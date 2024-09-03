@@ -12,6 +12,7 @@ script = ExtResource("3_w20rd")
 
 [node name="Player" type="Node2D" parent="."]
 script = ExtResource("2_8v3hi")
+grid_size = null
 
 [node name="PlayerSprite" type="Sprite2D" parent="Player"]
 position = Vector2(8, 8)
@@ -22,20 +23,8 @@ region_rect = Rect2(432, 96, 16, 16)
 [node name="Enemy" type="Node2D" parent="."]
 position = Vector2(163, 15)
 script = ExtResource("4_d8kgu")
-starting_position = Vector2i(5, 2)
 
 [node name="EnemySprite" type="Sprite2D" parent="Enemy"]
-position = Vector2(8, 8)
-texture = ExtResource("1_3ybx2")
-region_enabled = true
-region_rect = Rect2(400, 96, 16, 16)
-
-[node name="Enemy2" type="Node2D" parent="."]
-position = Vector2(163, 15)
-script = ExtResource("4_d8kgu")
-starting_position = Vector2i(8, 3)
-
-[node name="EnemySprite" type="Sprite2D" parent="Enemy2"]
 position = Vector2(8, 8)
 texture = ExtResource("1_3ybx2")
 region_enabled = true

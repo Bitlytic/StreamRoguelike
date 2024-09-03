@@ -6,33 +6,44 @@ extends Node2D
 var entities : Dictionary = {}
 
 
-func get_entity(pos: Vector2i):
+func get_entity(pos: Vector2i) -> Entity:
 	return entities.get(pos)
 
 
 func add_entity(e: Entity):
-	e.grid_position = Vector2i(5, 5)
 	entities[e.grid_position] = e
 
 
-func player_input(player: Player, direction: Vector2):
-	print(direction)
-	var dir := Vector2i(direction)
-	print(dir)
-	entities[player.grid_position] = null
+func player_input(player: Player, action: EntityAction):
+	_perform_action(player, action)
 	
-	var new_pos = player.grid_position + dir
+	_process_entities()
+
+
+func _process_entities():
+	for e : Entity in entities.values():
+		if e is Player:
+			continue
+		
+		var action : EntityAction = e.do_process()
+		_perform_action(e, action)
+
+
+func _perform_action(entity: Entity, action: EntityAction):
+	
+	match(action.type):
+		ActionType.MOVE:
+			_move_entity(entity, action.direction)
+
+
+func _move_entity(entity: Entity, direction : Vector2i):
+	entities.erase(entity.grid_position)
+	
+	var new_pos = entity.grid_position + direction
 	
 	new_pos.x = clamp(new_pos.x, 0, 16)
 	new_pos.y = clamp(new_pos.y, 0, 16)
 	
-	player.grid_position = new_pos
+	entity.grid_position = new_pos
 	
-	entities[player.grid_position] = player
-	
-
-func process_entities():
-	for e in entities.values():
-		if e is Player:
-			continue
-		e.process()
+	entities[entity.grid_position] = entity
