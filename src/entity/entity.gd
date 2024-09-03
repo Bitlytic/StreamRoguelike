@@ -1,9 +1,14 @@
 class_name Entity
 extends Node2D
 
-@onready var grid_world : GridWorld = get_tree().get_first_node_in_group("world")
 
 @export var starting_position := Vector2i(0, 0)
+
+# TODO: Use more component approach eventually
+@export var max_health := 10.0
+@onready var health := max_health
+
+@onready var grid_world : GridWorld = get_tree().get_first_node_in_group("world")
 
 var cell_size := Vector2(16, 16)
 

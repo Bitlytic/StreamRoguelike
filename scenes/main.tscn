@@ -1,42 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://f8ghk3wbo38j"]
+[gd_scene load_steps=4 format=3 uid="uid://f8ghk3wbo38j"]
 
-[ext_resource type="Texture2D" uid="uid://d1dtxy8sb2lia" path="res://assets/art/kenney-1bit.png" id="1_3ybx2"]
-[ext_resource type="Script" path="res://src/player/player.gd" id="2_8v3hi"]
+[ext_resource type="PackedScene" uid="uid://oaanpb1irxop" path="res://src/player/player.tscn" id="2_2maip"]
+[ext_resource type="PackedScene" uid="uid://bvbty718biabw" path="res://src/entity/enemy/enemy.tscn" id="3_has72"]
 [ext_resource type="Script" path="res://src/world/grid_world.gd" id="3_w20rd"]
-[ext_resource type="Script" path="res://src/entity/entity.gd" id="4_d8kgu"]
 
 [node name="Node2D" type="Node2D"]
 
 [node name="GridWorld" type="Node2D" parent="." groups=["world"]]
 script = ExtResource("3_w20rd")
 
-[node name="Player" type="Node2D" parent="."]
-script = ExtResource("2_8v3hi")
+[node name="Player" parent="." instance=ExtResource("2_2maip")]
 
-[node name="PlayerSprite" type="Sprite2D" parent="Player"]
-position = Vector2(8, 8)
-texture = ExtResource("1_3ybx2")
-region_enabled = true
-region_rect = Rect2(432, 96, 16, 16)
+[node name="Enemy" parent="." instance=ExtResource("3_has72")]
 
-[node name="Enemy" type="Node2D" parent="."]
-position = Vector2(163, 15)
-script = ExtResource("4_d8kgu")
-starting_position = Vector2i(5, 2)
-
-[node name="EnemySprite" type="Sprite2D" parent="Enemy"]
-position = Vector2(8, 8)
-texture = ExtResource("1_3ybx2")
-region_enabled = true
-region_rect = Rect2(400, 96, 16, 16)
-
-[node name="Enemy2" type="Node2D" parent="."]
-position = Vector2(163, 15)
-script = ExtResource("4_d8kgu")
-starting_position = Vector2i(8, 3)
-
-[node name="EnemySprite" type="Sprite2D" parent="Enemy2"]
-position = Vector2(8, 8)
-texture = ExtResource("1_3ybx2")
-region_enabled = true
-region_rect = Rect2(400, 96, 16, 16)
+[node name="Enemy2" parent="." instance=ExtResource("3_has72")]
+position = Vector2(163, 18)
+starting_position = Vector2i(10, 10)

@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://oaanpb1irxop"]
+
+[ext_resource type="Script" path="res://src/player/player.gd" id="1_iqw8t"]
+[ext_resource type="Texture2D" uid="uid://d1dtxy8sb2lia" path="res://assets/art/kenney-1bit.png" id="2_ys2la"]
+
+[node name="Player" type="Node2D"]
+script = ExtResource("1_iqw8t")
+max_health = 20.0
+
+[node name="PlayerSprite" type="Sprite2D" parent="."]
+position = Vector2(8, 8)
+texture = ExtResource("2_ys2la")
+region_enabled = true
+region_rect = Rect2(432, 96, 16, 16)
+
+[node name="Health" type="Node" parent="."]

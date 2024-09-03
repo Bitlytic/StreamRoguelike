@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvbty718biabw"]
+
+[ext_resource type="Script" path="res://src/entity/entity.gd" id="1_vm4lr"]
+[ext_resource type="Texture2D" uid="uid://d1dtxy8sb2lia" path="res://assets/art/kenney-1bit.png" id="2_1fto6"]
+
+[node name="Enemy" type="Node2D"]
+script = ExtResource("1_vm4lr")
+starting_position = Vector2i(5, 2)
+
+[node name="EnemySprite" type="Sprite2D" parent="."]
+position = Vector2(8, 8)
+texture = ExtResource("2_1fto6")
+region_enabled = true
+region_rect = Rect2(400, 96, 16, 16)
