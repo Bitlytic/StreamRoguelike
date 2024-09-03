@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://f8ghk3wbo38j"]
+
+[ext_resource type="Texture2D" uid="uid://d1dtxy8sb2lia" path="res://assets/art/kenney-1bit.png" id="1_3ybx2"]
+[ext_resource type="Script" path="res://src/player/player.gd" id="2_8v3hi"]
+[ext_resource type="Script" path="res://src/world/grid_world.gd" id="3_w20rd"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="GridWorld" type="Node2D" parent="."]
+script = ExtResource("3_w20rd")
+
+[node name="Player" type="Node2D" parent="." node_paths=PackedStringArray("grid_world")]
+script = ExtResource("2_8v3hi")
+grid_world = NodePath("../GridWorld")
+
+[node name="PlayerSprite" type="Sprite2D" parent="Player"]
+position = Vector2(8, 8)
+texture = ExtResource("1_3ybx2")
+region_enabled = true
+region_rect = Rect2(432, 96, 16, 16)
