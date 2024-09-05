@@ -16,7 +16,6 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	
-	# TODO: Rename this
 	var input_direction : int = Direction.get_player_direction()
 	var input_vector : Vector2i = Direction.direction_to_vector2(input_direction)
 	

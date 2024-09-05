@@ -10,6 +10,7 @@
 script = ExtResource("3_w20rd")
 
 [node name="Player" parent="." instance=ExtResource("2_2maip")]
+max_health = 10
 
 [node name="Enemy" parent="." instance=ExtResource("3_has72")]
 

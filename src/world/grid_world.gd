@@ -31,9 +31,14 @@ func _process_entities():
 
 func _perform_action(entity: Entity, action: EntityAction):
 	
+	# TODO: We should do this
+	#action.perform(entity)
+	
 	match(action.type):
 		ActionType.MOVE:
 			_move_entity(entity, action.direction)
+		ActionType.ATTACK:
+			_attack_entity(entity, action)
 
 
 func _move_entity(entity: Entity, direction : Vector2i):
@@ -47,3 +52,15 @@ func _move_entity(entity: Entity, direction : Vector2i):
 	entity.grid_position = new_pos
 	
 	entities[entity.grid_position] = entity
+
+
+func _attack_entity(entity: Entity, action: EntityAction) -> void:
+	
+	var target_position := entity.grid_position + action.direction
+	
+	var target_entity = entities.get(target_position)
+	
+	if target_entity:
+		print(target_entity.health)
+		target_entity.process_attack(Attack.new())
+	
