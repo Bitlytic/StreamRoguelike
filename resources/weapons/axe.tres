@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="BasicWeapon" load_steps=2 format=3 uid="uid://cxnmcvlqypql7"]
+
+[ext_resource type="Script" path="res://src/data/weapon.gd" id="1_ixl2f"]
+
+[resource]
+script = ExtResource("1_ixl2f")
+dice_size = 2
+dice_roll_times = 1
+constant_damage = 0
