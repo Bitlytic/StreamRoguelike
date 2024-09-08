@@ -1,9 +1,15 @@
-[gd_resource type="Resource" script_class="BasicWeapon" load_steps=2 format=3 uid="uid://dki4f1fh7wt05"]
+[gd_resource type="Resource" script_class="BasicWeapon" load_steps=4 format=3 uid="uid://dki4f1fh7wt05"]
 
 [ext_resource type="Script" path="res://src/data/weapon.gd" id="1_45v2o"]
+[ext_resource type="Texture2D" uid="uid://d1dtxy8sb2lia" path="res://assets/art/kenney-1bit.png" id="2_m173c"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1l2ln"]
+atlas = ExtResource("2_m173c")
+region = Rect2(576, 112, 16, 16)
 
 [resource]
 script = ExtResource("1_45v2o")
 dice_size = 3
 dice_roll_times = 1
 constant_damage = 1
+texture = SubResource("AtlasTexture_1l2ln")

@@ -2,7 +2,8 @@ class_name GridWorld
 extends Node2D
 
 
-@export var world_size := Vector2i(16, 16)
+@export var world_size := Vector2i(40, 21)
+@export var cell_size := Vector2(16, 16)
 
 
 # Indexed by vector position
@@ -16,6 +17,7 @@ func get_entity(pos: Vector2i) -> Entity:
 func add_entity(e: Entity):
 	# TODO: Stop entities from overlapping
 	entities[e.grid_position] = e
+	e.died.connect(on_entity_death)
 
 
 func player_input(player: Player, action: EntityAction):
@@ -50,8 +52,8 @@ func _move_entity(entity: Entity, direction : Vector2i):
 	
 	var new_pos = entity.grid_position + direction
 	
-	new_pos.x = clamp(new_pos.x, 0, 16)
-	new_pos.y = clamp(new_pos.y, 0, 16)
+	new_pos.x = clamp(new_pos.x, 0, world_size.x)
+	new_pos.y = clamp(new_pos.y, 0, world_size.y)
 	
 	entity.grid_position = new_pos
 	
@@ -80,7 +82,6 @@ func can_see(from: Vector2i, to: Vector2i, e: Enemy) -> bool:
 		p0 = line_to[i]
 		p1 = line_to[i + 1]
 		sum += (p1 - p0).length()
-		# TODO: Add back in vision range
 		if sum > e.vision_range:
 			return false
 	
@@ -89,8 +90,7 @@ func can_see(from: Vector2i, to: Vector2i, e: Enemy) -> bool:
 	
 	for point: Vector2i in line_to:
 		var cell = get_entity(point)
-		#if cell.blocks_movement():
-		if cell:
+		if cell && cell.blocks_vision:
 			return false
 	
 	return true
@@ -98,13 +98,21 @@ func can_see(from: Vector2i, to: Vector2i, e: Enemy) -> bool:
 
 func update_pathfinding(entity: Entity, a_star_grid: AStarGrid2D) -> void:
 	
-	for x in a_star_grid.size.x:
-		for y in a_star_grid.size.y:
-			a_star_grid.set_point_solid(Vector2i(x, y), false)
+	a_star_grid.fill_solid_region(Rect2i(0, 0, world_size.x, world_size.y), false)
 	
 	for e : Entity in entities.values():
 		if e == entity:
 			continue
 		
-		if e.blocks_movement || entity.is_passable(e):
+		if e.blocks_movement || !entity.is_passable(e):
 			a_star_grid.set_point_solid(e.grid_position)
+
+
+func on_entity_death(entity: Entity) -> void:
+	if entity is Player:
+		#TODO: Game over stuff
+		print("The player fuckin died")
+	
+	#TODO: Also account for multiple entities if we have that
+	entities.erase(entity.grid_position)
+	entity.queue_free()

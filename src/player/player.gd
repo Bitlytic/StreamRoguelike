@@ -1,16 +1,10 @@
 class_name Player
 extends Entity
 
-@export var grid_size := Vector2(16, 16)
-
 var axe : BasicWeapon = load("res://resources/weapons/axe.tres")
 var sword : BasicWeapon = load("res://resources/weapons/sword.tres")
 
 var has_moved := false
-
-func _ready() -> void:
-	grid_position = starting_position
-	grid_world.add_entity(self)
 
 
 func _process(delta: float) -> void:

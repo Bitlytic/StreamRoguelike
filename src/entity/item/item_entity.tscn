@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://1tr6jfjdpacw"]
+
+[ext_resource type="Script" path="res://src/entity/item/item_entity.gd" id="1_kcow7"]
+[ext_resource type="Texture2D" uid="uid://d1dtxy8sb2lia" path="res://assets/art/kenney-1bit.png" id="2_j5rps"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_otyhf"]
+atlas = ExtResource("2_j5rps")
+region = Rect2(544, 224, 16, 16)
+
+[node name="ItemEntity" type="Node2D"]
+script = ExtResource("1_kcow7")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_otyhf")

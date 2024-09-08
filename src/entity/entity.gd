@@ -3,10 +3,8 @@ extends Node2D
 
 
 signal health_changed(new_health: int)
-signal died()
+signal died(entity: Entity)
 
-
-@export var starting_position := Vector2i(0, 0)
 
 @export var max_health : int = 10
 @onready var health : int = max_health
@@ -16,6 +14,8 @@ signal died()
 
 @onready var grid_world : GridWorld = get_tree().get_first_node_in_group("world")
 @onready var player : Player = get_tree().get_first_node_in_group("player")
+
+const SPRITE_OFFSET := Vector2(8, 0)
 
 
 var cell_size := Vector2(16, 16)
@@ -27,7 +27,8 @@ var grid_position : Vector2i :
 
 
 func _ready():
-	grid_position = starting_position
+	grid_position = global_position / grid_world.cell_size.floor()
+	
 	grid_world.add_entity(self)
 
 
@@ -47,7 +48,8 @@ func _take_damage(damage: int) -> void:
 	health -= damage
 	if health <= 0:
 		health = 0
-		died.emit()
+		died.emit(self)
+		queue_free()
 	else:
 		health_changed.emit(health)
 

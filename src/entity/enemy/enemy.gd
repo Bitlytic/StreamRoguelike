@@ -2,12 +2,17 @@ class_name Enemy
 extends Entity
 
 
-@export var vision_range := 5
+@export var vision_range := 8
+
+var weapon : BasicWeapon = preload("res://resources/weapons/axe.tres")
 
 var a_star_grid : AStarGrid2D = AStarGrid2D.new()
 
 var last_seen_position : Vector2i
 var could_see_player := false
+
+var reaction_time := 1
+var current_player_reaction_time := 0
 
 
 func _ready() -> void:
@@ -22,14 +27,21 @@ func _ready() -> void:
 
 
 func do_process():
+	#TODO: If performance sucks, this is probably why
+	grid_world.update_pathfinding(self, a_star_grid)
+	
 	var can_see = grid_world.can_see(grid_position, player.grid_position, self)
 	
 	queue_redraw()
+	
+	# TODO: Make this a state machine eventually
 	
 	if !can_see:
 		if could_see_player:
 			last_seen_position = player.grid_position
 			could_see_player = false
+		else:
+			current_player_reaction_time = 0
 		
 		if grid_position != last_seen_position:
 			return move_toward_pos(last_seen_position)
@@ -37,14 +49,31 @@ func do_process():
 		var action = EntityAction.new(ActionType.WAIT)
 		return action
 	
+	if current_player_reaction_time < reaction_time:
+		current_player_reaction_time += 1
+		could_see_player = true
+		return EntityAction.new(ActionType.WAIT)
+	
 	last_seen_position = player.grid_position
-	could_see_player = true
+	
+	var player_diff = player.grid_position - grid_position
+	
+	if player_diff.length() < 2:
+		var attack = AttackAction.new()
+		attack.direction = player_diff
+		attack.weapon = weapon
+		
+		return attack
 	
 	return move_toward_pos(last_seen_position)
 
 
 func move_toward_pos(pos: Vector2i) -> EntityAction:
-	var path := a_star_grid.get_id_path(grid_position, pos)
+	#for y in grid_world.world_size.y:
+		#for x in grid_world.world_size.x:
+#			
+	
+	var path := a_star_grid.get_id_path(grid_position, pos, true)
 	
 	path.pop_front()
 	
@@ -60,7 +89,14 @@ func move_toward_pos(pos: Vector2i) -> EntityAction:
 func _draw() -> void:
 	var points = PathfindingUtil.get_line_to(grid_position, player.grid_position)
 	
+	var can_see = grid_world.can_see(grid_position, player.grid_position, self)
+	
+	var draw_color := Color.RED
+	
+	if can_see:
+		draw_color = Color.GREEN
+	
 	for i in range(points.size() - 1):
-		var p0 = points[i] * 16 + Vector2i(8, 8) - Vector2i(global_position)
-		var p1 = points[i + 1] * 16 + Vector2i(8, 8) - Vector2i(global_position)
-		draw_line(p0, p1, Color.RED, 2.0)
+		var p0 = points[i] * 16 - Vector2i(global_position)
+		var p1 = points[i + 1] * 16 - Vector2i(global_position)
+		draw_line(p0, p1, draw_color, 2.0)

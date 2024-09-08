@@ -1,5 +1,5 @@
 class_name BasicWeapon
-extends Resource
+extends Item
 
 
 
