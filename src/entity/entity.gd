@@ -6,8 +6,13 @@ signal health_changed(new_health: int)
 signal died(entity: Entity)
 
 
+const SPRITE_OFFSET := Vector2(8, 0)
+
+
 @export var max_health : int = 10
 @onready var health : int = max_health
+
+@export var is_character := false
 
 @export var blocks_vision := false
 @export var blocks_movement := false
@@ -15,8 +20,9 @@ signal died(entity: Entity)
 @onready var grid_world : GridWorld = get_tree().get_first_node_in_group("world")
 @onready var player : Player = get_tree().get_first_node_in_group("player")
 
-const SPRITE_OFFSET := Vector2(8, 0)
+var processed_this_frame := false
 
+var inventory := Inventory.new()
 
 var cell_size := Vector2(16, 16)
 

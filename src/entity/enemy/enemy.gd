@@ -2,6 +2,8 @@ class_name Enemy
 extends Entity
 
 
+@export var debug_draw := false
+
 @export var vision_range := 8
 
 var weapon : BasicWeapon = preload("res://resources/weapons/axe.tres")
@@ -69,24 +71,27 @@ func do_process():
 
 
 func move_toward_pos(pos: Vector2i) -> EntityAction:
-	#for y in grid_world.world_size.y:
-		#for x in grid_world.world_size.x:
-#			
 	
 	var path := a_star_grid.get_id_path(grid_position, pos, true)
 	
 	path.pop_front()
+	
+	#TODO: This sometimes messes up when it shouldn't
+	if path.size() <= 0:
+		return EntityAction.new(ActionType.WAIT)
 	
 	#TODO: this crashes sometimes
 	var target_direction = path[0] - grid_position
 	
 	var action = EntityAction.new(ActionType.MOVE, target_direction)
 	
-	
 	return action
 
 
 func _draw() -> void:
+	if !debug_draw:
+		return
+	
 	var points = PathfindingUtil.get_line_to(grid_position, player.grid_position)
 	
 	var can_see = grid_world.can_see(grid_position, player.grid_position, self)

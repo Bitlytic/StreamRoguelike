@@ -1,9 +1,11 @@
 class_name ItemEntity
 extends Entity
 
+@export var item : Item = preload("res://resources/weapons/axe.tres")
+
 @onready var sprite : Sprite2D = $Sprite
 
-var item : Item = preload("res://resources/weapons/axe.tres")
+var count : int = 1
 
 func _ready():
 	super()

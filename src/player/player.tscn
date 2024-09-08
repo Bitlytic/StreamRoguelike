@@ -5,6 +5,7 @@
 
 [node name="Player" type="Node2D" groups=["player"]]
 script = ExtResource("1_iqw8t")
+is_character = true
 
 [node name="PlayerSprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_ys2la")

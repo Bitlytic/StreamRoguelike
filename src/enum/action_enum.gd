@@ -4,5 +4,6 @@ enum {
 	NONE,
 	WAIT,
 	MOVE,
-	ATTACK
+	ATTACK,
+	PICK_UP
 }

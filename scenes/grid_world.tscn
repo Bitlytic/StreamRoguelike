@@ -4,3 +4,10 @@
 
 [node name="GridWorld" type="Node2D" groups=["world"]]
 script = ExtResource("1_ajg5n")
+
+[node name="CycleTimer" type="Timer" parent="."]
+wait_time = 0.75
+
+[node name="CycleWaitTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
