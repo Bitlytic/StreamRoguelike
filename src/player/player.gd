@@ -5,6 +5,8 @@ var axe : BasicWeapon = load("res://resources/weapons/axe.tres")
 var sword : BasicWeapon = load("res://resources/weapons/sword.tres")
 
 var has_moved := false
+var picking_direction := false
+
 
 func _process(delta: float) -> void:
 	pass
@@ -16,12 +18,23 @@ func _physics_process(delta: float) -> void:
 		return
 	
 	if Input.is_action_just_pressed("pick_action_menu"):
-		var target_position := grid_position + Vector2i(0, -1)
+		picking_direction = true
+	
+	if picking_direction:
+		var input_direction : int = Direction.get_player_direction()
+		# TODO: Add support for current tile by checking specifically num 5
+		if !input_direction:
+			return
+		
+		picking_direction = false
+		
+		var target_position := grid_position + Direction.direction_to_vector2(input_direction)
 		var cell : GridCell = grid_world.get_cell(target_position)
 		ActionManager.show_dialog(cell, target_position)
 		var action = await ActionManager.action_picked
 		
-		grid_world.player_input(self, action)
+		if action.type != ActionType.NONE:
+			grid_world.player_input(self, action)
 	
 	var input_direction : int = Direction.get_player_direction()
 	var input_vector : Vector2i = Direction.direction_to_vector2(input_direction)

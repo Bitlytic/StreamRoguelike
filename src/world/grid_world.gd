@@ -83,6 +83,8 @@ func _perform_action(entity: Entity, action: EntityAction):
 			_attack_entity(entity, action)
 		ActionType.PICK_UP:
 			_pick_up_entity(entity, action)
+		ActionType.OPEN:
+			_open_entity(entity, action)
 	
 	entity.processed_this_frame = true
 
@@ -118,6 +120,20 @@ func _pick_up_entity(entity: Entity, action: EntityAction):
 	if target_entity && target_entity is ItemEntity:
 		entity.inventory.add_item(target_entity.item, target_entity.count)
 		_remove_entity(target_entity)
+
+
+func _open_entity(entity: Entity, action: EntityAction):
+	
+	var target_entity: Entity = null
+	
+	for e in get_cell(action.position).get_entities():
+		if e.has_method("toggle_open"):
+			target_entity = e
+			break
+	
+	if target_entity:
+		target_entity.toggle_open()
+	
 
 
 func can_see(from: Vector2i, to: Vector2i, e: Enemy) -> bool:

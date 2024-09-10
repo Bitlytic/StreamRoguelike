@@ -46,7 +46,11 @@ func do_process():
 			current_player_reaction_time = 0
 		
 		if grid_position != last_seen_position:
-			return move_toward_pos(last_seen_position)
+			var action = move_toward_pos(last_seen_position)
+			#TODO: This probably won't matter when we use a state machine
+			if action.type == ActionType.WAIT:
+				last_seen_position = grid_position
+			return action
 		
 		var action = EntityAction.new(ActionType.WAIT)
 		return action
@@ -83,7 +87,7 @@ func move_toward_pos(pos: Vector2i) -> EntityAction:
 	#TODO: this crashes sometimes
 	var target_direction = path[0] - grid_position
 	
-	var action = EntityAction.new(ActionType.MOVE, target_direction)
+	var action = EntityAction.new(ActionType.MOVE, grid_position + target_direction)
 	
 	return action
 

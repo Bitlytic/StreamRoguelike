@@ -61,4 +61,8 @@ func _take_damage(damage: int) -> void:
 
 
 func is_passable(e: Entity) -> bool:
-	return true
+	return blocks_movement
+
+
+func can_see_through(e: Entity) -> bool:
+	return !blocks_vision

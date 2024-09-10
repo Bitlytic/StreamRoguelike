@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://celjbq7aup7mo"]
+
+[ext_resource type="Script" path="res://src/entity/door.gd" id="1_wqcno"]
+[ext_resource type="Texture2D" uid="uid://d1dtxy8sb2lia" path="res://assets/art/kenney-1bit.png" id="2_3crnd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4b5v7"]
+atlas = ExtResource("2_3crnd")
+region = Rect2(32, 144, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g5c00"]
+atlas = ExtResource("2_3crnd")
+region = Rect2(48, 144, 16, 16)
+
+[node name="Door" type="Node2D"]
+script = ExtResource("1_wqcno")
+open_texture = SubResource("AtlasTexture_4b5v7")
+closed_texture = SubResource("AtlasTexture_g5c00")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-8, -8)
+texture = SubResource("AtlasTexture_4b5v7")
+centered = false

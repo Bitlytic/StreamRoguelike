@@ -63,18 +63,18 @@ func blocks_movement() -> bool:
 		return true
 	
 	for e in _entities:
-		if e.blocks_movement:
+		if e.is_passable(null):
 			return true
 	
 	return false
 
 
 func blocks_vision() -> bool:
-	if character && character.blocks_vision:
+	if character && !character.can_see_through(null):
 		return true
 	
 	for e in _entities:
-		if e.blocks_vision:
+		if !e.can_see_through(null):
 			return true
 	
 	return false

@@ -6,5 +6,6 @@ enum {
 	MOVE,
 	ATTACK,
 	PICK_UP,
-	DROP_ITEM
+	DROP_ITEM,
+	OPEN
 }
