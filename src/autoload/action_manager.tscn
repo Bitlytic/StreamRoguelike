@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://ijfmb68a156c"]
+
+[ext_resource type="Script" path="res://src/autoload/action_manager.gd" id="1_rqua3"]
+[ext_resource type="PackedScene" uid="uid://dtikis2ihpd44" path="res://ui/action_dialog.tscn" id="2_1hkv7"]
+
+[node name="ActionManager" type="Node"]
+script = ExtResource("1_rqua3")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="ActionDialog" parent="UI" instance=ExtResource("2_1hkv7")]
+visible = false
+size_flags_horizontal = 4
+size_flags_vertical = 4

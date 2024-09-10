@@ -62,7 +62,7 @@ func do_process():
 	
 	if player_diff.length() < 2:
 		var attack = AttackAction.new()
-		attack.direction = player_diff
+		attack.position = player.grid_position
 		attack.weapon = weapon
 		
 		return attack

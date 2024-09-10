@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://cubf04keij220"]
+
+[ext_resource type="Script" path="res://ui/action_button.gd" id="1_j38x8"]
+[ext_resource type="Script" path="res://src/data/attack_action.gd" id="2_1xv66"]
+
+[sub_resource type="Resource" id="Resource_cb3o4"]
+script = ExtResource("2_1xv66")
+type = 0
+
+[node name="ActionButton" type="Button"]
+custom_minimum_size = Vector2(0, 24)
+script = ExtResource("1_j38x8")
+action = SubResource("Resource_cb3o4")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="SelectionCaret" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = ">"
+horizontal_alignment = 2
+
+[node name="ActionLabel" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "Attack"
+horizontal_alignment = 1

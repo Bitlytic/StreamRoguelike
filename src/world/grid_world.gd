@@ -78,7 +78,7 @@ func _perform_action(entity: Entity, action: EntityAction):
 	
 	match(action.type):
 		ActionType.MOVE:
-			_move_entity(entity, action.direction)
+			_move_entity(entity, action)
 		ActionType.ATTACK:
 			_attack_entity(entity, action)
 		ActionType.PICK_UP:
@@ -87,10 +87,10 @@ func _perform_action(entity: Entity, action: EntityAction):
 	entity.processed_this_frame = true
 
 
-func _move_entity(entity: Entity, direction : Vector2i):
+func _move_entity(entity: Entity, action : EntityAction):
 	get_cell(entity.grid_position).remove_entity(entity)
 	
-	var new_pos = entity.grid_position + direction
+	var new_pos = action.position
 	
 	new_pos.x = clamp(new_pos.x, 0, world_size.x)
 	new_pos.y = clamp(new_pos.y, 0, world_size.y)
@@ -102,20 +102,16 @@ func _move_entity(entity: Entity, direction : Vector2i):
 
 func _attack_entity(entity: Entity, action: AttackAction) -> void:
 	
-	var target_position := entity.grid_position + action.direction
-	
-	var target_entity = get_cell(target_position).character
+	var target_entity = get_cell(action.position).character
 	
 	if target_entity:
 		target_entity.process_attack(action.weapon.get_attack())
 
 
 func _pick_up_entity(entity: Entity, action: EntityAction):
-	var target_position := entity.grid_position + action.direction
-	
 	var target_entity : Entity = null
 	
-	for e in get_cell(target_position).get_entities():
+	for e in get_cell(action.position).get_entities():
 		if e is ItemEntity:
 			target_entity = e
 	
