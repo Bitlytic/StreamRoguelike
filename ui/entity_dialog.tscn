@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://dtikis2ihpd44"]
+[gd_scene load_steps=3 format=3 uid="uid://140436jeatmn"]
 
-[ext_resource type="Script" path="res://ui/action_dialog.gd" id="1_sts84"]
-[ext_resource type="PackedScene" uid="uid://cubf04keij220" path="res://ui/action_button.tscn" id="1_truwt"]
+[ext_resource type="Script" path="res://ui/entity_dialog.gd" id="1_uyfu1"]
+[ext_resource type="PackedScene" uid="uid://cubf04keij220" path="res://ui/action_button.tscn" id="1_yih2u"]
 
-[node name="ActionDialog" type="Control"]
+[node name="EntityDialog" type="Control"]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -12,7 +12,7 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_sts84")
+script = ExtResource("1_uyfu1")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 0
@@ -35,17 +35,17 @@ grow_vertical = 2
 
 [node name="Label" type="Label" parent="Panel/ButtonContainer"]
 layout_mode = 2
-text = "Action"
+text = "Entities"
 horizontal_alignment = 1
 
 [node name="HSeparator" type="HSeparator" parent="Panel/ButtonContainer"]
 layout_mode = 2
 
-[node name="Attack" parent="Panel/ButtonContainer" instance=ExtResource("1_truwt")]
+[node name="Attack" parent="Panel/ButtonContainer" instance=ExtResource("1_yih2u")]
 layout_mode = 2
 
-[node name="Talk" parent="Panel/ButtonContainer" instance=ExtResource("1_truwt")]
+[node name="Talk" parent="Panel/ButtonContainer" instance=ExtResource("1_yih2u")]
 layout_mode = 2
 
-[node name="Drop" parent="Panel/ButtonContainer" instance=ExtResource("1_truwt")]
+[node name="Drop" parent="Panel/ButtonContainer" instance=ExtResource("1_yih2u")]
 layout_mode = 2

@@ -15,6 +15,7 @@ extends Entity
 func _ready():
 	super()
 	update_sprite()
+	entity_name = "Door"
 
 
 #TODO: This can be toggled while entity on it

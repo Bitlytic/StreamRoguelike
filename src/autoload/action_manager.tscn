@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://ijfmb68a156c"]
+[gd_scene load_steps=4 format=3 uid="uid://ijfmb68a156c"]
 
 [ext_resource type="Script" path="res://src/autoload/action_manager.gd" id="1_rqua3"]
 [ext_resource type="PackedScene" uid="uid://dtikis2ihpd44" path="res://ui/action_dialog.tscn" id="2_1hkv7"]
+[ext_resource type="PackedScene" uid="uid://140436jeatmn" path="res://ui/entity_dialog.tscn" id="3_5jlx4"]
 
 [node name="ActionManager" type="Node"]
 script = ExtResource("1_rqua3")
@@ -12,3 +13,6 @@ script = ExtResource("1_rqua3")
 visible = false
 size_flags_horizontal = 4
 size_flags_vertical = 4
+
+[node name="EntityDialog" parent="UI" instance=ExtResource("3_5jlx4")]
+visible = false

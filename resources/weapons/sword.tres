@@ -10,6 +10,7 @@ region = Rect2(576, 112, 16, 16)
 [resource]
 script = ExtResource("1_45v2o")
 dice_size = 3
-dice_roll_times = 1
+dice_roll_times = 2
 constant_damage = 1
 texture = SubResource("AtlasTexture_1l2ln")
+item_name = "Sword"

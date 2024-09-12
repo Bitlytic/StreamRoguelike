@@ -2,7 +2,6 @@ class_name BasicWeapon
 extends Item
 
 
-
 @export var dice_size := 6
 @export var dice_roll_times := 1
 

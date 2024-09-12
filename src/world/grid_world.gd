@@ -27,7 +27,6 @@ func get_cell(pos: Vector2i) -> GridCell:
 
 
 func add_entity(e: Entity):
-	# TODO: Stop entities from overlapping
 	var cell := get_cell(e.grid_position)
 	if !cell:
 		cell = GridCell.new()
@@ -35,6 +34,17 @@ func add_entity(e: Entity):
 	
 	cell.add_entity(e)
 	e.died.connect(on_entity_death)
+
+
+func remove_entity(entity: Entity) -> void:
+	var cell = get_cell(entity.grid_position)
+	cell.remove_entity(entity)
+	entity.queue_free()
+
+
+func move_entity(entity: Entity, old_pos: Vector2i):
+	get_cell(old_pos).remove_entity(entity)
+	get_cell(entity.grid_position).add_entity(entity)
 
 
 func player_input(player: Player, action: EntityAction):
@@ -74,41 +84,9 @@ func _process_entities():
 
 
 func _perform_action(action: EntityAction):
-	
-	var cell : GridCell = get_cell(action.position)
-	
-	var target_entity : Entity
-	
-	if cell.character:
-		target_entity = cell.character
-	
-	
-	if !target_entity:
-		if cell.get_entities().size() > 0:
-			target_entity = cell.get_entities()[0]
-	
-	action.perform_action(target_entity)
+	action.perform_action()
 	
 	action.owner.processed_this_frame = true
-
-
-func move_entity(entity: Entity, old_pos: Vector2i):
-	get_cell(old_pos).remove_entity(entity)
-	get_cell(entity.grid_position).add_entity(entity)
-
-
-func _open_entity(entity: Entity, action: EntityAction):
-	
-	var target_entity: Entity = null
-	
-	for e in get_cell(action.position).get_entities():
-		if e.has_method("toggle_open"):
-			target_entity = e
-			break
-	
-	if target_entity:
-		target_entity.toggle_open()
-	
 
 
 func can_see(from: Vector2i, to: Vector2i, e: Enemy) -> bool:
@@ -138,7 +116,6 @@ func can_see(from: Vector2i, to: Vector2i, e: Enemy) -> bool:
 
 
 func update_pathfinding(entity: Entity, a_star_grid: AStarGrid2D) -> void:
-	
 	a_star_grid.fill_solid_region(Rect2i(0, 0, world_size.x, world_size.y), false)
 	
 	for cell_pos : Vector2i in cells.keys():
@@ -156,12 +133,6 @@ func on_entity_death(entity: Entity) -> void:
 		print("The player fuckin died")
 	
 	remove_entity(entity)
-
-
-func remove_entity(entity: Entity) -> void:
-	var cell = get_cell(entity.grid_position)
-	cell.remove_entity(entity)
-	entity.queue_free()
 
 
 func on_cycle_wait_timeout() -> void:

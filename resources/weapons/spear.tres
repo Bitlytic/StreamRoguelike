@@ -13,3 +13,4 @@ dice_size = 5
 dice_roll_times = 1
 constant_damage = 0
 texture = SubResource("AtlasTexture_ysj3d")
+item_name = "Spear"

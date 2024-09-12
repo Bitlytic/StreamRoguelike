@@ -6,7 +6,7 @@ func _init():
 	self.type = ActionType.MOVE
 
 
-func perform_action(_target_entity: Entity) -> void:
+func perform_action() -> void:
 	var old_pos := owner.grid_position
 	owner.grid_position = position
 	

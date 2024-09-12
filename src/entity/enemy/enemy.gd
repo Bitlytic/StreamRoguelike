@@ -110,3 +110,7 @@ func _draw() -> void:
 		var p0 = points[i] * 16 - Vector2i(global_position)
 		var p1 = points[i + 1] * 16 - Vector2i(global_position)
 		draw_line(p0, p1, draw_color, 2.0)
+
+
+func get_entity_name() -> String:
+	return "Enemy >:("

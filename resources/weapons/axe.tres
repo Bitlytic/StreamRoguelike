@@ -13,3 +13,4 @@ dice_size = 2
 dice_roll_times = 1
 constant_damage = 0
 texture = SubResource("AtlasTexture_iyljy")
+item_name = "Axe"

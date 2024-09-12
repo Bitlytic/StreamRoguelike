@@ -17,6 +17,8 @@ const SPRITE_OFFSET := Vector2(8, 0)
 @export var blocks_vision := false
 @export var blocks_movement := false
 
+@export var entity_name : String = ""
+
 @onready var player : Player = get_tree().get_first_node_in_group("player")
 
 var processed_this_frame := false
@@ -65,3 +67,9 @@ func is_passable(e: Entity) -> bool:
 
 func can_see_through(e: Entity) -> bool:
 	return !blocks_vision
+
+
+func get_entity_name() -> String:
+	if entity_name:
+		return entity_name
+	return "<NULL>"
