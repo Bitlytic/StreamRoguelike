@@ -17,7 +17,6 @@ const SPRITE_OFFSET := Vector2(8, 0)
 @export var blocks_vision := false
 @export var blocks_movement := false
 
-@onready var grid_world : GridWorld = get_tree().get_first_node_in_group("world")
 @onready var player : Player = get_tree().get_first_node_in_group("player")
 
 var processed_this_frame := false
@@ -33,9 +32,9 @@ var grid_position : Vector2i :
 
 
 func _ready():
-	grid_position = global_position / grid_world.cell_size.floor()
+	grid_position = global_position / GridWorld.cell_size.floor()
 	
-	grid_world.add_entity(self)
+	GridWorld.add_entity(self)
 
 
 func do_process() -> EntityAction:

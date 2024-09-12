@@ -4,6 +4,8 @@ extends Resource
 @export_enum("NONE", "WAIT", "MOVE", "ATTACK", "PICK_UP", "DROP_ITEM") var type : int = ActionType.NONE
 var position := Vector2i(0, 0)
 
+var owner : Entity
+
 
 func _init(type: int = ActionType.NONE, position := Vector2i(0, 0)):
 	self.type = type
@@ -12,3 +14,7 @@ func _init(type: int = ActionType.NONE, position := Vector2i(0, 0)):
 
 func _to_string() -> String:
 	return "Type: " + str(type) + ", position: " + str(position)
+
+
+func perform_action(entity: Entity) -> void:
+	pass

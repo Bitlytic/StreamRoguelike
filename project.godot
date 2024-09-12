@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 ActionManager="*res://src/autoload/action_manager.tscn"
+GridWorld="*res://scenes/grid_world.tscn"
 
 [display]
 

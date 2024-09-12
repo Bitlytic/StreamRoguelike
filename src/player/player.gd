@@ -29,12 +29,15 @@ func _physics_process(delta: float) -> void:
 		picking_direction = false
 		
 		var target_position := grid_position + Direction.direction_to_vector2(input_direction)
-		var cell : GridCell = grid_world.get_cell(target_position)
+		var cell : GridCell = GridWorld.get_cell(target_position)
 		ActionManager.show_dialog(cell, target_position)
 		var action = await ActionManager.action_picked
 		
+		if action is AttackAction:
+			action.weapon = sword
+		
 		if action.type != ActionType.NONE:
-			grid_world.player_input(self, action)
+			GridWorld.player_input(self, action)
 	
 	var input_direction : int = Direction.get_player_direction()
 	var input_vector : Vector2i = Direction.direction_to_vector2(input_direction)
@@ -44,10 +47,11 @@ func _physics_process(delta: float) -> void:
 	if input_vector:
 		var action_position := grid_position + input_vector
 		
-		var cell : GridCell = grid_world.get_cell(grid_position + input_vector)
+		var cell : GridCell = GridWorld.get_cell(grid_position + input_vector)
 		
 		# TODO: Allow movement over entity
 		if !cell || (cell.character == null && !cell.blocks_movement()):
+			action = MoveAction.new()
 			action.type = ActionType.MOVE
 		else:
 			action = AttackAction.new()
@@ -57,8 +61,8 @@ func _physics_process(delta: float) -> void:
 		has_moved = true
 	elif Input.is_action_just_pressed("move_wait"):
 		action.type = ActionType.WAIT
-	elif Input.is_action_just_pressed("pick_up") && grid_world.get_cell(grid_position).has_any(Predicates.is_item_entity):
-		action.type = ActionType.PICK_UP
+	elif Input.is_action_just_pressed("pick_up") && GridWorld.get_cell(grid_position).has_any(Predicates.is_item_entity):
+		action = PickUpAction.new()
 	
 	if action.type != ActionType.NONE:
-		grid_world.player_input(self, action)
+		GridWorld.player_input(self, action)

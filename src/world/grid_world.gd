@@ -1,5 +1,4 @@
-class_name GridWorld
-extends Node2D
+extends Node
 
 
 @export var world_size := Vector2i(40, 21)
@@ -39,7 +38,8 @@ func add_entity(e: Entity):
 
 
 func player_input(player: Player, action: EntityAction):
-	_perform_action(player, action)
+	action.owner = player
+	_perform_action(action)
 	
 	_process_entities()
 
@@ -48,7 +48,8 @@ func _process_entities():
 	for cell : GridCell in cells.values():
 		if cell.character && !cell.character.processed_this_frame:
 			var action : EntityAction = cell.character.do_process()
-			_perform_action(cell.character, action)
+			action.owner = cell.character
+			_perform_action(action)
 		
 		for e in cell.get_entities():
 			if e is Player:
@@ -58,7 +59,8 @@ func _process_entities():
 				continue
 			
 			var action : EntityAction = e.do_process()
-			_perform_action(e, action)
+			action.owner = e
+			_perform_action(action)
 	
 	for cell : GridCell in cells.values():
 		if cell.character:
@@ -71,55 +73,28 @@ func _process_entities():
 	cycle_timer.stop()
 
 
-func _perform_action(entity: Entity, action: EntityAction):
+func _perform_action(action: EntityAction):
 	
-	# TODO: We should do this
-	#action.perform(entity)
+	var cell : GridCell = get_cell(action.position)
 	
-	match(action.type):
-		ActionType.MOVE:
-			_move_entity(entity, action)
-		ActionType.ATTACK:
-			_attack_entity(entity, action)
-		ActionType.PICK_UP:
-			_pick_up_entity(entity, action)
-		ActionType.OPEN:
-			_open_entity(entity, action)
+	var target_entity : Entity
 	
-	entity.processed_this_frame = true
+	if cell.character:
+		target_entity = cell.character
+	
+	
+	if !target_entity:
+		if cell.get_entities().size() > 0:
+			target_entity = cell.get_entities()[0]
+	
+	action.perform_action(target_entity)
+	
+	action.owner.processed_this_frame = true
 
 
-func _move_entity(entity: Entity, action : EntityAction):
-	get_cell(entity.grid_position).remove_entity(entity)
-	
-	var new_pos = action.position
-	
-	new_pos.x = clamp(new_pos.x, 0, world_size.x)
-	new_pos.y = clamp(new_pos.y, 0, world_size.y)
-	
-	entity.grid_position = new_pos
-	
+func move_entity(entity: Entity, old_pos: Vector2i):
+	get_cell(old_pos).remove_entity(entity)
 	get_cell(entity.grid_position).add_entity(entity)
-
-
-func _attack_entity(entity: Entity, action: AttackAction) -> void:
-	
-	var target_entity = get_cell(action.position).character
-	
-	if target_entity:
-		target_entity.process_attack(action.weapon.get_attack())
-
-
-func _pick_up_entity(entity: Entity, action: EntityAction):
-	var target_entity : Entity = null
-	
-	for e in get_cell(action.position).get_entities():
-		if e is ItemEntity:
-			target_entity = e
-	
-	if target_entity && target_entity is ItemEntity:
-		entity.inventory.add_item(target_entity.item, target_entity.count)
-		_remove_entity(target_entity)
 
 
 func _open_entity(entity: Entity, action: EntityAction):
@@ -180,11 +155,10 @@ func on_entity_death(entity: Entity) -> void:
 		#TODO: Game over stuff
 		print("The player fuckin died")
 	
-	#TODO: Also account for multiple entities if we have that
-	_remove_entity(entity)
+	remove_entity(entity)
 
 
-func _remove_entity(entity: Entity) -> void:
+func remove_entity(entity: Entity) -> void:
 	var cell = get_cell(entity.grid_position)
 	cell.remove_entity(entity)
 	entity.queue_free()

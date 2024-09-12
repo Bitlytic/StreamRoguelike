@@ -22,17 +22,17 @@ func _ready() -> void:
 	
 	last_seen_position = grid_position
 	
-	a_star_grid.region = Rect2i(Vector2i(0, 0), grid_world.world_size + Vector2i(1, 1))
+	a_star_grid.region = Rect2i(Vector2i(0, 0), GridWorld.world_size + Vector2i(1, 1))
 	a_star_grid.update()
 	
-	grid_world.update_pathfinding(self, a_star_grid)
+	GridWorld.update_pathfinding(self, a_star_grid)
 
 
 func do_process():
 	#TODO: If performance sucks, this is probably why
-	grid_world.update_pathfinding(self, a_star_grid)
+	GridWorld.update_pathfinding(self, a_star_grid)
 	
-	var can_see = grid_world.can_see(grid_position, player.grid_position, self)
+	var can_see = GridWorld.can_see(grid_position, player.grid_position, self)
 	
 	queue_redraw()
 	
@@ -87,7 +87,8 @@ func move_toward_pos(pos: Vector2i) -> EntityAction:
 	#TODO: this crashes sometimes
 	var target_direction = path[0] - grid_position
 	
-	var action = EntityAction.new(ActionType.MOVE, grid_position + target_direction)
+	var action = MoveAction.new()
+	action.position = grid_position + target_direction
 	
 	return action
 
@@ -98,7 +99,7 @@ func _draw() -> void:
 	
 	var points = PathfindingUtil.get_line_to(grid_position, player.grid_position)
 	
-	var can_see = grid_world.can_see(grid_position, player.grid_position, self)
+	var can_see = GridWorld.can_see(grid_position, player.grid_position, self)
 	
 	var draw_color := Color.RED
 	

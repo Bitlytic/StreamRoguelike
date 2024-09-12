@@ -20,6 +20,9 @@ func _ready():
 
 
 func _physics_process(delta: float) -> void:
+	if !visible:
+		return
+	
 	if Input.is_action_just_pressed("move_south"):
 		_change_focus(1)
 	elif Input.is_action_just_pressed("move_north"):
@@ -76,11 +79,11 @@ func populate_options(actions: Array[int]):
 			ActionType.ATTACK:
 				create_button("Attack", AttackAction.new())
 			ActionType.MOVE:
-				create_button("Move", EntityAction.new(ActionType.MOVE))
+				create_button("Move", MoveAction.new())
 			ActionType.PICK_UP:
-				create_button("Pick Up", EntityAction.new(ActionType.PICK_UP))
+				create_button("Pick Up", PickUpAction.new())
 			ActionType.OPEN:
-				create_button("Open", EntityAction.new(ActionType.OPEN))
+				create_button("Open", OpenAction.new())
 
 
 func create_button(text: String, action: EntityAction):
