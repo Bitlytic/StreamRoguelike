@@ -2,12 +2,19 @@ class_name ListDialog
 extends Control
 
 
-var action_button_scene := preload("res://ui/action_button.tscn")
+@export var list_name := "List"
+
+var action_button_scene := preload("res://ui/scenes/action_button.tscn")
 
 @onready var button_container : VBoxContainer = $Panel/ButtonContainer
+@onready var label : Label = $Panel/ButtonContainer/Label
 var action_buttons : Array[ActionButton]
 
 var current_focused_index := 0
+
+func _ready():
+	label.text = list_name
+
 
 func clear_options():
 	for child in button_container.get_children():

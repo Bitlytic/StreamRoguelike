@@ -48,3 +48,25 @@ static func get_player_direction() -> int:
 
 static func direction_to_vector2(dir: int) -> Vector2i:
 	return direction_vectors[dir]
+
+
+static func direction_to_string(dir: int) -> String:
+	match(dir):
+		NORTH:
+			return "north"
+		NORTH_EAST:
+			return "north_east"
+		EAST:
+			return "east"
+		SOUTH_EAST:
+			return "south_east"
+		SOUTH:
+			return "south"
+		SOUTH_WEST:
+			return "south_west"
+		WEST:
+			return "west"
+		NORTH_WEST:
+			return "north_west"
+	
+	return ""

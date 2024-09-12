@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://s3xvsui2jr7h"]
+
+[ext_resource type="PackedScene" uid="uid://b00xy2f1n77y8" path="res://ui/scenes/list_dialog.tscn" id="1_e6tq4"]
+
+[node name="InventoryDialog" instance=ExtResource("1_e6tq4")]
+
+[node name="Panel" parent="." index="0"]
+layout_mode = 0

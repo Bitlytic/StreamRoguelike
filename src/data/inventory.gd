@@ -12,7 +12,6 @@ func add_item(item: Item, count: int = 1) -> void:
 	var existing_slot = _find_item_slot(item)
 	if existing_slot:
 		existing_slot.count += count
-		print(_items)
 		return
 	
 	var slot = ItemSlot.new(item, count)
@@ -26,6 +25,14 @@ func remove_item(item: Item, count: int = 1):
 		existing_slot.count -= count
 		if existing_slot.count <= 0:
 			_items.erase(item)
+	else:
+		push_error("We don't have an item slot for that")
+		
+	
+
+
+func get_items() -> Array:
+	return _items.values()
 
 
 func _find_item_slot(item: Item) -> ItemSlot:

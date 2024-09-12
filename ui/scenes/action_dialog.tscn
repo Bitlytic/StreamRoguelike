@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://cm801b11b3i4"]
+
+[ext_resource type="PackedScene" uid="uid://b00xy2f1n77y8" path="res://ui/scenes/list_dialog.tscn" id="1_lwr4d"]
+
+[node name="ActionDialog" instance=ExtResource("1_lwr4d")]
+list_name = "Actions"
+
+[node name="Panel" parent="." index="0"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 320.0
+offset_bottom = 280.0

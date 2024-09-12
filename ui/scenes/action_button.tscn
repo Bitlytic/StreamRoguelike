@@ -1,10 +1,10 @@
 [gd_scene load_steps=2 format=3 uid="uid://cubf04keij220"]
 
-[ext_resource type="Script" path="res://ui/action_button.gd" id="1_j38x8"]
+[ext_resource type="Script" path="res://ui/action_button.gd" id="1_0m0jf"]
 
 [node name="ActionButton" type="Button"]
 custom_minimum_size = Vector2(0, 24)
-script = ExtResource("1_j38x8")
+script = ExtResource("1_0m0jf")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1

@@ -1,18 +1,46 @@
-[gd_scene load_steps=4 format=3 uid="uid://ijfmb68a156c"]
+[gd_scene load_steps=7 format=3 uid="uid://ijfmb68a156c"]
 
 [ext_resource type="Script" path="res://src/autoload/action_manager.gd" id="1_rqua3"]
-[ext_resource type="PackedScene" uid="uid://dtikis2ihpd44" path="res://ui/action_dialog.tscn" id="2_1hkv7"]
-[ext_resource type="PackedScene" uid="uid://140436jeatmn" path="res://ui/entity_dialog.tscn" id="3_5jlx4"]
+[ext_resource type="PackedScene" uid="uid://cm801b11b3i4" path="res://ui/scenes/action_dialog.tscn" id="2_1hkv7"]
+[ext_resource type="PackedScene" uid="uid://cpqcckqf3glo7" path="res://ui/scenes/entity_dialog.tscn" id="3_5jlx4"]
+[ext_resource type="Script" path="res://ui/entity_dialog.gd" id="3_nefib"]
+[ext_resource type="Script" path="res://ui/action_dialog.gd" id="3_o1uyw"]
+[ext_resource type="Script" path="res://ui/inventory_dialog.gd" id="6_0olfa"]
 
 [node name="ActionManager" type="Node"]
 script = ExtResource("1_rqua3")
 
 [node name="UI" type="CanvasLayer" parent="."]
+offset = Vector2(-160, -135)
+transform = Transform2D(1, 0, 0, 1, -160, -135)
 
 [node name="ActionDialog" parent="UI" instance=ExtResource("2_1hkv7")]
-visible = false
-size_flags_horizontal = 4
-size_flags_vertical = 4
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_o1uyw")
 
 [node name="EntityDialog" parent="UI" instance=ExtResource("3_5jlx4")]
-visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_nefib")
+
+[node name="ItemDialog" parent="UI" instance=ExtResource("3_5jlx4")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("6_0olfa")
+list_name = "Items"
