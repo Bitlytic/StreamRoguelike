@@ -1,6 +1,9 @@
 extends Node
 
 
+signal world_updated()
+
+
 @export var world_size := Vector2i(40, 21)
 @export var cell_size := Vector2(16, 16)
 
@@ -50,7 +53,14 @@ func remove_entity(entity: Entity) -> void:
 
 
 func move_entity(entity: Entity, old_pos: Vector2i):
+	var new_pos = entity.grid_position.clamp(Vector2i(0, 0), world_size - Vector2i(1, 1))
+	
+	if new_pos != entity.grid_position:
+		entity.grid_position = old_pos
+		return
+	
 	get_cell(old_pos).remove_entity(entity)
+	
 	get_cell(entity.grid_position).add_entity(entity)
 
 
@@ -96,6 +106,8 @@ func _process_entities():
 	
 	cycle_wait_timer.start()
 	cycle_timer.stop()
+	
+	GridWorld.world_updated.emit()
 
 
 func _perform_action(action: EntityAction):

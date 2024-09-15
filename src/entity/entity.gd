@@ -59,9 +59,6 @@ func _take_damage(damage: int) -> void:
 		queue_free()
 	else:
 		health_changed.emit(health)
-	
-	if self is Player:
-		print(health)
 
 
 func heal(amount: int) -> void:
@@ -69,9 +66,6 @@ func heal(amount: int) -> void:
 	health += amount
 	if health > max_health:
 		health = max_health
-	
-	if self is Player:
-		print(health)
 	
 	health_changed.emit(health)
 

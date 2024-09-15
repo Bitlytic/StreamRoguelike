@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://mvx2fpcxrm7a"]
+
+[ext_resource type="Texture2D" uid="uid://d1dtxy8sb2lia" path="res://assets/art/kenney-1bit.png" id="1_ksjg7"]
+[ext_resource type="Script" path="res://src/world/ambient_tile.gd" id="1_pfi25"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5wxfd"]
+atlas = ExtResource("1_ksjg7")
+region = Rect2(16, 0, 16, 16)
+
+[node name="AmbientTile" type="Node2D"]
+modulate = Color(1, 1, 1, 0.411765)
+script = ExtResource("1_pfi25")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_5wxfd")
