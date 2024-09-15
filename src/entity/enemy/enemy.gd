@@ -93,6 +93,12 @@ func move_toward_pos(pos: Vector2i) -> EntityAction:
 	var action = MoveAction.new()
 	action.position = grid_position + target_direction
 	
+	var door : DoorEntity = GridWorld.get_cell(action.position).get_first_match(Predicates.is_door_entity)
+	
+	if door && !door.locked:
+		action = OpenAction.new()
+		action.target = door
+	
 	return action
 
 

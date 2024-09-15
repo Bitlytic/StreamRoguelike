@@ -51,4 +51,4 @@ sample_minimum = 0.0
 position = Vector2(312, 152)
 
 [node name="Player" parent="." instance=ExtResource("2_2maip")]
-position = Vector2(616, 328)
+position = Vector2(312, 184)

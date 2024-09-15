@@ -89,3 +89,14 @@ func has_any(test_func : Callable) -> bool:
 			return true
 	
 	return false
+
+
+func get_first_match(test_func : Callable) -> Entity:
+	if test_func.call(character):
+		return character
+	
+	for e in _entities:
+		if test_func.call(e):
+			return e
+	
+	return null

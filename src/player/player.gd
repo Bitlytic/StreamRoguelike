@@ -66,6 +66,10 @@ func _physics_process(delta: float) -> void:
 			action.weapon = weapon
 			action.type = ActionType.ATTACK
 			action.target = cell.character
+		elif cell.has_any(Predicates.is_door_entity):
+			action = OpenAction.new()
+			var door = cell.get_first_match(Predicates.is_door_entity)
+			action.target = door
 		action.position = action_position
 		has_moved = true
 	elif Input.is_action_just_pressed("move_wait"):

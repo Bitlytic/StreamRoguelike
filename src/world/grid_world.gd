@@ -151,7 +151,11 @@ func update_pathfinding(entity: Entity, a_star_grid: AStarGrid2D) -> void:
 			continue
 		
 		if cell && cell.blocks_movement():
-			a_star_grid.set_point_solid(cell_pos)
+			if cell.has_any(Predicates.is_door_entity):
+				var door : DoorEntity = cell.get_first_match(Predicates.is_door_entity)
+				a_star_grid.set_point_solid(cell_pos, door.locked)
+			else:
+				a_star_grid.set_point_solid(cell_pos)
 
 
 func on_entity_death(entity: Entity) -> void:
