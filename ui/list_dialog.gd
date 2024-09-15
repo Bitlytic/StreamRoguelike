@@ -12,6 +12,7 @@ var action_buttons : Array[ActionButton]
 
 var current_focused_index := 0
 
+
 func _ready():
 	label.text = list_name
 

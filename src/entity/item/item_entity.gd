@@ -7,6 +7,7 @@ extends Entity
 
 var count : int = 1
 
+
 func _ready():
 	super()
 	sprite.texture = item.texture

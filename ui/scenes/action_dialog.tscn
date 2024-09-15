@@ -6,7 +6,6 @@
 list_name = "Actions"
 
 [node name="Panel" parent="." index="0"]
-layout_mode = 0
 offset_left = 0.0
 offset_top = 0.0
 offset_right = 320.0

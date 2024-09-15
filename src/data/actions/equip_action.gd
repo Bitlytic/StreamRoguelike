@@ -7,6 +7,7 @@ var slot : ItemSlot
 
 func _init(slot: ItemSlot):
 	self.slot = slot
+	self.type = ActionType.EQUIP
 
 
 func perform_action() -> void:

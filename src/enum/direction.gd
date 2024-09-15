@@ -13,16 +13,16 @@ enum {
 	NORTH_WEST
 }
 
-static var direction_vectors : Array[Vector2] = [
-	Vector2(0, 0),
-	Vector2(0, -1),
-	Vector2(1, -1),
-	Vector2(1, 0),
-	Vector2(1, 1),
-	Vector2(0, 1),
-	Vector2(-1, 1),
-	Vector2(-1, 0),
-	Vector2(-1, -1),
+static var direction_vectors : Array[Vector2i] = [
+	Vector2i(0, 0),
+	Vector2i(0, -1),
+	Vector2i(1, -1),
+	Vector2i(1, 0),
+	Vector2i(1, 1),
+	Vector2i(0, 1),
+	Vector2i(-1, 1),
+	Vector2i(-1, 0),
+	Vector2i(-1, -1),
 ]
 
 
@@ -48,6 +48,14 @@ static func get_player_direction() -> int:
 
 static func direction_to_vector2(dir: int) -> Vector2i:
 	return direction_vectors[dir]
+
+
+static func vector2_to_direction(v: Vector2i) -> int:
+	for i in direction_vectors.size():
+		if v == direction_vectors[i]:
+			return i
+	
+	return 0
 
 
 static func direction_to_string(dir: int) -> String:

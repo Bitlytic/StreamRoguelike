@@ -7,7 +7,8 @@ signal item_picked(slot: ItemSlot)
 
 @onready var action_dialog: ActionDialog = $UI/ActionDialog
 @onready var entity_dialog: EntityDialog = $UI/EntityDialog
-@onready var item_dialog: InventoryDialog = $UI/ItemDialog
+@onready var inventory_dialog: InventoryDialog = $UI/ItemDialog
+@onready var item_action_dialog: ItemActionDialog = $UI/ItemActionDialog
 
 
 var picking_action := false
@@ -19,11 +20,13 @@ var target_entity : Entity
 func _ready():
 	action_dialog.action_selected.connect(on_action_selected)
 	entity_dialog.entity_selected.connect(on_entity_selected)
-	item_dialog.item_selected.connect(on_item_selected)
+	inventory_dialog.item_selected.connect(on_item_selected)
+	item_action_dialog.item_action_selected.connect(on_item_action_selected)
 	
 	action_dialog.hide()
 	entity_dialog.hide()
-	item_dialog.hide()
+	inventory_dialog.hide()
+	item_action_dialog.hide()
 
 
 func _physics_process(delta: float) -> void:
@@ -46,10 +49,8 @@ func show_dialog(cell: GridCell, target_position: Vector2i):
 func on_action_selected(action: EntityAction):
 	action.target = target_entity
 	action.position = target_position
-	action_picked.emit(action)
-	action_dialog.hide()
-	entity_dialog.hide()
-	picking_action = false
+	GridWorld.player_input(action)
+	clean_up()
 
 
 func on_entity_selected(entity: Entity):
@@ -66,13 +67,34 @@ func on_entity_selected(entity: Entity):
 	action_dialog.display_actions(entity)
 
 
-func show_item_dialog(inventory: Inventory) -> void:
+func show_inventory_dialog(inventory: Inventory) -> void:
 	picking_item = true
-	item_dialog.display_items(inventory)
+	inventory_dialog.display_items(inventory)
 
 
-func on_item_selected(slot: ItemSlot):
-	item_dialog.hide()
-	item_picked.emit(slot)
+func on_item_selected(slot: ItemSlot) -> void:
 	
+	if !slot:
+		picking_item = false
+		on_action_selected(EntityAction.new())
+		return
+	inventory_dialog.hide()
+	
+	item_action_dialog.display_actions(slot)
+
+
+func on_item_action_selected(action: EntityAction) -> void:
+	item_action_dialog.hide()
+	picking_item = false
+	
+	GridWorld.player_input(action)
+	clean_up()
+
+
+func clean_up():
+	action_dialog.hide()
+	entity_dialog.hide()
+	inventory_dialog.hide()
+	item_action_dialog.hide()
+	picking_action = false
 	picking_item = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://f8ghk3wbo38j"]
+[gd_scene load_steps=11 format=4 uid="uid://f8ghk3wbo38j"]
 
 [ext_resource type="PackedScene" uid="uid://dkhrcr6y2unah" path="res://src/entity/wall.tscn" id="1_jg00e"]
 [ext_resource type="PackedScene" uid="uid://oaanpb1irxop" path="res://src/player/player.tscn" id="2_2maip"]
@@ -7,6 +7,7 @@
 [ext_resource type="Resource" uid="uid://cyud1nt6gqpl1" path="res://resources/weapons/spear.tres" id="6_lfy4y"]
 [ext_resource type="PackedScene" uid="uid://celjbq7aup7mo" path="res://src/entity/door.tscn" id="7_2frx7"]
 [ext_resource type="Resource" uid="uid://dki4f1fh7wt05" path="res://resources/weapons/sword.tres" id="7_yonjw"]
+[ext_resource type="Resource" uid="uid://bs56fqb7322ae" path="res://resources/potions/basic_health_potion.tres" id="8_mkscg"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_ovget"]
 resource_name = "Tiles"
@@ -32,3 +33,7 @@ item = ExtResource("6_lfy4y")
 [node name="ItemEntity2" parent="." instance=ExtResource("5_e3wws")]
 position = Vector2(328, 168)
 item = ExtResource("7_yonjw")
+
+[node name="ItemEntity3" parent="." instance=ExtResource("5_e3wws")]
+position = Vector2(296, 168)
+item = ExtResource("8_mkscg")

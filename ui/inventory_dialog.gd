@@ -35,6 +35,7 @@ func display_items(inventory: Inventory) -> void:
 
 
 func on_item_selected(result: Object) -> void:
+	
 	if result is ItemSlot:
 		item_selected.emit(result)
 		hide()

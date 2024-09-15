@@ -6,6 +6,8 @@ extends Entity
 
 @export var vision_range := 8
 
+@onready var animation_controller: AnimationController = $AnimationController
+
 var weapon : BasicWeapon = preload("res://resources/weapons/axe.tres")
 
 var a_star_grid : AStarGrid2D = AStarGrid2D.new()
@@ -68,6 +70,7 @@ func do_process():
 		var attack = AttackAction.new()
 		attack.position = player.grid_position
 		attack.weapon = weapon
+		attack.target = player
 		
 		return attack
 	
@@ -114,3 +117,12 @@ func _draw() -> void:
 
 func get_entity_name() -> String:
 	return "Enemy >:("
+
+
+func play_attack_animation(action: AttackAction):
+	var direction = action.target.grid_position - grid_position
+	
+	direction.x = clamp(direction.x, -1, 1)
+	direction.y = clamp(direction.y, -1, 1)
+	
+	animation_controller.play_attack_animation(Direction.vector2_to_direction(direction))

@@ -10,5 +10,8 @@ func _init():
 
 
 func perform_action() -> void:
+	
 	if target:
+		if owner.has_method("play_attack_animation"):
+			owner.play_attack_animation(self)
 		target.process_attack(weapon.get_attack())

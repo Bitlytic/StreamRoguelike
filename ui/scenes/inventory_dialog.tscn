@@ -5,4 +5,7 @@
 [node name="InventoryDialog" instance=ExtResource("1_e6tq4")]
 
 [node name="Panel" parent="." index="0"]
-layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 320.0
+offset_bottom = 280.0

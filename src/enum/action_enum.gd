@@ -5,7 +5,9 @@ enum {
 	WAIT,
 	MOVE,
 	ATTACK,
+	EQUIP,
 	PICK_UP,
 	DROP_ITEM,
-	OPEN
+	OPEN,
+	USE_ITEM
 }

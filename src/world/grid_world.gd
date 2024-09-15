@@ -8,6 +8,13 @@ extends Node
 @onready var cycle_wait_timer: Timer = $CycleWaitTimer
 
 
+var player : Player:
+	get():
+		if !player:
+			player = get_tree().get_first_node_in_group("player")
+		return player
+
+
 # Indexed by vector position
 #var entities : Dictionary = {}
 var cells : Dictionary = {}
@@ -47,8 +54,16 @@ func move_entity(entity: Entity, old_pos: Vector2i):
 	get_cell(entity.grid_position).add_entity(entity)
 
 
-func player_input(player: Player, action: EntityAction):
+func player_input(action: EntityAction):
+	if action.type == ActionType.NONE:
+		return
+	
 	action.owner = player
+	
+	# TODO: this sucks, don't do this eventually
+	if action is AttackAction:
+		action.weapon = player.weapon
+	
 	_perform_action(action)
 	
 	_process_entities()

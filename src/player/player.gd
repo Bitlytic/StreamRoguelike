@@ -29,7 +29,8 @@ func _physics_process(delta: float) -> void:
 	
 	# TODO: Switch this to more interactive UI
 	if Input.is_action_just_pressed("equip_item_menu"):
-		picking_item = true
+		ActionManager.show_inventory_dialog(inventory)
+		return
 	
 	if picking_direction:
 		var input_direction : int = Direction.get_player_direction()
@@ -44,22 +45,7 @@ func _physics_process(delta: float) -> void:
 		var target_position := grid_position + Direction.direction_to_vector2(input_direction)
 		var cell : GridCell = GridWorld.get_cell(target_position)
 		ActionManager.show_dialog(cell, target_position)
-		var action = await ActionManager.action_picked
-		
-		if action is AttackAction:
-			action.weapon = weapon
-			animation_controller.play_attack_animation(input_direction)
-		
-		if action.type != ActionType.NONE:
-			GridWorld.player_input(self, action)
-	
-	if picking_item:
-		ActionManager.show_item_dialog(inventory)
-		var item = await ActionManager.item_picked
-		if item:
-			var action := EquipAction.new(item)
-			GridWorld.player_input(self, action)
-		picking_item = false
+		return
 	
 	var input_direction : int = Direction.get_player_direction()
 	var input_vector : Vector2i = Direction.direction_to_vector2(input_direction)
@@ -80,7 +66,6 @@ func _physics_process(delta: float) -> void:
 			action.weapon = weapon
 			action.type = ActionType.ATTACK
 			action.target = cell.character
-			animation_controller.play_attack_animation(input_direction)
 		action.position = action_position
 		has_moved = true
 	elif Input.is_action_just_pressed("move_wait"):
@@ -89,4 +74,13 @@ func _physics_process(delta: float) -> void:
 		action = PickUpAction.new()
 	
 	if action.type != ActionType.NONE:
-		GridWorld.player_input(self, action)
+		GridWorld.player_input(action)
+
+
+func play_attack_animation(action: AttackAction):
+	var direction = action.target.grid_position - grid_position
+	
+	direction.x = clamp(direction.x, -1, 1)
+	direction.y = clamp(direction.y, -1, 1)
+	
+	animation_controller.play_attack_animation(Direction.vector2_to_direction(direction))
