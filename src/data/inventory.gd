@@ -9,7 +9,7 @@ func _init():
 
 
 func add_item(item: Item, count: int = 1) -> void:
-	var existing_slot = _find_item_slot(item)
+	var existing_slot = find_item_slot(item)
 	if existing_slot:
 		existing_slot.count += count
 		return
@@ -19,7 +19,7 @@ func add_item(item: Item, count: int = 1) -> void:
 
 
 func remove_item(item: Item, count: int = 1):
-	var existing_slot = _find_item_slot(item)
+	var existing_slot = find_item_slot(item)
 	
 	if existing_slot:
 		existing_slot.count -= count
@@ -34,7 +34,7 @@ func get_items() -> Array:
 	return _items.values()
 
 
-func _find_item_slot(item: Item) -> ItemSlot:
+func find_item_slot(item: Item) -> ItemSlot:
 	var slot : ItemSlot = _items.get(item)
 	
 	return slot

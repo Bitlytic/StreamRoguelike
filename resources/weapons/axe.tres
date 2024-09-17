@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="BasicWeapon" load_steps=4 format=3 uid="uid://cxnmcvlqypql7"]
 
-[ext_resource type="Script" path="res://src/data/weapon.gd" id="1_ixl2f"]
+[ext_resource type="Script" path="res://src/data/item/weapon.gd" id="1_ixl2f"]
 [ext_resource type="Texture2D" uid="uid://d1dtxy8sb2lia" path="res://assets/art/kenney-1bit.png" id="2_ec78r"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iyljy"]

@@ -6,6 +6,8 @@ extends Entity
 
 @export var vision_range := 8
 
+@onready var state_machine := $StateMachine
+
 @onready var animation_controller: AnimationController = $AnimationController
 
 var weapon : BasicWeapon = preload("res://resources/weapons/axe.tres")
@@ -29,52 +31,20 @@ func _ready() -> void:
 	
 	GridWorld.update_pathfinding(self, a_star_grid)
 
+# Idle, Chasing, Lost Vision
+
 
 func do_process():
 	#TODO: If performance sucks, this is probably why
 	GridWorld.update_pathfinding(self, a_star_grid)
 	
+	
+	var action = state_machine.do_process()
+	
 	var can_see = GridWorld.can_see(grid_position, player.grid_position, self)
 	
 	queue_redraw()
-	
-	# TODO: Make this a state machine eventually
-	
-	if !can_see:
-		if could_see_player:
-			last_seen_position = player.grid_position
-			could_see_player = false
-		else:
-			current_player_reaction_time = 0
-		
-		if grid_position != last_seen_position:
-			var action = move_toward_pos(last_seen_position)
-			#TODO: This probably won't matter when we use a state machine
-			if action.type == ActionType.WAIT:
-				last_seen_position = grid_position
-			return action
-		
-		var action = EntityAction.new(ActionType.WAIT)
-		return action
-	
-	if current_player_reaction_time < reaction_time:
-		current_player_reaction_time += 1
-		could_see_player = true
-		return EntityAction.new(ActionType.WAIT)
-	
-	last_seen_position = player.grid_position
-	
-	var player_diff = player.grid_position - grid_position
-	
-	if player_diff.length() < 2:
-		var attack = AttackAction.new()
-		attack.position = player.grid_position
-		attack.weapon = weapon
-		attack.target = player
-		
-		return attack
-	
-	return move_toward_pos(last_seen_position)
+	return action
 
 
 func move_toward_pos(pos: Vector2i) -> EntityAction:
@@ -95,7 +65,7 @@ func move_toward_pos(pos: Vector2i) -> EntityAction:
 	
 	var door : DoorEntity = GridWorld.get_cell(action.position).get_first_match(Predicates.is_door_entity)
 	
-	if door && !door.locked:
+	if door && !door.locked && !door.open:
 		action = OpenAction.new()
 		action.target = door
 	

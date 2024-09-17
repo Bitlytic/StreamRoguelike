@@ -27,22 +27,22 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("pick_action_menu"):
 		picking_direction = true
 	
-	# TODO: Switch this to more interactive UI
 	if Input.is_action_just_pressed("equip_item_menu"):
 		ActionManager.show_inventory_dialog(inventory)
 		return
 	
 	if picking_direction:
 		var input_direction : int = Direction.get_player_direction()
-		# TODO: Add support for current tile by checking specifically num 5
-		if !input_direction:
+		var input_center := Input.is_action_just_pressed("move_wait")
+		
+		if !input_direction && !input_center:
 			return
 		
 		picking_direction = false
 		
-		# TODO: Make action picking a signal so the world can handle it
+		var target_direction := Direction.direction_to_vector2(input_direction)
 		
-		var target_position := grid_position + Direction.direction_to_vector2(input_direction)
+		var target_position := grid_position + target_direction
 		var cell : GridCell = GridWorld.get_cell(target_position)
 		ActionManager.show_dialog(cell, target_position)
 		return
@@ -57,7 +57,6 @@ func _physics_process(delta: float) -> void:
 		
 		var cell : GridCell = GridWorld.get_cell(grid_position + input_vector)
 		
-		# TODO: Allow movement over entity
 		if !cell || (cell.character == null && !cell.blocks_movement()):
 			action = MoveAction.new()
 			action.type = ActionType.MOVE
@@ -67,9 +66,14 @@ func _physics_process(delta: float) -> void:
 			action.type = ActionType.ATTACK
 			action.target = cell.character
 		elif cell.has_any(Predicates.is_door_entity):
-			action = OpenAction.new()
 			var door = cell.get_first_match(Predicates.is_door_entity)
-			action.target = door
+			var item_slot := inventory.find_item_slot(ItemRegistry.KEY)
+			
+			if door.locked && item_slot != null:
+				action = UnlockAction.new(item_slot, door)
+			elif !door.locked && !door.open:
+				action = OpenAction.new()
+				action.target = door
 		action.position = action_position
 		has_moved = true
 	elif Input.is_action_just_pressed("move_wait"):

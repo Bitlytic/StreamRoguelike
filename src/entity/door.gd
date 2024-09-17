@@ -2,10 +2,16 @@ class_name DoorEntity
 extends Entity
 
 
+@export_group("Textures")
 @export var open_texture : Texture2D
 @export var closed_texture : Texture2D
 
+@export_group("Colors")
+@export var locked_color : Color
+@export var unlocked_color : Color
 
+
+@export_group("State")
 @export var locked := false
 @export var open := false
 
@@ -20,7 +26,13 @@ func _ready():
 
 #TODO: This can be toggled while entity on it
 func toggle_open():
-	open = !open
+	if !locked:
+		open = !open
+	update_sprite()
+
+
+func unlock():
+	locked = false
 	update_sprite()
 
 
@@ -37,3 +49,8 @@ func update_sprite():
 		sprite.texture = open_texture
 	else:
 		sprite.texture = closed_texture
+	
+	if locked:
+		sprite.self_modulate = locked_color
+	else:
+		sprite.self_modulate = unlocked_color

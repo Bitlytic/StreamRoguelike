@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Potion" load_steps=4 format=3 uid="uid://bs56fqb7322ae"]
 
-[ext_resource type="Script" path="res://src/data/potion.gd" id="1_5nurt"]
+[ext_resource type="Script" path="res://src/data/item/potion.gd" id="1_5nurt"]
 [ext_resource type="Texture2D" uid="uid://d1dtxy8sb2lia" path="res://assets/art/kenney-1bit.png" id="2_14y0p"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_84mqy"]

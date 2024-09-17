@@ -15,7 +15,7 @@ func _physics_process(delta: float) -> void:
 func display_entities(cell: GridCell):
 	clear_options()
 	
-	if cell.character:
+	if cell.character && cell.character is not Player:
 		create_button(cell.character.get_entity_name(), cell.character)
 	
 	for e in cell.get_entities():

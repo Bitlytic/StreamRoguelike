@@ -15,6 +15,8 @@ region = Rect2(48, 144, 16, 16)
 script = ExtResource("1_wqcno")
 open_texture = SubResource("AtlasTexture_4b5v7")
 closed_texture = SubResource("AtlasTexture_g5c00")
+locked_color = Color(1, 0.423529, 0.611765, 1)
+unlocked_color = Color(1, 1, 1, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-8, -8)

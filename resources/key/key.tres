@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Key" load_steps=4 format=3 uid="uid://dp5hw11qph52p"]
+
+[ext_resource type="Script" path="res://src/data/item/key.gd" id="1_myx3l"]
+[ext_resource type="Texture2D" uid="uid://d1dtxy8sb2lia" path="res://assets/art/kenney-1bit.png" id="2_vufn5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p87lt"]
+atlas = ExtResource("2_vufn5")
+region = Rect2(512, 176, 16, 16)
+
+[resource]
+script = ExtResource("1_myx3l")
+texture = SubResource("AtlasTexture_p87lt")
+item_name = "Key"
