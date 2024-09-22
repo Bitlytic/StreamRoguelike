@@ -15,8 +15,11 @@ var picking_item := false
 @onready var weapon : BasicWeapon = axe
 
 
-func _process(delta: float) -> void:
-	pass
+func _ready():
+	super()
+	
+	health_changed.connect(on_health_changed)
+	on_health_changed(health)
 
 
 func _physics_process(delta: float) -> void:
@@ -26,6 +29,7 @@ func _physics_process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("pick_action_menu"):
 		picking_direction = true
+		ActionManager.show_picking_direction()
 	
 	if Input.is_action_just_pressed("equip_item_menu"):
 		ActionManager.show_inventory_dialog(inventory)
@@ -35,8 +39,15 @@ func _physics_process(delta: float) -> void:
 		var input_direction : int = Direction.get_player_direction()
 		var input_center := Input.is_action_just_pressed("move_wait")
 		
+		if Input.is_action_just_pressed("cancel"):
+			picking_direction = false
+			ActionManager.hide_top_bar()
+			return
+		
 		if !input_direction && !input_center:
 			return
+		
+		ActionManager.hide_top_bar()
 		
 		picking_direction = false
 		
@@ -92,3 +103,7 @@ func play_attack_animation(action: AttackAction):
 	direction.y = clamp(direction.y, -1, 1)
 	
 	animation_controller.play_attack_animation(Direction.vector2_to_direction(direction))
+
+
+func on_health_changed(_new_health: int) -> void:
+	PlayerEventBus.health_changed.emit(self)

@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 ActionManager="*res://src/autoload/action_manager.tscn"
 GridWorld="*res://scenes/grid_world.tscn"
+PlayerEventBus="*res://src/autoload/player_event_bus.gd"
 
 [display]
 

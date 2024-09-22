@@ -9,6 +9,7 @@ signal item_picked(slot: ItemSlot)
 @onready var entity_dialog: EntityDialog = $UI/EntityDialog
 @onready var inventory_dialog: InventoryDialog = $UI/ItemDialog
 @onready var item_action_dialog: ItemActionDialog = $UI/ItemActionDialog
+@onready var top_bar: TopBar = $HUD/TopBar
 
 
 var picking_action := false
@@ -98,3 +99,11 @@ func clean_up():
 	item_action_dialog.hide()
 	picking_action = false
 	picking_item = false
+
+
+func show_picking_direction() -> void:
+	top_bar.display_action("[Pick a direction to interact with]")
+
+
+func hide_top_bar() -> void:
+	top_bar.hide_action()

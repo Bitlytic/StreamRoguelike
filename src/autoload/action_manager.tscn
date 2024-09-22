@@ -1,12 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://ijfmb68a156c"]
+[gd_scene load_steps=10 format=3 uid="uid://ijfmb68a156c"]
 
 [ext_resource type="Script" path="res://src/autoload/action_manager.gd" id="1_rqua3"]
 [ext_resource type="PackedScene" uid="uid://cm801b11b3i4" path="res://ui/scenes/action_dialog.tscn" id="2_1hkv7"]
 [ext_resource type="PackedScene" uid="uid://cpqcckqf3glo7" path="res://ui/scenes/entity_dialog.tscn" id="3_5jlx4"]
+[ext_resource type="Theme" uid="uid://g27u5fdw6jtd" path="res://ui/theme/main_theme.tres" id="3_cw17j"]
 [ext_resource type="Script" path="res://ui/entity_dialog.gd" id="3_nefib"]
 [ext_resource type="Script" path="res://ui/action_dialog.gd" id="3_o1uyw"]
 [ext_resource type="Script" path="res://ui/inventory_dialog.gd" id="6_0olfa"]
 [ext_resource type="PackedScene" uid="uid://b1kdxhor7jnn" path="res://ui/scenes/item_action_dialog.tscn" id="7_hqe7c"]
+[ext_resource type="PackedScene" uid="uid://cgqtwojb0f3f2" path="res://ui/scenes/top_bar.tscn" id="8_eong2"]
 
 [node name="ActionManager" type="Node"]
 script = ExtResource("1_rqua3")
@@ -23,6 +25,7 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("3_cw17j")
 script = ExtResource("3_o1uyw")
 
 [node name="EntityDialog" parent="UI" instance=ExtResource("3_5jlx4")]
@@ -33,6 +36,7 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("3_cw17j")
 script = ExtResource("3_nefib")
 
 [node name="ItemDialog" parent="UI" instance=ExtResource("3_5jlx4")]
@@ -43,6 +47,7 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("3_cw17j")
 script = ExtResource("6_0olfa")
 list_name = "Items"
 
@@ -54,3 +59,10 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("3_cw17j")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="TopBar" parent="HUD" instance=ExtResource("8_eong2")]
+offset_bottom = 23.0
+theme = ExtResource("3_cw17j")

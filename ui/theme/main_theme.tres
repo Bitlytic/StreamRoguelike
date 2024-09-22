@@ -1,0 +1,6 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://g27u5fdw6jtd"]
+
+[ext_resource type="FontFile" uid="uid://bmye0mhqu6yso" path="res://ui/theme/font/Silkscreen-Regular.ttf" id="1_rxwik"]
+
+[resource]
+default_font = ExtResource("1_rxwik")
