@@ -2,7 +2,12 @@ class_name Player
 extends Entity
 
 
+@export var vision_range := 12
+
+@onready var weapon : BasicWeapon = axe
 @onready var animation_controller: AnimationController = $AnimationController
+@onready var sight_controller: SightController = $SightController
+@onready var shadow_controller: ShadowController = $ShadowController
 
 
 var axe : BasicWeapon = load("res://resources/weapons/axe.tres")
@@ -12,8 +17,7 @@ var picking_direction := false
 var picking_item := false
 
 
-@onready var weapon : BasicWeapon = axe
-
+var positions_to_check : Array[Vector2i]
 
 func _ready():
 	super()
@@ -107,3 +111,16 @@ func play_attack_animation(action: AttackAction):
 
 func on_health_changed(_new_health: int) -> void:
 	PlayerEventBus.health_changed.emit(self)
+
+
+func update_sight():
+	shadow_controller.compute_fov(self)
+	
+	queue_redraw()
+
+
+func _draw() -> void:
+	for pos in shadow_controller.visible_tiles:
+		var world_coords : Vector2 = GridWorld.cell_size * Vector2(pos)
+		
+		draw_circle(world_coords, 8.0, Color.RED)

@@ -172,3 +172,9 @@ func on_cycle_wait_timeout() -> void:
 func on_cycle_timeout() -> void:
 	for cell : GridCell in cells.values():
 		cell.cycle_display()
+
+
+func is_in_bounds(pos: Vector2i) -> bool:
+	return (pos.x >= 0 && pos.x < world_size.x) && (pos.y >= 0 && pos.y < world_size.y)
+	
+	

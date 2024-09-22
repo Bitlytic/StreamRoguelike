@@ -3,6 +3,8 @@ extends EnemyState
 
 var target_position : Vector2i
 
+var could_see := false
+
 
 func enter():
 	target_position = player.grid_position
@@ -14,10 +16,16 @@ func do_process() -> EntityAction:
 	var can_see := GridWorld.can_see(enemy.grid_position, player.grid_position, enemy)
 	
 	if !can_see:
+		if could_see:
+			target_position = player.grid_position
+			could_see = false
+		
 		if target_position == enemy.grid_position:
 			transitioned.emit(self, "idle")
 	else:
 		target_position = player.grid_position
+		
+		could_see = true
 		
 		var attack_action = try_attack_target(player)
 		if attack_action:
