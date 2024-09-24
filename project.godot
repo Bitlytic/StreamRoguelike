@@ -21,6 +21,10 @@ ActionManager="*res://src/autoload/action_manager.tscn"
 GridWorld="*res://scenes/grid_world.tscn"
 PlayerEventBus="*res://src/autoload/player_event_bus.gd"
 
+[debug]
+
+settings/gdscript/max_call_stack=2047
+
 [display]
 
 window/size/viewport_width=640

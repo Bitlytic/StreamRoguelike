@@ -2,12 +2,13 @@ class_name Player
 extends Entity
 
 
+@export var debug_draw := false
+
 @export var vision_range := 12
 
 @onready var weapon : BasicWeapon = axe
 @onready var animation_controller: AnimationController = $AnimationController
 @onready var sight_controller: SightController = $SightController
-@onready var shadow_controller: ShadowController = $ShadowController
 
 
 var axe : BasicWeapon = load("res://resources/weapons/axe.tres")
@@ -24,6 +25,10 @@ func _ready():
 	
 	health_changed.connect(on_health_changed)
 	on_health_changed(health)
+	
+	
+	await get_tree().process_frame
+	update_sight()
 
 
 func _physics_process(delta: float) -> void:
@@ -114,13 +119,18 @@ func on_health_changed(_new_health: int) -> void:
 
 
 func update_sight():
-	shadow_controller.compute_fov(self)
+	sight_controller.update_fov()
+	
+	GridWorld.set_player_vision(sight_controller.visible_tiles)
 	
 	queue_redraw()
 
 
 func _draw() -> void:
-	for pos in shadow_controller.visible_tiles:
-		var world_coords : Vector2 = GridWorld.cell_size * Vector2(pos)
+	if !debug_draw:
+		return
+	
+	for pos in sight_controller.visible_tiles:
+		var world_coords : Vector2 = GridWorld.cell_size * (pos - Vector2(grid_position))
 		
-		draw_circle(world_coords, 8.0, Color.RED)
+		draw_circle(world_coords, 4.0, Color.RED)

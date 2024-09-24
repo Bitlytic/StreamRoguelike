@@ -48,7 +48,8 @@ func show_dialog(cell: GridCell, target_position: Vector2i):
 
 
 func on_action_selected(action: EntityAction):
-	action.target = target_entity
+	if target_entity:
+		action.target = target_entity
 	action.position = target_position
 	GridWorld.player_input(action)
 	clean_up()

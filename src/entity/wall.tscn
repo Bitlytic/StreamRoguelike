@@ -8,6 +8,7 @@ script = ExtResource("1_oe3du")
 blocks_vision = true
 blocks_movement = true
 entity_name = "Wall"
+discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_ul8vy")

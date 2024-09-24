@@ -26,7 +26,7 @@ var cells : Dictionary = {}
 func _ready():
 	for x in world_size.x:
 		for y in world_size.y:
-			cells[Vector2i(x, y)] = GridCell.new()
+			cells[Vector2i(x, y)] = GridCell.new(Vector2i(x, y))
 	
 	cycle_timer.timeout.connect(on_cycle_timeout)
 	cycle_wait_timer.timeout.connect(on_cycle_wait_timeout)
@@ -39,7 +39,7 @@ func get_cell(pos: Vector2i) -> GridCell:
 func add_entity(e: Entity):
 	var cell := get_cell(e.grid_position)
 	if !cell:
-		cell = GridCell.new()
+		cell = GridCell.new(e.grid_position)
 		cells[e.grid_position] = cell
 	
 	cell.add_entity(e)
@@ -106,6 +106,8 @@ func _process_entities():
 	
 	cycle_wait_timer.start()
 	cycle_timer.stop()
+	
+	player.update_sight()
 	
 	GridWorld.world_updated.emit()
 
@@ -176,5 +178,12 @@ func on_cycle_timeout() -> void:
 
 func is_in_bounds(pos: Vector2i) -> bool:
 	return (pos.x >= 0 && pos.x < world_size.x) && (pos.y >= 0 && pos.y < world_size.y)
+
+
+func set_player_vision(tiles: Array[Vector2]) -> void:
 	
-	
+	for cell : GridCell in cells.values():
+		if tiles.has(Vector2(cell.grid_position)):
+			cell.set_player_visible(true)
+		else:
+			cell.set_player_visible(false)

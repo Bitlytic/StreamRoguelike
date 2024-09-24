@@ -3,9 +3,16 @@ class_name GridCell
 
 var character : Entity
 var _entities : Array[Entity]
+var ambient_tile : AmbientTile
 
 # Can't be larger than entity count (if character is there, otherwise count - 1)
 var current_display_index : int = 0
+
+var grid_position : Vector2i
+
+
+func _init(pos: Vector2i):
+	grid_position = pos
 
 
 func reset_display() -> void:
@@ -31,7 +38,7 @@ func cycle_display() -> void:
 func _display_entity() -> void:
 	var index_offset = 0
 	
-	if character:
+	if character && character.in_vision:
 		character.visible = current_display_index == 0
 		index_offset = 1
 	
@@ -56,6 +63,15 @@ func remove_entity(e: Entity) -> void:
 
 func get_entities() -> Array[Entity]:
 	return _entities
+
+
+func get_entity_count() -> int:
+	var total = _entities.size()
+	
+	if character:
+		total += 1
+	
+	return total
 
 
 func blocks_movement() -> bool:
@@ -100,3 +116,14 @@ func get_first_match(test_func : Callable) -> Entity:
 			return e
 	
 	return null
+
+
+func set_player_visible(v: bool) -> void:
+	for e in get_entities():
+		e.in_vision = v
+	
+	if character:
+		character.in_vision = v
+	
+	if ambient_tile:
+		ambient_tile.in_vision = v

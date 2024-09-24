@@ -1,11 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://oaanpb1irxop"]
+[gd_scene load_steps=15 format=3 uid="uid://oaanpb1irxop"]
 
 [ext_resource type="Script" path="res://src/player/player.gd" id="1_iqw8t"]
 [ext_resource type="Texture2D" uid="uid://d1dtxy8sb2lia" path="res://assets/art/kenney-1bit.png" id="2_ys2la"]
 [ext_resource type="Script" path="res://src/components/animation_controller.gd" id="3_phlvu"]
-[ext_resource type="Script" path="res://src/player/sight_controller.gd" id="4_v4dro"]
-[ext_resource type="Script" path="res://src/player/shadow_controller.gd" id="5_8tvw8"]
-[ext_resource type="Script" path="res://src/player/sight_controller_2.gd" id="6_i4krp"]
+[ext_resource type="Script" path="res://src/player/sight_controller.gd" id="6_i4krp"]
 
 [sub_resource type="Animation" id="Animation_yhvbl"]
 length = 0.001
@@ -193,10 +191,4 @@ script = ExtResource("3_phlvu")
 animation_player = NodePath("../AnimationPlayer")
 
 [node name="SightController" type="Node" parent="."]
-script = ExtResource("4_v4dro")
-
-[node name="ShadowController" type="Node" parent="."]
-script = ExtResource("5_8tvw8")
-
-[node name="SightController2" type="Node" parent="."]
 script = ExtResource("6_i4krp")

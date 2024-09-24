@@ -19,7 +19,17 @@ const SPRITE_OFFSET := Vector2(8, 0)
 
 @export var entity_name : String = ""
 
+@export_group("Vision Colors")
+@export var discovered_color := Color("#434343")
+@export var vision_color := Color("#FFFFFF")
+
 @onready var player : Player = get_tree().get_first_node_in_group("player")
+
+var discovered := false
+var in_vision := false :
+	set(val):
+		in_vision = val
+		on_vision_changed()
 
 var processed_this_frame := false
 
@@ -82,3 +92,14 @@ func get_entity_name() -> String:
 	if entity_name:
 		return entity_name
 	return "<NULL>"
+
+
+func on_vision_changed() -> void:
+	if in_vision:
+		discovered = true
+		modulate = vision_color
+	else:
+		if discovered && !is_character:
+			modulate = discovered_color
+		else:
+			modulate = Color(0, 0, 0, 0)
