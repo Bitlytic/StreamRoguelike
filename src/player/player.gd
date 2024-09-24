@@ -26,8 +26,13 @@ func _ready():
 	health_changed.connect(on_health_changed)
 	on_health_changed(health)
 	
+	sight_controller.vision_range = vision_range
 	
+	# TODO: Please fix this one day. This feels really gross
 	await get_tree().process_frame
+	update_sight()
+	await get_tree().process_frame
+	GridWorld.world_updated.emit()
 	update_sight()
 
 

@@ -6,9 +6,9 @@ extends Entity
 
 @export var vision_range := 8
 
-@onready var state_machine := $StateMachine
-
+@onready var state_machine : StateMachine = $StateMachine
 @onready var animation_controller: AnimationController = $AnimationController
+@onready var sight_controller: SightController = $SightController
 
 var weapon : BasicWeapon = preload("res://resources/weapons/axe.tres")
 
@@ -20,6 +20,7 @@ var could_see_player := false
 var reaction_time := 1
 var current_player_reaction_time := 0
 
+var can_see_player := false
 
 func _ready() -> void:
 	super()
@@ -28,6 +29,8 @@ func _ready() -> void:
 	
 	a_star_grid.region = Rect2i(Vector2i(0, 0), GridWorld.world_size + Vector2i(1, 1))
 	a_star_grid.update()
+	
+	sight_controller.vision_range = vision_range
 	
 	GridWorld.update_pathfinding(self, a_star_grid)
 
@@ -39,36 +42,18 @@ func do_process():
 	GridWorld.update_pathfinding(self, a_star_grid)
 	
 	
+	# TODO: Performance sometimes sucks, this is the reason.
+	# One optimization is to only update fov in the player direction
+	# Another is to only check the fov from the player, and use that to determine enemy fov
+	#sight_controller.update_fov()
+	#can_see_player = check_for_player()
+	
+	
 	var action = state_machine.do_process()
 	
-	var can_see = GridWorld.can_see(grid_position, player.grid_position, self)
+	#var can_see = GridWorld.can_see(grid_position, player.grid_position, self)
 	
 	queue_redraw()
-	return action
-
-
-func move_toward_pos(pos: Vector2i) -> EntityAction:
-	
-	var path := a_star_grid.get_id_path(grid_position, pos, true)
-	
-	path.pop_front()
-	
-	#TODO: This sometimes messes up when it shouldn't
-	if path.size() <= 0:
-		return EntityAction.new(ActionType.WAIT)
-	
-	#TODO: this crashes sometimes
-	var target_direction = path[0] - grid_position
-	
-	var action = MoveAction.new()
-	action.position = grid_position + target_direction
-	
-	var door : DoorEntity = GridWorld.get_cell(action.position).get_first_match(Predicates.is_door_entity)
-	
-	if door && !door.locked && !door.open:
-		action = OpenAction.new()
-		action.target = door
-	
 	return action
 
 
@@ -78,17 +63,21 @@ func _draw() -> void:
 	
 	var points = PathfindingUtil.get_line_to(grid_position, player.grid_position)
 	
-	var can_see = GridWorld.can_see(grid_position, player.grid_position, self)
-	
 	var draw_color := Color.RED
 	
-	if can_see:
+	if can_see_player:
 		draw_color = Color.GREEN
 	
 	for i in range(points.size() - 1):
 		var p0 = points[i] * 16 - Vector2i(global_position)
 		var p1 = points[i + 1] * 16 - Vector2i(global_position)
 		draw_line(p0, p1, draw_color, 2.0)
+	
+	
+	for pos in sight_controller.visible_tiles:
+		var world_coords : Vector2 = GridWorld.cell_size * (pos - Vector2(grid_position))
+		
+		draw_circle(world_coords, 4.0, Color.RED)
 
 
 func get_entity_name() -> String:
@@ -102,3 +91,7 @@ func play_attack_animation(action: AttackAction):
 	direction.y = clamp(direction.y, -1, 1)
 	
 	animation_controller.play_attack_animation(Direction.vector2_to_direction(direction))
+
+
+func check_for_player() -> bool:
+	return sight_controller.visible_tiles.has(Vector2(player.grid_position))

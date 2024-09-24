@@ -3,9 +3,11 @@
 class_name SightController
 extends Node
 
-# Retrieve references to the game's tilemap, fog, and player.
+# Retrieve references to the game's tilemap, fog, and entity.
 
-@onready var player : Player = get_owner()
+@onready var entity : Entity = get_owner()
+
+var vision_range := 0
 
 var visible_tiles : Array[Vector2]
 const MAX_VISION_DISTANCE = 12 # Maximum distance for player's FOV.
@@ -16,7 +18,7 @@ func update_fov():
 	visible_tiles.clear()
 	#for n in visible_tiles.keys():
 		#fog.set_cellv(n, 1) # Reset visible tiles to soft-fog.
-	shadow_casting(player.grid_position) # Calculate visible tiles.
+	shadow_casting(entity.grid_position) # Calculate visible tiles.
 
 # Primary shadowcasting function, iterates through quadrants.
 func shadow_casting(origin : Vector2):
@@ -33,7 +35,7 @@ func reveal(tile : Vector2, quadrant : Quadrant):
 
 # Mark a tile as visible if it's within the defined vision distance.
 func mark_visible(tile : Vector2):
-	if distance(player.grid_position, tile) > MAX_VISION_DISTANCE: return
+	if distance(entity.grid_position, tile) > vision_range: return
 	if !visible_tiles.has(tile):
 		visible_tiles.append(tile)
 
@@ -84,7 +86,7 @@ func scan(row : Row, quadrant : Quadrant):
 	if is_floor(prev_tile, quadrant):
 		scan(row.next(), quadrant)
 
-# Represents one of the 4 relative quadrants around the player.
+# Represents one of the 4 relative quadrants around the entity.
 class Quadrant:
 	var cardinal
 	var ox

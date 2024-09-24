@@ -13,15 +13,14 @@ func enter():
 func do_process() -> EntityAction:
 	var action = EntityAction.new()
 	
-	var can_see := GridWorld.can_see(enemy.grid_position, player.grid_position, enemy)
-	
-	if !can_see:
+	if !enemy.can_see_player:
 		if could_see:
 			target_position = player.grid_position
 			could_see = false
 		
 		if target_position == enemy.grid_position:
 			transitioned.emit(self, "idle")
+			return EntityAction.new()
 	else:
 		target_position = player.grid_position
 		

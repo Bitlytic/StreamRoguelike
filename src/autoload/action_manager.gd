@@ -28,6 +28,8 @@ func _ready():
 	entity_dialog.hide()
 	inventory_dialog.hide()
 	item_action_dialog.hide()
+	
+	hide_top_bar()
 
 
 func _physics_process(delta: float) -> void:
