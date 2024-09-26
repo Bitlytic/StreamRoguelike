@@ -12,8 +12,22 @@ func _init(slot: ItemSlot):
 
 func perform_action() -> void:
 	if owner is Player:
-		owner.inventory.add_item(owner.weapon)
+		var item = slot.item
+		if item is BasicWeapon:
+			_swap_item("weapon")
 		
-		owner.weapon = slot.item
-		
-		owner.inventory.remove_item(owner.weapon)
+		if item is Armor:
+			match item.slot:
+				Armor.ArmorSlot.HELMET:
+					_swap_item("helmet")
+				Armor.ArmorSlot.CHESTPLATE:
+					_swap_item("chestplate")
+				Armor.ArmorSlot.BOOTS:
+					_swap_item("boots")
+
+
+func _swap_item(property_name: String) -> void:
+	if owner.equipment.get(property_name):
+		owner.inventory.add_item(owner.equipment.get(property_name))
+	owner.equipment.set(property_name, slot.item)
+	owner.inventory.remove_item(owner.equipment.get(property_name))

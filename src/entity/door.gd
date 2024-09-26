@@ -15,6 +15,11 @@ extends Entity
 @export var locked := false
 @export var open := false
 
+@export_group("Sounds")
+@export var open_sound : AudioStream
+@export var close_sound : AudioStream
+@export var unlock_sound : AudioStream
+
 @onready var sprite: Sprite2D = $Sprite2D
 
 
@@ -28,11 +33,18 @@ func _ready():
 func toggle_open():
 	if !locked:
 		open = !open
+		
+		if open:
+			SoundManager.play_sound(open_sound, 0.25)
+		else:
+			SoundManager.play_sound(close_sound, 0.25)
+	
 	update_sprite()
 
 
 func unlock():
 	locked = false
+	SoundManager.play_sound(unlock_sound, 0.25)
 	update_sprite()
 
 

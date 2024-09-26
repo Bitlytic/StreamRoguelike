@@ -43,7 +43,7 @@ func try_attack_target(target: Entity) -> EntityAction:
 	if target_diff.length() < 2:
 		var attack = AttackAction.new()
 		attack.position = target.grid_position
-		attack.weapon = enemy.weapon
+		attack.weapon = enemy.equipment.weapon
 		attack.target = target
 		
 		return attack

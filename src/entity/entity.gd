@@ -19,6 +19,8 @@ const SPRITE_OFFSET := Vector2(8, 0)
 
 @export var entity_name : String = ""
 
+@export var equipment := Equipment.new()
+
 @export_group("Vision Colors")
 @export var discovered_color := Color("#434343")
 @export var vision_color := Color("#FFFFFF")

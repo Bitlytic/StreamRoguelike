@@ -26,8 +26,7 @@ func remove_item(item: Item, count: int = 1):
 		if existing_slot.count <= 0:
 			_items.erase(item)
 	else:
-		push_error("We don't have an item slot for that!")
-	
+		push_error("We don't have an item slot for that!", item)
 
 
 func get_items() -> Array:

@@ -72,7 +72,7 @@ func player_input(action: EntityAction):
 	
 	# TODO: this sucks, don't do this eventually
 	if action is AttackAction:
-		action.weapon = player.weapon
+		action.weapon = player.equipment.weapon
 	
 	_perform_action(action)
 	

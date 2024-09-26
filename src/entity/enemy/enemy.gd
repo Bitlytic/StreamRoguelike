@@ -10,8 +10,6 @@ extends Entity
 @onready var animation_controller: AnimationController = $AnimationController
 @onready var sight_controller: SightController = $SightController
 
-var weapon : BasicWeapon = preload("res://resources/weapons/axe.tres")
-
 var a_star_grid : AStarGrid2D = AStarGrid2D.new()
 
 var last_seen_position : Vector2i
@@ -45,9 +43,11 @@ func do_process():
 	# TODO: Performance sometimes sucks, this is the reason.
 	# One optimization is to only update fov in the player direction
 	# Another is to only check the fov from the player, and use that to determine enemy fov
-	#sight_controller.update_fov()
-	#can_see_player = check_for_player()
-	
+	if in_vision:
+		var dist_to_player := player.grid_position.distance_to(grid_position)
+		can_see_player = dist_to_player <= vision_range
+	else:
+		can_see_player = false
 	
 	var action = state_machine.do_process()
 	

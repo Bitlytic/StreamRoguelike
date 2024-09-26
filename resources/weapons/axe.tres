@@ -13,4 +13,5 @@ dice_size = 2
 dice_roll_times = 1
 constant_damage = 0
 texture = SubResource("AtlasTexture_iyljy")
+texture_tint = Color(1, 1, 1, 1)
 item_name = "Axe"

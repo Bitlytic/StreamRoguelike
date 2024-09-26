@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://ijfmb68a156c"]
+[gd_scene load_steps=11 format=3 uid="uid://ijfmb68a156c"]
 
 [ext_resource type="Script" path="res://src/autoload/action_manager.gd" id="1_rqua3"]
 [ext_resource type="PackedScene" uid="uid://cm801b11b3i4" path="res://ui/scenes/action_dialog.tscn" id="2_1hkv7"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://ui/inventory_dialog.gd" id="6_0olfa"]
 [ext_resource type="PackedScene" uid="uid://b1kdxhor7jnn" path="res://ui/scenes/item_action_dialog.tscn" id="7_hqe7c"]
 [ext_resource type="PackedScene" uid="uid://cgqtwojb0f3f2" path="res://ui/scenes/top_bar.tscn" id="8_eong2"]
+[ext_resource type="PackedScene" uid="uid://ceuginjgu77gv" path="res://ui/scenes/equipment_dialog.tscn" id="8_wyelg"]
 
 [node name="ActionManager" type="Node"]
 script = ExtResource("1_rqua3")
@@ -50,6 +51,12 @@ grow_vertical = 2
 theme = ExtResource("3_cw17j")
 script = ExtResource("6_0olfa")
 list_name = "Items"
+
+[node name="EquipmentDialog" parent="UI" instance=ExtResource("8_wyelg")]
+offset_left = 320.0
+offset_top = 180.0
+offset_right = 320.0
+offset_bottom = 180.0
 
 [node name="ItemActionDialog" parent="UI" instance=ExtResource("7_hqe7c")]
 anchors_preset = 8

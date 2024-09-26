@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Equipment" load_steps=3 format=3 uid="uid://dic5q6ooaklqe"]
+
+[ext_resource type="Script" path="res://src/data/equipment.gd" id="1_doo03"]
+[ext_resource type="Resource" uid="uid://cxnmcvlqypql7" path="res://resources/weapons/axe.tres" id="2_7t08e"]
+
+[resource]
+script = ExtResource("1_doo03")
+weapon = ExtResource("2_7t08e")

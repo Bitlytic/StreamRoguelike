@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Armor" load_steps=4 format=3 uid="uid://bii8q822ugauu"]
+
+[ext_resource type="Script" path="res://src/data/item/armor.gd" id="1_vm0fd"]
+[ext_resource type="Texture2D" uid="uid://d1dtxy8sb2lia" path="res://assets/art/kenney-1bit.png" id="2_r7i2a"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iq7o2"]
+atlas = ExtResource("2_r7i2a")
+region = Rect2(528, 0, 16, 16)
+
+[resource]
+script = ExtResource("1_vm0fd")
+slot = 0
+armor_value = 1
+evasion_value = -1
+texture = SubResource("AtlasTexture_iq7o2")
+texture_tint = Color(0.666569, 0.666569, 0.666569, 1)
+item_name = "Iron Cap"

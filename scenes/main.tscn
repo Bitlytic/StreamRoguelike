@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://f8ghk3wbo38j"]
+[gd_scene load_steps=29 format=4 uid="uid://f8ghk3wbo38j"]
 
 [ext_resource type="PackedScene" uid="uid://dkhrcr6y2unah" path="res://src/entity/wall.tscn" id="1_jg00e"]
 [ext_resource type="PackedScene" uid="uid://oaanpb1irxop" path="res://src/player/player.tscn" id="2_2maip"]
@@ -7,10 +7,14 @@
 [ext_resource type="Resource" uid="uid://cyud1nt6gqpl1" path="res://resources/weapons/spear.tres" id="6_lfy4y"]
 [ext_resource type="Script" path="res://src/data/item/weapon.gd" id="6_mm8bc"]
 [ext_resource type="PackedScene" uid="uid://celjbq7aup7mo" path="res://src/entity/door.tscn" id="7_2frx7"]
+[ext_resource type="Script" path="res://src/data/equipment.gd" id="7_mrrbf"]
 [ext_resource type="Resource" uid="uid://dki4f1fh7wt05" path="res://resources/weapons/sword.tres" id="7_yonjw"]
 [ext_resource type="Resource" uid="uid://bs56fqb7322ae" path="res://resources/potions/basic_health_potion.tres" id="8_mkscg"]
 [ext_resource type="Resource" uid="uid://dp5hw11qph52p" path="res://resources/key/key.tres" id="9_m0bnd"]
 [ext_resource type="Script" path="res://src/world/grass_spawner.gd" id="9_pi4jy"]
+[ext_resource type="Resource" uid="uid://bdlpx87828fub" path="res://resources/armor/leather_chestplate.tres" id="12_q1gmv"]
+[ext_resource type="Resource" uid="uid://mj5rnxhiks3s" path="res://resources/armor/iron_chestplate.tres" id="13_uephb"]
+[ext_resource type="Resource" uid="uid://bii8q822ugauu" path="res://resources/armor/iron_cap.tres" id="14_q3jwa"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_ovget"]
 resource_name = "Tiles"
@@ -36,7 +40,29 @@ dice_size = 5
 dice_roll_times = 1
 constant_damage = 0
 texture = SubResource("AtlasTexture_umao2")
+texture_tint = Color(1, 1, 1, 1)
 item_name = "Spear"
+
+[sub_resource type="Resource" id="Resource_dekfl"]
+script = ExtResource("7_mrrbf")
+
+[sub_resource type="Resource" id="Resource_hkmk5"]
+script = ExtResource("7_mrrbf")
+
+[sub_resource type="Resource" id="Resource_l65iq"]
+script = ExtResource("7_mrrbf")
+
+[sub_resource type="Resource" id="Resource_x6ng8"]
+script = ExtResource("7_mrrbf")
+
+[sub_resource type="Resource" id="Resource_al6ou"]
+script = ExtResource("7_mrrbf")
+
+[sub_resource type="Resource" id="Resource_t3ih8"]
+script = ExtResource("7_mrrbf")
+
+[sub_resource type="Resource" id="Resource_55idd"]
+script = ExtResource("7_mrrbf")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_p7yku"]
 frequency = 0.0244
@@ -52,32 +78,53 @@ tile_set = SubResource("TileSet_28ccd")
 [node name="ItemEntity" parent="Items" instance=ExtResource("5_e3wws")]
 position = Vector2(296, 280)
 item = SubResource("Resource_mq13i")
+equipment = SubResource("Resource_dekfl")
 
 [node name="ItemEntity6" parent="Items" instance=ExtResource("5_e3wws")]
 position = Vector2(56, 312)
 item = SubResource("Resource_mq13i")
+equipment = SubResource("Resource_hkmk5")
 
 [node name="ItemEntity2" parent="Items" instance=ExtResource("5_e3wws")]
 position = Vector2(424, 120)
 item = ExtResource("7_yonjw")
+equipment = SubResource("Resource_l65iq")
 
 [node name="ItemEntity3" parent="Items" instance=ExtResource("5_e3wws")]
 position = Vector2(168, 136)
 item = ExtResource("8_mkscg")
+equipment = SubResource("Resource_x6ng8")
 
 [node name="ItemEntity4" parent="Items" instance=ExtResource("5_e3wws")]
 position = Vector2(408, 232)
 item = ExtResource("9_m0bnd")
+equipment = SubResource("Resource_al6ou")
 
 [node name="ItemEntity5" parent="Items" instance=ExtResource("5_e3wws")]
 position = Vector2(376, 216)
 item = ExtResource("6_lfy4y")
+equipment = SubResource("Resource_t3ih8")
+
+[node name="ItemEntity7" parent="Items" instance=ExtResource("5_e3wws")]
+position = Vector2(40, 72)
+item = ExtResource("12_q1gmv")
+equipment = SubResource("Resource_t3ih8")
+
+[node name="ItemEntity8" parent="Items" instance=ExtResource("5_e3wws")]
+position = Vector2(72, 72)
+item = ExtResource("13_uephb")
+equipment = SubResource("Resource_t3ih8")
+
+[node name="ItemEntity9" parent="Items" instance=ExtResource("5_e3wws")]
+position = Vector2(72, 56)
+item = ExtResource("14_q3jwa")
+equipment = SubResource("Resource_t3ih8")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(312, 152)
 
 [node name="Player" parent="." instance=ExtResource("2_2maip")]
-position = Vector2(48, 48)
+position = Vector2(40, 40)
 max_health = 25
 
 [node name="Objects" type="Node2D" parent="."]
@@ -89,6 +136,7 @@ locked = true
 [node name="Key" parent="." instance=ExtResource("5_e3wws")]
 position = Vector2(72, 248)
 item = ExtResource("9_m0bnd")
+equipment = SubResource("Resource_55idd")
 
 [node name="GrassSpawner" type="Node" parent="."]
 script = ExtResource("9_pi4jy")

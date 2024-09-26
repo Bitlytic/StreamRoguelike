@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Armor" load_steps=4 format=3 uid="uid://xwy76ka3oi8r"]
+
+[ext_resource type="Script" path="res://src/data/item/armor.gd" id="1_hpfv4"]
+[ext_resource type="Texture2D" uid="uid://d1dtxy8sb2lia" path="res://assets/art/kenney-1bit.png" id="2_lbhov"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rw0kg"]
+atlas = ExtResource("2_lbhov")
+region = Rect2(512, 0, 16, 16)
+
+[resource]
+script = ExtResource("1_hpfv4")
+slot = 0
+armor_value = 0
+evasion_value = 1
+texture = SubResource("AtlasTexture_rw0kg")
+texture_tint = Color(0.458824, 0.317647, 0.0352941, 1)
+item_name = "Leather Cap"

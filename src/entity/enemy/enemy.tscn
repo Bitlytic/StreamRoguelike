@@ -1,7 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://bvbty718biabw"]
+[gd_scene load_steps=19 format=3 uid="uid://bvbty718biabw"]
 
 [ext_resource type="Script" path="res://src/entity/enemy/enemy.gd" id="1_3qv4u"]
 [ext_resource type="Texture2D" uid="uid://d1dtxy8sb2lia" path="res://assets/art/kenney-1bit.png" id="2_1fto6"]
+[ext_resource type="Resource" uid="uid://dic5q6ooaklqe" path="res://resources/kits/weak_enemy_kit.tres" id="2_wbdi6"]
 [ext_resource type="Script" path="res://src/components/animation_controller.gd" id="3_ijsc8"]
 [ext_resource type="Script" path="res://src/entity/state_machine.gd" id="4_xqqcd"]
 [ext_resource type="Script" path="res://src/entity/enemy/state/enemy_idle.gd" id="5_1efml"]
@@ -176,6 +177,7 @@ _data = {
 script = ExtResource("1_3qv4u")
 debug_draw = true
 is_character = true
+equipment = ExtResource("2_wbdi6")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_1fto6")

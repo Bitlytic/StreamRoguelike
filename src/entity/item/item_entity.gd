@@ -31,3 +31,4 @@ func get_entity_name() -> String:
 func update_sprite():
 	if sprite:
 		sprite.texture = item.texture
+		sprite.self_modulate = item.texture_tint

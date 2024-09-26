@@ -15,13 +15,14 @@ var axe : BasicWeapon = load("res://resources/weapons/axe.tres")
 
 var has_moved := false
 var picking_direction := false
-var picking_item := false
 
 
 var positions_to_check : Array[Vector2i]
 
 func _ready():
 	super()
+	
+	equipment.weapon = weapon
 	
 	health_changed.connect(on_health_changed)
 	on_health_changed(health)
@@ -38,6 +39,11 @@ func _ready():
 
 func _physics_process(delta: float) -> void:
 	
+	if Input.is_action_just_pressed("debug_info"):
+		print("armor: ", equipment.get_armor())
+		print("evasion: ", equipment.get_evasion())
+		print(equipment.get_property_list())
+	
 	if ActionManager.picking_action || ActionManager.picking_item:
 		return
 	
@@ -45,8 +51,12 @@ func _physics_process(delta: float) -> void:
 		picking_direction = true
 		ActionManager.show_picking_direction()
 	
-	if Input.is_action_just_pressed("equip_item_menu"):
+	if Input.is_action_just_pressed("inventory"):
 		ActionManager.show_inventory_dialog(inventory)
+		return
+	
+	if Input.is_action_just_pressed("equipment"):
+		ActionManager.show_equipment_dialog(equipment)
 		return
 	
 	if picking_direction:
@@ -87,7 +97,7 @@ func _physics_process(delta: float) -> void:
 			action.type = ActionType.MOVE
 		elif cell.character:
 			action = AttackAction.new()
-			action.weapon = weapon
+			action.weapon = equipment.weapon
 			action.type = ActionType.ATTACK
 			action.target = cell.character
 		elif cell.has_any(Predicates.is_door_entity):

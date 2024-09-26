@@ -1,7 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://celjbq7aup7mo"]
+[gd_scene load_steps=8 format=3 uid="uid://celjbq7aup7mo"]
 
 [ext_resource type="Script" path="res://src/entity/door.gd" id="1_wqcno"]
 [ext_resource type="Texture2D" uid="uid://d1dtxy8sb2lia" path="res://assets/art/kenney-1bit.png" id="2_3crnd"]
+[ext_resource type="AudioStream" uid="uid://cy14cmhlu43k4" path="res://assets/sound/kenney/doorOpen_2.ogg" id="3_kwyc3"]
+[ext_resource type="AudioStream" uid="uid://dj8x0buu7hjjb" path="res://assets/sound/kenney/doorClose_4.ogg" id="4_tcloo"]
+[ext_resource type="AudioStream" uid="uid://du2mfwouurloq" path="res://assets/sound/kenney/metalClick.ogg" id="5_7vxp1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4b5v7"]
 atlas = ExtResource("2_3crnd")
@@ -17,6 +20,9 @@ open_texture = SubResource("AtlasTexture_4b5v7")
 closed_texture = SubResource("AtlasTexture_g5c00")
 locked_color = Color(1, 0.423529, 0.611765, 1)
 unlocked_color = Color(1, 1, 1, 1)
+open_sound = ExtResource("3_kwyc3")
+close_sound = ExtResource("4_tcloo")
+unlock_sound = ExtResource("5_7vxp1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-8, -8)

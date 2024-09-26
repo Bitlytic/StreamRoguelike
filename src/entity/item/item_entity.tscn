@@ -8,6 +8,7 @@ atlas = ExtResource("2_j5rps")
 region = Rect2(640, 112, 16, 16)
 
 [node name="ItemEntity" type="Node2D"]
+position = Vector2(8, 8)
 script = ExtResource("1_kcow7")
 
 [node name="Sprite" type="Sprite2D" parent="."]

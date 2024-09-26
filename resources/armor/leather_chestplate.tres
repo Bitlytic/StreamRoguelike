@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Armor" load_steps=4 format=3 uid="uid://bdlpx87828fub"]
+
+[ext_resource type="Script" path="res://src/data/item/armor.gd" id="1_sa7qh"]
+[ext_resource type="Texture2D" uid="uid://d1dtxy8sb2lia" path="res://assets/art/kenney-1bit.png" id="2_iouyb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ct0jg"]
+atlas = ExtResource("2_iouyb")
+region = Rect2(512, 16, 16, 16)
+
+[resource]
+script = ExtResource("1_sa7qh")
+slot = 1
+armor_value = 1
+evasion_value = 1
+texture = SubResource("AtlasTexture_ct0jg")
+texture_tint = Color(0.46, 0.318933, 0.0368, 1)
+item_name = "Leather Chestplate"

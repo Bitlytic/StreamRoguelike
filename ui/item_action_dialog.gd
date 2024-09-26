@@ -20,7 +20,7 @@ func display_actions(slot: ItemSlot):
 	
 	var action_types : Array[int] = [ActionType.DROP_ITEM]
 	
-	if slot.item is BasicWeapon:
+	if slot.item is BasicWeapon || slot.item is Armor:
 		action_types.append(ActionType.EQUIP)
 	
 	if slot.item.has_method("use_item"):

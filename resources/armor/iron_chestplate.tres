@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Armor" load_steps=4 format=3 uid="uid://mj5rnxhiks3s"]
+
+[ext_resource type="Script" path="res://src/data/item/armor.gd" id="1_u6ymf"]
+[ext_resource type="Texture2D" uid="uid://d1dtxy8sb2lia" path="res://assets/art/kenney-1bit.png" id="2_0orsv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bocfm"]
+atlas = ExtResource("2_0orsv")
+region = Rect2(528, 16, 16, 16)
+
+[resource]
+script = ExtResource("1_u6ymf")
+slot = 1
+armor_value = 3
+evasion_value = -1
+texture = SubResource("AtlasTexture_bocfm")
+texture_tint = Color(0.666667, 0.666667, 0.666667, 1)
+item_name = "Iron Chestplate"
