@@ -85,7 +85,7 @@ func blocks_movement() -> bool:
 		return true
 	
 	for e in _entities:
-		if e.is_passable(null):
+		if !e.is_passable(null):
 			return true
 	
 	return false

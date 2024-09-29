@@ -4,14 +4,11 @@ extends Entity
 
 @export var debug_draw := false
 
-@export var vision_range := 12
+@export var vision_range := 8
 
-@onready var weapon : BasicWeapon = axe
 @onready var animation_controller: AnimationController = $AnimationController
 @onready var sight_controller: SightController = $SightController
 
-
-var axe : BasicWeapon = load("res://resources/weapons/axe.tres")
 
 var has_moved := false
 var picking_direction := false
@@ -24,8 +21,6 @@ var positions_to_check : Array[Vector2i]
 
 func _ready():
 	super()
-	
-	equipment.weapon = weapon
 	
 	health_changed.connect(on_health_changed)
 	on_health_changed(health)
@@ -56,8 +51,12 @@ func _physics_process(delta: float) -> void:
 		ActionManager.show_picking_direction()
 	
 	if Input.is_action_just_pressed("use_ranged"):
+		if !equipment.ranged_weapon:
+			return
+		
 		aiming_ranged_weapon = true
 		current_aiming_position = grid_position
+		GridWorld.update_reticle_position(current_aiming_position)
 		GridWorld.show_reticle()
 		ActionManager.show_aiming()
 	
@@ -95,6 +94,13 @@ func _physics_process(delta: float) -> void:
 			current_aiming_position = GridWorld.clamp_to_bounds(current_aiming_position)
 			GridWorld.update_reticle_position(current_aiming_position)
 			queue_redraw()
+		
+		if Input.is_action_just_pressed("ui_accept"):
+			attack_ranged_target()
+			aiming_ranged_weapon = false
+			GridWorld.hide_reticle()
+			queue_redraw()
+			ActionManager.hide_top_bar()
 		return
 	
 	var action := EntityAction.new()
@@ -153,12 +159,41 @@ func update_sight():
 	queue_redraw()
 
 
+func attack_ranged_target() -> void:
+	var action := AttackAction.new()
+	action.weapon = equipment.ranged_weapon
+	
+	var line_to := PathfindingUtil.get_line_to(grid_position, current_aiming_position)
+	
+	if line_to.size() < 1:
+		return
+	
+	for pos in line_to:
+		var cell = GridWorld.get_cell(pos)
+		if cell.character && cell.character is not Player:
+			action.target = cell.character
+			break
+		
+		for e in cell.get_entities():
+			if !e.is_passable(self):
+				action.target = e
+				break
+		
+		if action.target:
+			break
+	
+	
+	GridWorld.player_input(action)
+
 func _draw() -> void:
 	if !debug_draw:
 		return
 	
 	if aiming_ranged_weapon:
 		var line_to := PathfindingUtil.get_line_to(grid_position, current_aiming_position)
+		
+		if line_to.size() < 2:
+			return
 		
 		var scaled_points := []
 		
@@ -167,4 +202,4 @@ func _draw() -> void:
 		
 		var packed_array := PackedVector2Array(scaled_points)
 		
-		draw_polyline(scaled_points, Color(1, 1, 1, 0.75), 2.0, true)
+		draw_polyline(scaled_points, Color(1, 1, 1, 0.5), 2.0, true)

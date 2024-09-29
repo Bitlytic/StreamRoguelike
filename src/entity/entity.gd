@@ -83,7 +83,7 @@ func heal(amount: int) -> void:
 
 
 func is_passable(e: Entity) -> bool:
-	return blocks_movement
+	return !blocks_movement
 
 
 func can_see_through(e: Entity) -> bool:

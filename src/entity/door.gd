@@ -49,7 +49,7 @@ func unlock():
 
 
 func is_passable(e: Entity) -> bool:
-	return !open
+	return open
 
 
 func can_see_through(e: Entity) -> bool:

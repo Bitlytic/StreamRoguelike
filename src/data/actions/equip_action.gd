@@ -15,6 +15,8 @@ func perform_action() -> void:
 		var item = slot.item
 		if item is BasicWeapon:
 			_swap_item("weapon")
+		elif item is RangedWeapon:
+			_swap_item("ranged_weapon")
 		
 		if item is Armor:
 			match item.slot:

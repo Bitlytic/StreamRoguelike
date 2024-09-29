@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bvbty718biabw" path="res://src/entity/enemy/enemy.tscn" id="3_has72"]
 [ext_resource type="PackedScene" uid="uid://1tr6jfjdpacw" path="res://src/entity/item/item_entity.tscn" id="5_e3wws"]
 [ext_resource type="Resource" uid="uid://cyud1nt6gqpl1" path="res://resources/weapons/spear.tres" id="6_lfy4y"]
-[ext_resource type="Script" path="res://src/data/item/weapon.gd" id="6_mm8bc"]
+[ext_resource type="Script" path="res://src/data/item/basic_weapon.gd" id="6_mm8bc"]
 [ext_resource type="PackedScene" uid="uid://celjbq7aup7mo" path="res://src/entity/door.tscn" id="7_2frx7"]
 [ext_resource type="Script" path="res://src/data/equipment.gd" id="7_mrrbf"]
 [ext_resource type="Resource" uid="uid://dki4f1fh7wt05" path="res://resources/weapons/sword.tres" id="7_yonjw"]
@@ -122,6 +122,7 @@ position = Vector2(312, 152)
 
 [node name="Player" parent="." instance=ExtResource("2_2maip")]
 position = Vector2(40, 40)
+debug_draw = null
 max_health = 25
 
 [node name="Objects" type="Node2D" parent="."]

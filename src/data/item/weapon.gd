@@ -1,15 +1,7 @@
-class_name BasicWeapon
+class_name Weapon
 extends Item
-
 
 @export var dice_roll : DiceRoll
 
-
 func get_attack() -> Attack:
-	var attack := Attack.new()
-	attack.damage = calc_damage()
-	return attack
-
-
-func calc_damage() -> int:
-	return dice_roll.calc()
+	return Attack.new()

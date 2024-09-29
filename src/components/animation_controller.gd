@@ -12,5 +12,7 @@ func play_attack_animation(direction: int):
 	var anim_name := "attack_" + dir_string
 	
 	animation_player.stop()
-	animation_player.play(anim_name, -1, 3.0)
+	
+	if animation_player.has_animation(anim_name):
+		animation_player.play(anim_name, -1, 3.0)
 	

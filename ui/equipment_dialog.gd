@@ -5,6 +5,7 @@ extends ListDialog
 signal equipment_selected(result: Item)
 
 var equipment_properties : Array[String] = [
+	"ranged_weapon",
 	"weapon",
 	"helmet",
 	"chestplate",

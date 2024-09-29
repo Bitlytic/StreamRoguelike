@@ -6,7 +6,7 @@ var attack_sounds := [
 ]
 
 
-var weapon : BasicWeapon
+var weapon : Weapon
 
 
 func _init():

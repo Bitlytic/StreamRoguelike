@@ -1,10 +1,17 @@
 class_name RangedWeapon
-extends Resource
+extends Weapon
 
 
-@export_range(0, 1) var accuracy := 0.1
-@export var dice_roll : DiceRoll
+@export_range(0, 1) var accuracy : float = 0.1
 
 
-func calc_damage() -> int:
-	return dice_roll.calc()
+
+func get_attack() -> Attack:
+	var attack := Attack.new()
+	
+	if randf_range(0, 1) <= accuracy:
+		attack.damage = dice_roll.calc()
+		print("Hit! for ", attack.damage)
+	else:
+		print("Miss!")
+	return attack

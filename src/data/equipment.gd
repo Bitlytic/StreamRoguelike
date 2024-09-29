@@ -3,6 +3,7 @@ extends Resource
 
 
 @export var weapon : BasicWeapon
+@export var ranged_weapon : RangedWeapon
 
 @export_group("Armor")
 @export var helmet : Armor

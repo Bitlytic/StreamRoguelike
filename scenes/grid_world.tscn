@@ -18,5 +18,6 @@ wait_time = 1.25
 one_shot = true
 
 [node name="Reticle" type="Sprite2D" parent="."]
+visible = false
 z_index = 2
 texture = SubResource("AtlasTexture_jem6k")

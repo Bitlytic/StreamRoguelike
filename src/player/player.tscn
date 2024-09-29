@@ -1,9 +1,17 @@
-[gd_scene load_steps=15 format=3 uid="uid://oaanpb1irxop"]
+[gd_scene load_steps=19 format=3 uid="uid://oaanpb1irxop"]
 
 [ext_resource type="Script" path="res://src/player/player.gd" id="1_iqw8t"]
+[ext_resource type="Resource" uid="uid://c0slctsr58idx" path="res://resources/weapons/bow.tres" id="2_igauv"]
 [ext_resource type="Texture2D" uid="uid://d1dtxy8sb2lia" path="res://assets/art/kenney-1bit.png" id="2_ys2la"]
 [ext_resource type="Script" path="res://src/components/animation_controller.gd" id="3_phlvu"]
+[ext_resource type="Script" path="res://src/data/equipment.gd" id="3_ts3ge"]
+[ext_resource type="Resource" uid="uid://cxnmcvlqypql7" path="res://resources/weapons/axe.tres" id="4_08l8g"]
 [ext_resource type="Script" path="res://src/player/sight_controller.gd" id="6_i4krp"]
+
+[sub_resource type="Resource" id="Resource_oa8iq"]
+script = ExtResource("3_ts3ge")
+weapon = ExtResource("4_08l8g")
+ranged_weapon = ExtResource("2_igauv")
 
 [sub_resource type="Animation" id="Animation_yhvbl"]
 length = 0.001
@@ -173,8 +181,15 @@ _data = {
 z_index = 1
 script = ExtResource("1_iqw8t")
 debug_draw = true
+vision_range = null
+max_health = null
 is_character = true
+blocks_vision = null
+blocks_movement = null
 entity_name = "Player"
+equipment = SubResource("Resource_oa8iq")
+discovered_color = null
+vision_color = null
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_ys2la")

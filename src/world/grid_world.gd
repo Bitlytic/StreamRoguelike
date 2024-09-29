@@ -11,6 +11,7 @@ signal world_updated()
 @onready var cycle_wait_timer: Timer = $CycleWaitTimer
 @onready var reticle: Sprite2D = $Reticle
 
+var aiming_reticle := false
 
 var reticle_position : Vector2i:
 	set(val):
@@ -78,7 +79,7 @@ func player_input(action: EntityAction):
 	action.owner = player
 	
 	# TODO: this sucks, don't do this eventually
-	if action is AttackAction:
+	if action is AttackAction && !action.weapon:
 		action.weapon = player.equipment.weapon
 	
 	_perform_action(action)
@@ -185,7 +186,7 @@ func on_cycle_wait_timeout() -> void:
 
 func on_cycle_timeout() -> void:
 	for cell : GridCell in cells.values():
-		if cell.grid_position == reticle_position:
+		if aiming_reticle && cell.grid_position == reticle_position:
 			if reticle.visible:
 				cell.set_display(true)
 				cell.cycle_display()
@@ -218,10 +219,13 @@ func set_player_vision(tiles: Array[Vector2]) -> void:
 
 func show_reticle() -> void:
 	reticle.show()
-
+	aiming_reticle = true
+	get_cell(reticle_position).set_display(true)
 
 func hide_reticle() -> void:
 	reticle.hide()
+	aiming_reticle = false
+	get_cell(reticle_position).set_display(true)
 
 
 func update_reticle_position(new_pos: Vector2i) -> void:
