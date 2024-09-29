@@ -13,4 +13,5 @@ dice_size = 3
 rolls = 2
 constant_amount = 0
 texture = SubResource("AtlasTexture_84mqy")
+texture_tint = Color(1, 1, 1, 1)
 item_name = "Basic Health Potion"

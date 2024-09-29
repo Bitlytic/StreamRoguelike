@@ -10,4 +10,5 @@ region = Rect2(512, 176, 16, 16)
 [resource]
 script = ExtResource("1_myx3l")
 texture = SubResource("AtlasTexture_p87lt")
+texture_tint = Color(1, 1, 1, 1)
 item_name = "Key"

@@ -42,7 +42,6 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("debug_info"):
 		print("armor: ", equipment.get_armor())
 		print("evasion: ", equipment.get_evasion())
-		print(equipment.get_property_list())
 	
 	if ActionManager.picking_action || ActionManager.picking_item:
 		return

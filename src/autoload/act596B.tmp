@@ -78,7 +78,7 @@ offset_right = 320.0
 offset_bottom = 180.0
 theme = ExtResource("3_cw17j")
 script = ExtResource("11_bggal")
-list_name = "List"
+list_name = null
 
 [node name="HUD" type="CanvasLayer" parent="."]
 

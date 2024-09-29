@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dtk0s4u5tm2c5"]
+
+[ext_resource type="PackedScene" uid="uid://b00xy2f1n77y8" path="res://ui/scenes/list_dialog.tscn" id="1_jlvul"]
+[ext_resource type="Script" path="res://ui/item_action_dialog.gd" id="2_5rhqg"]
+
+[node name="EquipmentActionDialog" instance=ExtResource("1_jlvul")]
+script = ExtResource("2_5rhqg")
+list_name = "Item Actions"
+
+[node name="Panel" parent="." index="0"]
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 320.0
+offset_bottom = 280.0

@@ -6,6 +6,7 @@ enum {
 	MOVE,
 	ATTACK,
 	EQUIP,
+	UNEQUIP,
 	PICK_UP,
 	DROP_ITEM,
 	OPEN,

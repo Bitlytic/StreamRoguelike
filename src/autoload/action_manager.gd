@@ -9,6 +9,7 @@ signal item_picked(slot: ItemSlot)
 @onready var entity_dialog: EntityDialog = $UI/EntityDialog
 @onready var inventory_dialog: InventoryDialog = $UI/ItemDialog
 @onready var equipment_dialog: EquipmentDialog = $UI/EquipmentDialog
+@onready var equipment_action_dialog: EquipmentActionDialog = $UI/EquipmentActionDialog
 @onready var item_action_dialog: ItemActionDialog = $UI/ItemActionDialog
 @onready var top_bar: TopBar = $HUD/TopBar
 
@@ -25,12 +26,9 @@ func _ready():
 	inventory_dialog.item_selected.connect(on_item_selected)
 	equipment_dialog.equipment_selected.connect(on_equipment_selected)
 	item_action_dialog.item_action_selected.connect(on_item_action_selected)
+	equipment_action_dialog.equipment_action_selected.connect(on_item_action_selected)
 	
-	action_dialog.hide()
-	entity_dialog.hide()
-	inventory_dialog.hide()
-	equipment_dialog.hide()
-	item_action_dialog.hide()
+	clean_up()
 	
 	hide_top_bar()
 
@@ -87,7 +85,6 @@ func show_inventory_dialog(inventory: Inventory) -> void:
 func on_item_selected(slot: ItemSlot) -> void:
 	
 	if !slot:
-		picking_item = false
 		on_action_selected(EntityAction.new())
 		return
 	inventory_dialog.hide()
@@ -104,17 +101,21 @@ func on_item_action_selected(action: EntityAction) -> void:
 
 
 func on_equipment_selected(item: Item) -> void:
-	print(item.item_name)
-	picking_item = false
-	clean_up()
+	if !item:
+		on_action_selected(EntityAction.new())
+		return
+	
+	picking_item = true
+	equipment_action_dialog.display_actions(item)
 
 
 func clean_up():
 	action_dialog.hide()
 	entity_dialog.hide()
 	inventory_dialog.hide()
-	equipment_dialog.hide()
 	item_action_dialog.hide()
+	equipment_dialog.hide()
+	equipment_action_dialog.hide()
 	picking_action = false
 	picking_item = false
 
