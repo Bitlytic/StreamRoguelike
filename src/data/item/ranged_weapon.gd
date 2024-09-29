@@ -11,7 +11,4 @@ func get_attack() -> Attack:
 	
 	if randf_range(0, 1) <= accuracy:
 		attack.damage = dice_roll.calc()
-		print("Hit! for ", attack.damage)
-	else:
-		print("Miss!")
 	return attack
