@@ -36,9 +36,6 @@ region = Rect2(528, 48, 16, 16)
 
 [sub_resource type="Resource" id="Resource_mq13i"]
 script = ExtResource("6_mm8bc")
-dice_size = 5
-dice_roll_times = 1
-constant_damage = 0
 texture = SubResource("AtlasTexture_umao2")
 texture_tint = Color(1, 1, 1, 1)
 item_name = "Spear"

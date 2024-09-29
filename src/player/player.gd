@@ -9,7 +9,6 @@ extends Entity
 @onready var weapon : BasicWeapon = axe
 @onready var animation_controller: AnimationController = $AnimationController
 @onready var sight_controller: SightController = $SightController
-@onready var reticle: Sprite2D = $Reticle
 
 
 var axe : BasicWeapon = load("res://resources/weapons/axe.tres")
@@ -95,6 +94,7 @@ func _physics_process(delta: float) -> void:
 			current_aiming_position += target_direction
 			current_aiming_position = GridWorld.clamp_to_bounds(current_aiming_position)
 			GridWorld.update_reticle_position(current_aiming_position)
+			queue_redraw()
 		return
 	
 	var action := EntityAction.new()
@@ -157,7 +157,14 @@ func _draw() -> void:
 	if !debug_draw:
 		return
 	
-	for pos in sight_controller.visible_tiles:
-		var world_coords : Vector2 = GridWorld.cell_size * (pos - Vector2(grid_position))
+	if aiming_ranged_weapon:
+		var line_to := PathfindingUtil.get_line_to(grid_position, current_aiming_position)
 		
-		draw_circle(world_coords, 4.0, Color.RED)
+		var scaled_points := []
+		
+		for pos in line_to:
+			scaled_points.append(Vector2(pos - grid_position)*GridWorld.cell_size)
+		
+		var packed_array := PackedVector2Array(scaled_points)
+		
+		draw_polyline(scaled_points, Color(1, 1, 1, 0.75), 2.0, true)

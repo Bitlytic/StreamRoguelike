@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="RangedWeapon" load_steps=4 format=3 uid="uid://c0slctsr58idx"]
+
+[ext_resource type="Script" path="res://src/data/dice_roll.gd" id="1_6tvl4"]
+[ext_resource type="Script" path="res://src/data/item/ranged_weapon.gd" id="1_l7ia6"]
+
+[sub_resource type="Resource" id="Resource_05iv0"]
+script = ExtResource("1_6tvl4")
+dice_size = 1
+dice_roll_times = 1
+constant_damage = 1
+
+[resource]
+script = ExtResource("1_l7ia6")
+accuracy = 0.25
+dice_roll = SubResource("Resource_05iv0")

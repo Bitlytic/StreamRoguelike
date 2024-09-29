@@ -2,10 +2,7 @@ class_name BasicWeapon
 extends Item
 
 
-@export var dice_size := 6
-@export var dice_roll_times := 1
-
-@export var constant_damage := 1
+@export var dice_roll : DiceRoll
 
 
 func get_attack() -> Attack:
@@ -14,12 +11,5 @@ func get_attack() -> Attack:
 	return attack
 
 
-func calc_damage():
-	var total := 0
-	
-	for i in dice_roll_times:
-		total += randi_range(1, dice_size)
-	
-	total += constant_damage
-	
-	return total
+func calc_damage() -> int:
+	return dice_roll.calc()

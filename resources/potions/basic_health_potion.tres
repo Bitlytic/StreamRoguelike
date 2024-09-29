@@ -1,7 +1,14 @@
-[gd_resource type="Resource" script_class="Potion" load_steps=4 format=3 uid="uid://bs56fqb7322ae"]
+[gd_resource type="Resource" script_class="Potion" load_steps=6 format=3 uid="uid://bs56fqb7322ae"]
 
 [ext_resource type="Script" path="res://src/data/item/potion.gd" id="1_5nurt"]
+[ext_resource type="Script" path="res://src/data/dice_roll.gd" id="1_to5jv"]
 [ext_resource type="Texture2D" uid="uid://d1dtxy8sb2lia" path="res://assets/art/kenney-1bit.png" id="2_14y0p"]
+
+[sub_resource type="Resource" id="Resource_34b4b"]
+script = ExtResource("1_to5jv")
+dice_size = 3
+dice_roll_times = 2
+constant_damage = 1
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_84mqy"]
 atlas = ExtResource("2_14y0p")
@@ -9,9 +16,7 @@ region = Rect2(544, 224, 16, 16)
 
 [resource]
 script = ExtResource("1_5nurt")
-dice_size = 3
-rolls = 2
-constant_amount = 0
+dice_roll = SubResource("Resource_34b4b")
 texture = SubResource("AtlasTexture_84mqy")
 texture_tint = Color(1, 1, 1, 1)
 item_name = "Basic Health Potion"
