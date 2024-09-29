@@ -124,5 +124,9 @@ func show_picking_direction() -> void:
 	top_bar.display_action("[Pick a direction to interact with]")
 
 
+func show_aiming() -> void:
+	top_bar.display_action("[Pick target location]")
+
+
 func hide_top_bar() -> void:
 	top_bar.hide_action()

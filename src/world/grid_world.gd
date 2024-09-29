@@ -9,6 +9,13 @@ signal world_updated()
 
 @onready var cycle_timer : Timer = $CycleTimer
 @onready var cycle_wait_timer: Timer = $CycleWaitTimer
+@onready var reticle: Sprite2D = $Reticle
+
+
+var reticle_position : Vector2i:
+	set(val):
+		reticle_position = val
+		reticle.global_position = val*Vector2i(cell_size)
 
 
 var player : Player:
@@ -53,7 +60,7 @@ func remove_entity(entity: Entity) -> void:
 
 
 func move_entity(entity: Entity, old_pos: Vector2i):
-	var new_pos = entity.grid_position.clamp(Vector2i(0, 0), world_size - Vector2i(1, 1))
+	var new_pos = clamp_to_bounds(entity.grid_position)
 	
 	if new_pos != entity.grid_position:
 		entity.grid_position = old_pos
@@ -104,12 +111,16 @@ func _process_entities():
 			e.processed_this_frame = false
 		cell.reset_display()
 	
-	cycle_wait_timer.start()
-	cycle_timer.stop()
+	restart_timers()
 	
 	player.update_sight()
 	
 	GridWorld.world_updated.emit()
+
+
+func restart_timers() -> void:
+	cycle_wait_timer.start()
+	cycle_timer.stop()
 
 
 func _perform_action(action: EntityAction):
@@ -171,14 +182,30 @@ func on_entity_death(entity: Entity) -> void:
 func on_cycle_wait_timeout() -> void:
 	cycle_timer.start()
 
+
 func on_cycle_timeout() -> void:
 	for cell : GridCell in cells.values():
-		cell.cycle_display()
+		if cell.grid_position == reticle_position:
+			if reticle.visible:
+				cell.set_display(true)
+				cell.cycle_display()
+				reticle.hide()
+			else:
+				cell.set_display(false)
+				reticle.show()
+		else:
+			cell.cycle_display()
 
 
 func is_in_bounds(pos: Vector2i) -> bool:
 	return (pos.x >= 0 && pos.x < world_size.x) && (pos.y >= 0 && pos.y < world_size.y)
 
+
+func clamp_to_bounds(pos: Vector2i) -> Vector2i:
+	pos.x = clamp(pos.x, 0, world_size.x - 1)
+	pos.y = clamp(pos.y, 0, world_size.y - 1)
+	
+	return pos
 
 func set_player_vision(tiles: Array[Vector2]) -> void:
 	
@@ -187,3 +214,24 @@ func set_player_vision(tiles: Array[Vector2]) -> void:
 			cell.set_player_visible(true)
 		else:
 			cell.set_player_visible(false)
+
+
+func show_reticle() -> void:
+	reticle.show()
+
+
+func hide_reticle() -> void:
+	reticle.hide()
+
+
+func update_reticle_position(new_pos: Vector2i) -> void:
+	var old_cell :=  get_cell(reticle_position)
+	old_cell.current_display_index = 0
+	old_cell.set_display(true)
+	
+	reticle.show()
+	reticle_position = new_pos
+	
+	get_cell(reticle_position).set_display(false)
+	
+	restart_timers()

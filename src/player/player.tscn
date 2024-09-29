@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://oaanpb1irxop"]
+[gd_scene load_steps=16 format=3 uid="uid://oaanpb1irxop"]
 
 [ext_resource type="Script" path="res://src/player/player.gd" id="1_iqw8t"]
 [ext_resource type="Texture2D" uid="uid://d1dtxy8sb2lia" path="res://assets/art/kenney-1bit.png" id="2_ys2la"]
@@ -169,6 +169,10 @@ _data = {
 "attack_west": SubResource("Animation_qoegs")
 }
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_eqp22"]
+atlas = ExtResource("2_ys2la")
+region = Rect2(640, 208, 16, 16)
+
 [node name="Player" type="Node2D" groups=["player"]]
 script = ExtResource("1_iqw8t")
 is_character = true
@@ -192,3 +196,8 @@ animation_player = NodePath("../AnimationPlayer")
 
 [node name="SightController" type="Node" parent="."]
 script = ExtResource("6_i4krp")
+
+[node name="Reticle" type="Sprite2D" parent="."]
+visible = false
+z_index = 1
+texture = SubResource("AtlasTexture_eqp22")

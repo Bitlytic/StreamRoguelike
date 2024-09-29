@@ -9,12 +9,16 @@ extends Entity
 @onready var weapon : BasicWeapon = axe
 @onready var animation_controller: AnimationController = $AnimationController
 @onready var sight_controller: SightController = $SightController
+@onready var reticle: Sprite2D = $Reticle
 
 
 var axe : BasicWeapon = load("res://resources/weapons/axe.tres")
 
 var has_moved := false
 var picking_direction := false
+var aiming_ranged_weapon := false
+
+var current_aiming_position : Vector2i 
 
 
 var positions_to_check : Array[Vector2i]
@@ -38,6 +42,8 @@ func _ready():
 
 
 func _physics_process(delta: float) -> void:
+	var input_direction : int = Direction.get_player_direction()
+	var target_direction := Direction.direction_to_vector2(input_direction)
 	
 	if Input.is_action_just_pressed("debug_info"):
 		print("armor: ", equipment.get_armor())
@@ -50,6 +56,12 @@ func _physics_process(delta: float) -> void:
 		picking_direction = true
 		ActionManager.show_picking_direction()
 	
+	if Input.is_action_just_pressed("use_ranged"):
+		aiming_ranged_weapon = true
+		current_aiming_position = grid_position
+		GridWorld.show_reticle()
+		ActionManager.show_aiming()
+	
 	if Input.is_action_just_pressed("inventory"):
 		ActionManager.show_inventory_dialog(inventory)
 		return
@@ -59,7 +71,6 @@ func _physics_process(delta: float) -> void:
 		return
 	
 	if picking_direction:
-		var input_direction : int = Direction.get_player_direction()
 		var input_center := Input.is_action_just_pressed("move_wait")
 		
 		if Input.is_action_just_pressed("cancel"):
@@ -74,22 +85,24 @@ func _physics_process(delta: float) -> void:
 		
 		picking_direction = false
 		
-		var target_direction := Direction.direction_to_vector2(input_direction)
-		
 		var target_position := grid_position + target_direction
 		var cell : GridCell = GridWorld.get_cell(target_position)
 		ActionManager.show_dialog(cell, target_position)
 		return
 	
-	var input_direction : int = Direction.get_player_direction()
-	var input_vector : Vector2i = Direction.direction_to_vector2(input_direction)
+	if aiming_ranged_weapon:
+		if target_direction:
+			current_aiming_position += target_direction
+			current_aiming_position = GridWorld.clamp_to_bounds(current_aiming_position)
+			GridWorld.update_reticle_position(current_aiming_position)
+		return
 	
 	var action := EntityAction.new()
 	
-	if input_vector:
-		var action_position := grid_position + input_vector
+	if target_direction:
+		var action_position := grid_position + target_direction
 		
-		var cell : GridCell = GridWorld.get_cell(grid_position + input_vector)
+		var cell : GridCell = GridWorld.get_cell(action_position)
 		
 		if !cell || (cell.character == null && !cell.blocks_movement()):
 			action = MoveAction.new()

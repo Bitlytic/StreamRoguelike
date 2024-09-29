@@ -5,6 +5,8 @@ var character : Entity
 var _entities : Array[Entity]
 var ambient_tile : AmbientTile
 
+var displayed := true
+
 # Can't be larger than entity count (if character is there, otherwise count - 1)
 var current_display_index : int = 0
 
@@ -35,16 +37,20 @@ func cycle_display() -> void:
 	_display_entity()
 
 
+func set_display(b: bool) -> void:
+	displayed = b
+	_display_entity()
+
 func _display_entity() -> void:
 	var index_offset = 0
 	
 	if character && character.in_vision:
-		character.visible = current_display_index == 0
+		character.visible = current_display_index == 0 && displayed
 		index_offset = 1
 	
 	for index in _entities.size():
 		var e: Entity = _entities[index]
-		e.visible = index + index_offset == current_display_index
+		e.visible = index + index_offset == current_display_index && displayed
 
 
 func add_entity(e: Entity) -> void:

@@ -17,7 +17,6 @@ func _physics_process(delta: float) -> void:
 		return
 	
 	poll_input()
-	
 
 
 func display_actions(target_entity: Entity):

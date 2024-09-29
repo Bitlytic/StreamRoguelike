@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://oqkhrathx5bo"]
+[gd_scene load_steps=4 format=3 uid="uid://oqkhrathx5bo"]
 
 [ext_resource type="Script" path="res://src/world/grid_world.gd" id="1_ajg5n"]
+[ext_resource type="Texture2D" uid="uid://d1dtxy8sb2lia" path="res://assets/art/kenney-1bit.png" id="2_nhreb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jem6k"]
+atlas = ExtResource("2_nhreb")
+region = Rect2(480, 176, 16, 16)
 
 [node name="GridWorld" type="Node2D" groups=["world"]]
 script = ExtResource("1_ajg5n")
@@ -11,3 +16,6 @@ wait_time = 0.6
 [node name="CycleWaitTimer" type="Timer" parent="."]
 wait_time = 1.25
 one_shot = true
+
+[node name="Reticle" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_jem6k")
