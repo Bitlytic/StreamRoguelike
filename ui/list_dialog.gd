@@ -12,6 +12,8 @@ var action_buttons : Array[ActionButton]
 
 var current_focused_index := 0
 
+@onready var player : Player = get_tree().get_first_node_in_group("player")
+
 
 func _ready():
 	label.text = list_name

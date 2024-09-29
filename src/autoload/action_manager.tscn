@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cpqcckqf3glo7" path="res://ui/scenes/entity_dialog.tscn" id="3_5jlx4"]
 [ext_resource type="Theme" uid="uid://g27u5fdw6jtd" path="res://ui/theme/main_theme.tres" id="3_cw17j"]
 [ext_resource type="Script" path="res://ui/entity_dialog.gd" id="3_nefib"]
-[ext_resource type="Script" path="res://ui/action_dialog.gd" id="3_o1uyw"]
+[ext_resource type="Script" path="res://ui/entity_action_dialog.gd" id="3_o1uyw"]
 [ext_resource type="Script" path="res://ui/inventory_dialog.gd" id="6_0olfa"]
 [ext_resource type="PackedScene" uid="uid://b1kdxhor7jnn" path="res://ui/scenes/item_action_dialog.tscn" id="7_hqe7c"]
 [ext_resource type="PackedScene" uid="uid://cgqtwojb0f3f2" path="res://ui/scenes/top_bar.tscn" id="8_eong2"]

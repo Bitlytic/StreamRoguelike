@@ -9,6 +9,7 @@ enum {
 	UNEQUIP,
 	PICK_UP,
 	DROP_ITEM,
+	USE_ITEM,
 	OPEN,
-	USE_ITEM
+	UNLOCK
 }

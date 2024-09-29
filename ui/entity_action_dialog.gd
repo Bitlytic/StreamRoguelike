@@ -5,6 +5,8 @@ extends ListDialog
 signal action_selected(action: EntityAction)
 
 
+var target_entity: Entity
+
 
 func _ready():
 	connect_options(on_action_selected)
@@ -19,6 +21,8 @@ func _physics_process(delta: float) -> void:
 
 
 func display_actions(target_entity: Entity):
+	self.target_entity = target_entity
+	
 	var action_types : Array[int] = [ActionType.DROP_ITEM]
 	
 	action_types.append(ActionType.ATTACK)
@@ -31,6 +35,10 @@ func display_actions(target_entity: Entity):
 	
 	if target_entity is DoorEntity:
 		action_types.append(ActionType.OPEN)
+		var item_slot := player.inventory.find_item_slot(ItemRegistry.KEY)
+		
+		if target_entity.locked && item_slot != null:
+			action_types.append(ActionType.UNLOCK)
 	
 	populate_options(action_types)
 	
@@ -62,4 +70,9 @@ func populate_options(actions: Array[int]):
 			ActionType.PICK_UP:
 				create_button("Pick Up", PickUpAction.new())
 			ActionType.OPEN:
-				create_button("Open", OpenAction.new())
+				var open_text := "Open"
+				if target_entity.open:
+					open_text = "Close"
+				create_button(open_text, OpenAction.new())
+			ActionType.UNLOCK:
+				create_button("Unlock", UnlockAction.new())
