@@ -117,6 +117,11 @@ position = Vector2(72, 56)
 item = ExtResource("14_q3jwa")
 equipment = SubResource("Resource_t3ih8")
 
+[node name="ItemEntity10" parent="Items" instance=ExtResource("5_e3wws")]
+position = Vector2(72, 24)
+item = ExtResource("9_m0bnd")
+equipment = SubResource("Resource_t3ih8")
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(312, 152)
 
