@@ -16,4 +16,12 @@ func calc() -> int:
 	total += constant_damage
 	
 	return total
+
+
+func _to_string() -> String:
+	var str = "%dd%d" % [dice_roll_times, dice_size]
 	
+	if constant_damage:
+		str += " + %d" % constant_damage
+	
+	return str

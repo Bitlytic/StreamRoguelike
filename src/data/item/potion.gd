@@ -12,4 +12,10 @@ func use_item(target : Entity):
 func calc_health() -> int:
 	return dice_roll.calc()
 
+
+func _to_string() -> String:
+	var str = super()
 	
+	str += " " + str(dice_roll)
+	
+	return str

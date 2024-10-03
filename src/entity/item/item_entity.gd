@@ -25,7 +25,7 @@ func _process(delta: float) -> void:
 
 
 func get_entity_name() -> String:
-	return item.item_name
+	return str(item)
 
 
 func update_sprite():

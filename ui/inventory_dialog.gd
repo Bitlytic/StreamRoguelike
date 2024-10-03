@@ -16,7 +16,7 @@ func display_items(inventory: Inventory) -> void:
 	
 	
 	for stack: ItemSlot in inventory.get_items():
-		var button_text := stack.item.item_name
+		var button_text := str(stack.item)
 		
 		if stack.count > 1:
 			button_text += " - " + str(stack.count)

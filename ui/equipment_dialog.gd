@@ -25,7 +25,7 @@ func display_items(equipment: Equipment) -> void:
 	for property: String in equipment_properties:
 		var item : Item = equipment.get(property) 
 		if item:
-			create_button(item.item_name, item)
+			create_button(str(item), item)
 	
 	if action_buttons.size() <= 0:
 		equipment_selected.emit(null)
