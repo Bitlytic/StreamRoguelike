@@ -3,7 +3,7 @@ extends EntityAction
 
 var slot : ItemSlot
 
-func _init(slot: ItemSlot = null, target: Entity = null):
+func _init(target: Entity = null, slot: ItemSlot = null):
 	self.type = ActionType.UNLOCK
 	self.slot = slot
 	self.target = target

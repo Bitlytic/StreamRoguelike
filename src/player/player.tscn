@@ -181,15 +181,9 @@ _data = {
 z_index = 1
 script = ExtResource("1_iqw8t")
 debug_draw = true
-vision_range = null
-max_health = null
 is_character = true
-blocks_vision = null
-blocks_movement = null
 entity_name = "Player"
 equipment = SubResource("Resource_oa8iq")
-discovered_color = null
-vision_color = null
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_ys2la")

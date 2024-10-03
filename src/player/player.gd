@@ -10,14 +10,15 @@ extends Entity
 @onready var sight_controller: SightController = $SightController
 
 
-var has_moved := false
 var picking_direction := false
 var aiming_ranged_weapon := false
 
 var current_aiming_position : Vector2i 
 
-
 var positions_to_check : Array[Vector2i]
+
+var last_target : Entity
+
 
 func _ready():
 	super()
@@ -35,49 +36,43 @@ func _ready():
 	update_sight()
 
 
-func _physics_process(delta: float) -> void:
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventMouse:
+		return
+	
 	var input_direction : int = Direction.get_player_direction()
 	var target_direction := Direction.direction_to_vector2(input_direction)
 	
-	if Input.is_action_just_pressed("debug_info"):
+	if Input.is_action_pressed("debug_info"):
 		print("armor: ", equipment.get_armor())
 		print("evasion: ", equipment.get_evasion())
 	
 	if ActionManager.picking_action || ActionManager.picking_item:
 		return
 	
-	if Input.is_action_just_pressed("pick_action_menu"):
+	if (_process_gui(input_direction, target_direction)):
+		return
+	
+	_process_auto_actions(target_direction)
+
+
+# Returns true if rest of process should be skipped
+# For example, if inventory is opened, we shouldn't be allowed to move in the same step
+func _process_gui(input_direction: int, target_direction: Vector2i) -> bool:
+	if Input.is_action_pressed("pick_action_menu"):
 		picking_direction = true
 		ActionManager.show_picking_direction()
 	
-	if Input.is_action_just_pressed("use_ranged"):
-		if !equipment.ranged_weapon:
-			return
-		
-		aiming_ranged_weapon = true
-		current_aiming_position = grid_position
-		GridWorld.update_reticle_position(current_aiming_position)
-		GridWorld.show_reticle()
-		ActionManager.show_aiming()
-	
-	if Input.is_action_just_pressed("inventory"):
-		ActionManager.show_inventory_dialog(inventory)
-		return
-	
-	if Input.is_action_just_pressed("equipment"):
-		ActionManager.show_equipment_dialog(equipment)
-		return
-	
 	if picking_direction:
-		var input_center := Input.is_action_just_pressed("move_wait")
+		var input_center := Input.is_action_pressed("move_wait")
 		
-		if Input.is_action_just_pressed("cancel"):
+		if Input.is_action_pressed("cancel"):
 			picking_direction = false
 			ActionManager.hide_top_bar()
-			return
+			return true
 		
 		if !input_direction && !input_center:
-			return
+			return true
 		
 		ActionManager.hide_top_bar()
 		
@@ -86,7 +81,31 @@ func _physics_process(delta: float) -> void:
 		var target_position := grid_position + target_direction
 		var cell : GridCell = GridWorld.get_cell(target_position)
 		ActionManager.show_dialog(cell, target_position)
-		return
+		return true
+	
+	if Input.is_action_pressed("inventory"):
+		ActionManager.show_inventory_dialog(inventory)
+		return true
+	
+	if Input.is_action_pressed("equipment"):
+		ActionManager.show_equipment_dialog(equipment)
+		return true
+	
+		
+	if Input.is_action_pressed("use_ranged"):
+		if !equipment.ranged_weapon:
+			return false
+		
+		aiming_ranged_weapon = true
+		current_aiming_position = grid_position
+		
+		if last_target && is_instance_valid(last_target) && last_target.in_vision:
+			current_aiming_position = last_target.grid_position
+		
+		GridWorld.show_reticle()
+		GridWorld.update_reticle_position(current_aiming_position)
+		queue_redraw()
+		ActionManager.show_aiming()
 	
 	if aiming_ranged_weapon:
 		if target_direction:
@@ -95,48 +114,33 @@ func _physics_process(delta: float) -> void:
 			GridWorld.update_reticle_position(current_aiming_position)
 			queue_redraw()
 		
-		if Input.is_action_just_pressed("ui_accept"):
+		if Input.is_action_pressed("ui_accept"):
 			attack_ranged_target()
 			aiming_ranged_weapon = false
 			GridWorld.hide_reticle()
 			queue_redraw()
 			ActionManager.hide_top_bar()
-		return
+		elif Input.is_action_pressed("cancel"):
+			aiming_ranged_weapon = false
+			GridWorld.hide_reticle()
+			queue_redraw()
+			ActionManager.hide_top_bar()
+		
+		return true
 	
+	return false
+
+
+func _process_auto_actions(target_direction: Vector2i):
 	var action := EntityAction.new()
 	
 	if target_direction:
-		var action_position := grid_position + target_direction
-		
-		var cell : GridCell = GridWorld.get_cell(action_position)
-		
-		if !cell || (cell.character == null && !cell.blocks_movement()):
-			action = MoveAction.new()
-			action.type = ActionType.MOVE
-		elif cell.character:
-			action = AttackAction.new()
-			action.weapon = equipment.weapon
-			action.type = ActionType.ATTACK
-			action.target = cell.character
-		elif cell.has_any(Predicates.is_door_entity):
-			var door = cell.get_first_match(Predicates.is_door_entity)
-			var item_slot := inventory.find_item_slot(ItemRegistry.KEY)
-			
-			if door.locked && item_slot != null:
-				action = UnlockAction.new(item_slot, door)
-			elif !door.locked && !door.open:
-				action = OpenAction.new()
-				action.target = door
-		action.position = action_position
-		has_moved = true
-	elif Input.is_action_just_pressed("move_wait"):
+		action = _try_move_to(target_direction)
+	elif Input.is_action_pressed("move_wait"):
 		action.type = ActionType.WAIT
-	elif Input.is_action_just_pressed("pick_up") && GridWorld.get_cell(grid_position).has_any(Predicates.is_item_entity):
-		action = PickUpAction.new()
 	
 	if action.type != ActionType.NONE:
 		GridWorld.player_input(action)
-
 
 func play_attack_animation(action: AttackAction):
 	var direction = action.target.grid_position - grid_position
@@ -160,6 +164,17 @@ func update_sight():
 
 
 func attack_ranged_target() -> void:
+	
+	var cell : GridCell = GridWorld.get_cell(current_aiming_position)
+	
+	if cell.character:
+		last_target = cell.character
+	else:
+		for e in cell.get_entities():
+			if !e.is_passable(self):
+				last_target = e
+				break
+	
 	var action := AttackAction.new()
 	action.weapon = equipment.ranged_weapon
 	
@@ -169,7 +184,7 @@ func attack_ranged_target() -> void:
 		return
 	
 	for pos in line_to:
-		var cell = GridWorld.get_cell(pos)
+		cell = GridWorld.get_cell(pos)
 		if cell.character && cell.character is not Player:
 			action.target = cell.character
 			break
@@ -203,3 +218,37 @@ func _draw() -> void:
 		var packed_array := PackedVector2Array(scaled_points)
 		
 		draw_polyline(scaled_points, Color(1, 1, 1, 0.5), 2.0, true)
+
+
+func _try_move_to(target_direction: Vector2i) -> EntityAction:
+	var action := EntityAction.new()
+	
+	var action_position := grid_position + target_direction
+	
+	var cell : GridCell = GridWorld.get_cell(action_position)
+	
+	if _can_move_to_cell(cell):
+		action = MoveAction.new()
+		action.position = action_position
+	elif cell.character:
+		action = AttackAction.new(equipment.weapon, cell.character)
+	elif cell.has_any(Predicates.is_door_entity):
+		var door : DoorEntity = cell.get_first_match(Predicates.is_door_entity)
+		var can_open_door := !door.locked && !door.open
+		
+		var key_slot := inventory.find_item_slot(ItemRegistry.KEY)
+		
+		if can_open_door:
+			action = OpenAction.new(door)
+		elif _can_unlock_door(door, key_slot):
+			action = UnlockAction.new(door, key_slot)
+	
+	return action
+
+
+func _can_move_to_cell(cell: GridCell) -> bool:
+	return !cell || (cell.character == null && !cell.blocks_movement())
+
+
+func _can_unlock_door(door: DoorEntity, key_slot: ItemSlot) -> bool:
+	return door.locked && key_slot != null

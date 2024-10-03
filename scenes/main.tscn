@@ -79,7 +79,7 @@ equipment = SubResource("Resource_dekfl")
 
 [node name="ItemEntity6" parent="Items" instance=ExtResource("5_e3wws")]
 position = Vector2(56, 312)
-item = SubResource("Resource_mq13i")
+item = ExtResource("6_lfy4y")
 equipment = SubResource("Resource_hkmk5")
 
 [node name="ItemEntity2" parent="Items" instance=ExtResource("5_e3wws")]
@@ -122,7 +122,6 @@ position = Vector2(312, 152)
 
 [node name="Player" parent="." instance=ExtResource("2_2maip")]
 position = Vector2(40, 40)
-debug_draw = null
 max_health = 25
 
 [node name="Objects" type="Node2D" parent="."]

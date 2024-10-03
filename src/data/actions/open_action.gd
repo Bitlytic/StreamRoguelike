@@ -2,8 +2,9 @@ class_name OpenAction
 extends EntityAction
 
 
-func _init():
+func _init(target: DoorEntity = null):
 	self.type = ActionType.OPEN
+	self.target = target
 
 
 func perform_action() -> void:

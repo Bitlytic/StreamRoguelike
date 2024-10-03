@@ -27,21 +27,21 @@ static var direction_vectors : Array[Vector2i] = [
 
 
 static func get_player_direction() -> int:
-	if Input.is_action_just_pressed("move_north"):
+	if Input.is_action_pressed("move_north"):
 		return NORTH
-	elif Input.is_action_just_pressed("move_north_east"):
+	elif Input.is_action_pressed("move_north_east"):
 		return NORTH_EAST
-	elif Input.is_action_just_pressed("move_east"):
+	elif Input.is_action_pressed("move_east"):
 		return EAST
-	elif Input.is_action_just_pressed("move_south_east"):
+	elif Input.is_action_pressed("move_south_east"):
 		return SOUTH_EAST
-	elif Input.is_action_just_pressed("move_south"):
+	elif Input.is_action_pressed("move_south"):
 		return SOUTH
-	elif Input.is_action_just_pressed("move_south_west"):
+	elif Input.is_action_pressed("move_south_west"):
 		return SOUTH_WEST
-	elif Input.is_action_just_pressed("move_west"):
+	elif Input.is_action_pressed("move_west"):
 		return WEST
-	elif Input.is_action_just_pressed("move_north_west"):
+	elif Input.is_action_pressed("move_north_west"):
 		return NORTH_WEST
 	return NONE
 

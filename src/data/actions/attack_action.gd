@@ -9,8 +9,10 @@ var attack_sounds := [
 var weapon : Weapon
 
 
-func _init():
+func _init(weapon: Weapon = null, target: Entity = null):
 	super(ActionType.ATTACK)
+	self.weapon = weapon
+	self.target = target
 
 
 func perform_action() -> void:
