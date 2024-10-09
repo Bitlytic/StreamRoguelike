@@ -11,9 +11,18 @@ extends Entity
 
 
 var picking_direction := false
-var aiming_ranged_weapon := false
+var aiming_ranged_weapon := false:
+	set(val):
+		aiming_ranged_weapon = val
+		ActionManager.aiming = val
 
-var current_aiming_position : Vector2i 
+
+var inspecting := false:
+	set(val):
+		inspecting = val
+		ActionManager.aiming = val
+
+var current_aiming_position : Vector2i
 
 var positions_to_check : Array[Vector2i]
 
@@ -40,6 +49,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouse:
 		return
 	
+	if event is InputEventKey:
+		if !event.pressed:
+			return
+	
 	var input_direction : int = Direction.get_player_direction()
 	var target_direction := Direction.direction_to_vector2(input_direction)
 	
@@ -47,7 +60,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		print("armor: ", equipment.get_armor())
 		print("evasion: ", equipment.get_evasion())
 	
-	if ActionManager.picking_action || ActionManager.picking_item:
+	if ActionManager.aiming:
+		if (_process_cursor_movement(target_direction)):
+			return
+	elif ActionManager.is_busy():
 		return
 	
 	if (_process_gui(input_direction, target_direction)):
@@ -91,7 +107,6 @@ func _process_gui(input_direction: int, target_direction: Vector2i) -> bool:
 		ActionManager.show_equipment_dialog(equipment)
 		return true
 	
-		
 	if Input.is_action_pressed("use_ranged"):
 		if !equipment.ranged_weapon:
 			return false
@@ -106,26 +121,19 @@ func _process_gui(input_direction: int, target_direction: Vector2i) -> bool:
 		GridWorld.update_reticle_position(current_aiming_position)
 		queue_redraw()
 		ActionManager.show_aiming()
+		return true
 	
-	if aiming_ranged_weapon:
-		if target_direction:
-			current_aiming_position += target_direction
-			current_aiming_position = GridWorld.clamp_to_bounds(current_aiming_position)
-			GridWorld.update_reticle_position(current_aiming_position)
-			queue_redraw()
+	if Input.is_action_pressed("inspect"):
+		inspecting = true
+		current_aiming_position = grid_position
 		
-		if Input.is_action_pressed("ui_accept"):
-			attack_ranged_target()
-			aiming_ranged_weapon = false
-			GridWorld.hide_reticle()
-			queue_redraw()
-			ActionManager.hide_top_bar()
-		elif Input.is_action_pressed("cancel"):
-			aiming_ranged_weapon = false
-			GridWorld.hide_reticle()
-			queue_redraw()
-			ActionManager.hide_top_bar()
+		if last_target && is_instance_valid(last_target) && last_target.in_vision:
+			current_aiming_position = last_target.grid_position
 		
+		GridWorld.show_reticle()
+		GridWorld.update_reticle_position(current_aiming_position)
+		queue_redraw()
+		ActionManager.show_aiming()
 		return true
 	
 	return false
@@ -141,6 +149,39 @@ func _process_auto_actions(target_direction: Vector2i):
 	
 	if action.type != ActionType.NONE:
 		GridWorld.player_input(action)
+
+
+func _process_cursor_movement(target_direction: Vector2i) -> bool:
+	if ActionManager.aiming:
+		if target_direction:
+			current_aiming_position += target_direction
+			current_aiming_position = GridWorld.clamp_to_bounds(current_aiming_position)
+			GridWorld.update_reticle_position(current_aiming_position)
+			queue_redraw()
+			
+		if Input.is_action_just_pressed("cancel"):
+			inspecting = false
+			aiming_ranged_weapon = false
+			GridWorld.hide_reticle()
+			GridWorld.hide_tooltip()
+			queue_redraw()
+			ActionManager.hide_top_bar()
+	
+	if aiming_ranged_weapon:
+		if Input.is_action_pressed("ui_accept"):
+			attack_ranged_target()
+			aiming_ranged_weapon = false
+			GridWorld.hide_reticle()
+			queue_redraw()
+			ActionManager.hide_top_bar()
+		
+		return true
+	
+	if inspecting:
+		GridWorld.set_tooltip_position(current_aiming_position)
+		return true
+	
+	return false
 
 func play_attack_animation(action: AttackAction):
 	var direction = action.target.grid_position - grid_position

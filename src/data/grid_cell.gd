@@ -5,6 +5,8 @@ var character : Entity
 var _entities : Array[Entity]
 var ambient_tile : AmbientTile
 
+var in_vision := false
+
 var displayed := true
 
 # Can't be larger than entity count (if character is there, otherwise count - 1)
@@ -133,3 +135,5 @@ func set_player_visible(v: bool) -> void:
 	
 	if ambient_tile:
 		ambient_tile.in_vision = v
+	
+	in_vision = v

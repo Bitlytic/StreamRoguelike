@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://ba2d3b1iwgs6"]
+
+[ext_resource type="Script" path="res://ui/tooltip.gd" id="1_i3tgt"]
+[ext_resource type="Theme" uid="uid://g27u5fdw6jtd" path="res://ui/theme/main_theme.tres" id="1_nfb3e"]
+
+[node name="Tooltip" type="Node2D"]
+script = ExtResource("1_i3tgt")
+
+[node name="Panel" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(64, 32)
+offset_right = 150.0
+offset_bottom = 32.0
+theme = ExtResource("1_nfb3e")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="TooltipText" type="Label" parent="Panel/MarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Enemy has 15/15 hp"
+horizontal_alignment = 1
+vertical_alignment = 1

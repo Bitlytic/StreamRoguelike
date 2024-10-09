@@ -16,6 +16,7 @@ signal item_picked(slot: ItemSlot)
 
 var picking_action := false
 var picking_item := false
+var aiming := false
 var target_position : Vector2i
 var target_entity : Entity
 
@@ -130,3 +131,7 @@ func show_aiming() -> void:
 
 func hide_top_bar() -> void:
 	top_bar.hide_action()
+
+
+func is_busy() -> bool:
+	return picking_action || picking_item || aiming

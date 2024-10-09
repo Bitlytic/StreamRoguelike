@@ -10,6 +10,7 @@ signal world_updated()
 @onready var cycle_timer : Timer = $CycleTimer
 @onready var cycle_wait_timer: Timer = $CycleWaitTimer
 @onready var reticle: Sprite2D = $Reticle
+@onready var tooltip: Node2D = $Tooltip
 
 var aiming_reticle := false
 
@@ -239,3 +240,31 @@ func update_reticle_position(new_pos: Vector2i) -> void:
 	get_cell(reticle_position).set_display(false)
 	
 	restart_timers()
+
+
+func hide_tooltip() -> void:
+	tooltip.visible = false
+
+
+func set_tooltip_name(text: String) -> void:
+	tooltip.entity_name = text
+	tooltip.visible = true
+
+
+func set_tooltip_description(text: String) -> void:
+	tooltip.entity_description = text
+	tooltip.visible = true
+
+
+func set_tooltip_position(pos: Vector2i) -> void:
+	tooltip.visible = false
+	tooltip.grid_position = pos
+	
+	var cell : GridCell = get_cell(tooltip.grid_position)
+	
+	if !cell.in_vision:
+		return
+	
+	if cell.character:
+		set_tooltip_name(cell.character.get_entity_name())
+		set_tooltip_description(cell.character.get_description())

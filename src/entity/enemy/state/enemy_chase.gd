@@ -8,6 +8,7 @@ var could_see := false
 
 func enter():
 	target_position = player.grid_position
+	could_see = true
 
 
 func do_process() -> EntityAction:

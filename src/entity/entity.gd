@@ -105,3 +105,8 @@ func on_vision_changed() -> void:
 			modulate = discovered_color
 		else:
 			modulate = Color(0, 0, 0, 0)
+
+
+func get_description() -> String:
+	return "Uninitializated Description"
+	

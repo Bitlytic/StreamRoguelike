@@ -95,3 +95,9 @@ func play_attack_animation(action: AttackAction):
 
 func check_for_player() -> bool:
 	return sight_controller.visible_tiles.has(Vector2(player.grid_position))
+
+
+func get_description() -> String:
+	return "A bad dude, he wants to hurt you\nHP: %d/%d" % [health, max_health]
+	
+	
