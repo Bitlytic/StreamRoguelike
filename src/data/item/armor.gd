@@ -7,7 +7,7 @@ enum ArmorSlot {
 	BOOTS
 }
 
-@export_enum("Helmet", "Chestplate", "Boots") var slot : int
+@export var slot : ArmorSlot
 
 @export var armor_value := 0
 @export var evasion_value := 0
