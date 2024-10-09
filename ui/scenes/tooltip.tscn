@@ -27,6 +27,7 @@ offset_right = 55.0
 offset_bottom = 24.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
+mouse_filter = 2
 theme = ExtResource("1_nfb3e")
 theme_override_styles/panel = SubResource("StyleBoxFlat_o54ow")
 

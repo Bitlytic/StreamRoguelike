@@ -175,7 +175,6 @@ _data = {
 
 [node name="Enemy" type="Node2D"]
 script = ExtResource("1_3qv4u")
-debug_draw = true
 is_character = true
 equipment = ExtResource("2_wbdi6")
 

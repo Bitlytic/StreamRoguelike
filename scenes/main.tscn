@@ -121,7 +121,7 @@ equipment = SubResource("Resource_t3ih8")
 position = Vector2(312, 152)
 
 [node name="Player" parent="." instance=ExtResource("2_2maip")]
-position = Vector2(64, 192)
+position = Vector2(40, 40)
 max_health = 25
 
 [node name="Objects" type="Node2D" parent="."]

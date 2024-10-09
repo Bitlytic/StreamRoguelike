@@ -10,17 +10,18 @@ extends Entity
 @onready var sight_controller: SightController = $SightController
 
 
+enum AimingMode {
+	NONE,
+	RANGED,
+	INFO
+}
+
+var current_aiming_mode := AimingMode.NONE:
+	set(val):
+		current_aiming_mode = val
+		ActionManager.aiming = current_aiming_mode != AimingMode.NONE
+
 var picking_direction := false
-var aiming_ranged_weapon := false:
-	set(val):
-		aiming_ranged_weapon = val
-		ActionManager.aiming = val
-
-
-var inspecting := false:
-	set(val):
-		inspecting = val
-		ActionManager.aiming = val
 
 var current_aiming_position : Vector2i
 
@@ -46,8 +47,10 @@ func _ready():
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouse:
-		return
+	if event is InputEventMouseMotion:
+		_handle_mouse_movement()
+	elif event is InputEventMouseButton:
+		_handle_mouse_button()
 	
 	if event is InputEventKey:
 		if !event.pressed:
@@ -111,7 +114,7 @@ func _process_gui(input_direction: int, target_direction: Vector2i) -> bool:
 		if !equipment.ranged_weapon:
 			return false
 		
-		aiming_ranged_weapon = true
+		current_aiming_mode = AimingMode.RANGED
 		current_aiming_position = grid_position
 		
 		if last_target && is_instance_valid(last_target) && last_target.in_vision:
@@ -124,7 +127,7 @@ func _process_gui(input_direction: int, target_direction: Vector2i) -> bool:
 		return true
 	
 	if Input.is_action_pressed("inspect"):
-		inspecting = true
+		current_aiming_mode = AimingMode.INFO
 		current_aiming_position = grid_position
 		
 		if last_target && is_instance_valid(last_target) && last_target.in_vision:
@@ -152,36 +155,55 @@ func _process_auto_actions(target_direction: Vector2i):
 
 
 func _process_cursor_movement(target_direction: Vector2i) -> bool:
-	if ActionManager.aiming:
-		if target_direction:
-			current_aiming_position += target_direction
-			current_aiming_position = GridWorld.clamp_to_bounds(current_aiming_position)
-			GridWorld.update_reticle_position(current_aiming_position)
-			queue_redraw()
-			
-		if Input.is_action_just_pressed("cancel"):
-			inspecting = false
-			aiming_ranged_weapon = false
-			GridWorld.hide_reticle()
-			GridWorld.hide_tooltip()
-			queue_redraw()
-			ActionManager.hide_top_bar()
+	if !ActionManager.aiming:
+		return false
 	
-	if aiming_ranged_weapon:
-		if Input.is_action_pressed("ui_accept"):
+	current_aiming_position += target_direction
+	current_aiming_position = GridWorld.clamp_to_bounds(current_aiming_position)
+	queue_redraw()
+	
+	GridWorld.update_reticle_position(current_aiming_position)
+	match current_aiming_mode:
+		AimingMode.INFO:
+			GridWorld.set_tooltip_position(current_aiming_position)
+	
+	if Input.is_action_just_pressed("cancel"):
+		clear_aiming()
+	
+	if Input.is_action_pressed("ui_accept"):
+		accept_aiming()
+		return true
+	
+	return true
+
+
+func accept_aiming() -> void:
+	match current_aiming_mode:
+		AimingMode.RANGED:
 			attack_ranged_target()
-			aiming_ranged_weapon = false
-			GridWorld.hide_reticle()
-			queue_redraw()
-			ActionManager.hide_top_bar()
-		
-		return true
 	
-	if inspecting:
-		GridWorld.set_tooltip_position(current_aiming_position)
-		return true
-	
-	return false
+	clear_aiming()
+
+
+func clear_aiming() -> void:
+	current_aiming_mode = AimingMode.NONE
+	GridWorld.hide_reticle()
+	GridWorld.hide_tooltip()
+	queue_redraw()
+	ActionManager.hide_top_bar()
+
+func _handle_mouse_movement() -> void:
+	if ActionManager.aiming:
+		var mouse_pos : Vector2 = get_global_mouse_position() + GridWorld.cell_size / 2.0
+		mouse_pos /= GridWorld.cell_size
+		current_aiming_position = mouse_pos
+		_process_cursor_movement(Vector2i.ZERO)
+
+
+func _handle_mouse_button() -> void:
+	if current_aiming_mode != AimingMode.NONE:
+		if Input.is_action_just_pressed("primary_mouse"):
+			accept_aiming()
 
 func play_attack_animation(action: AttackAction):
 	var direction = action.target.grid_position - grid_position
@@ -238,14 +260,14 @@ func attack_ranged_target() -> void:
 		if action.target:
 			break
 	
-	
 	GridWorld.player_input(action)
+
 
 func _draw() -> void:
 	if !debug_draw:
 		return
 	
-	if aiming_ranged_weapon:
+	if current_aiming_mode == AimingMode.RANGED:
 		var line_to := PathfindingUtil.get_line_to(grid_position, current_aiming_position)
 		
 		if line_to.size() < 2:

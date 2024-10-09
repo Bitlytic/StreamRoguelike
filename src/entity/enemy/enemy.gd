@@ -32,8 +32,6 @@ func _ready() -> void:
 	
 	GridWorld.update_pathfinding(self, a_star_grid)
 
-# Idle, Chasing, Lost Vision
-
 
 func do_process():
 	#TODO: If performance sucks, this is probably why
