@@ -11,5 +11,6 @@ enum {
 	DROP_ITEM,
 	USE_ITEM,
 	OPEN,
-	UNLOCK
+	UNLOCK,
+	TRAVEL
 }

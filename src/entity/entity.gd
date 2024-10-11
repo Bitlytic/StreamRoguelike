@@ -1,3 +1,4 @@
+@tool
 class_name Entity
 extends Node2D
 
@@ -8,24 +9,31 @@ signal died(entity: Entity)
 
 const SPRITE_OFFSET := Vector2(8, 0)
 
+@export var entity_name : String = ""
 
+@export_group("Entity Stats")
 @export var max_health : int = 10
 @onready var health : int = max_health
 
+@export var max_weight := 10.0
+@export var equipment := Equipment.new()
+
+@export_group("Entity Info")
 @export var is_character := false
 
 @export var blocks_vision := false
 @export var blocks_movement := false
 
-@export var entity_name : String = ""
-
-@export var equipment := Equipment.new()
-
 @export_group("Vision Colors")
 @export var discovered_color := Color("#434343")
 @export var vision_color := Color("#FFFFFF")
 
-@onready var player : Player = get_tree().get_first_node_in_group("player")
+var player: Player:
+	get():
+		if !player:
+			player = get_tree().get_first_node_in_group("player")
+		return player
+
 
 var discovered := false
 var in_vision := false :
@@ -46,10 +54,15 @@ var grid_position : Vector2i :
 
 
 func _ready():
-	grid_position = global_position / GridWorld.cell_size.floor()
-	
-	GridWorld.add_entity(self)
+	if !Engine.is_editor_hint():
+		grid_position = global_position / GridWorld.cell_size.floor()
+		
+		GridWorld.add_entity(self)
 
+
+func _process(_delta: float) -> void:
+	if Engine.is_editor_hint():
+		global_position = (global_position / GridWorld.cell_size).floor() * GridWorld.cell_size + Vector2(8, 8)
 
 func do_process() -> EntityAction:
 	return EntityAction.new()
@@ -69,6 +82,7 @@ func _take_damage(damage: int) -> void:
 		health = 0
 		died.emit(self)
 		queue_free()
+		Vector2(0, 0) * Vector2(1, 1)
 	else:
 		health_changed.emit(health)
 
@@ -109,4 +123,11 @@ func on_vision_changed() -> void:
 
 func get_description() -> String:
 	return "Uninitializated Description"
-	
+
+
+func get_weight() -> float:
+	return equipment.get_weight() + inventory.get_weight()
+
+
+func get_max_weight() -> float:
+	return max_weight

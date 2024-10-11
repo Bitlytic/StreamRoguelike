@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://oaanpb1irxop"]
+[gd_scene load_steps=26 format=3 uid="uid://oaanpb1irxop"]
 
 [ext_resource type="Script" path="res://src/player/player.gd" id="1_iqw8t"]
 [ext_resource type="Resource" uid="uid://c0slctsr58idx" path="res://resources/weapons/bow.tres" id="2_igauv"]
@@ -11,11 +11,12 @@
 
 [sub_resource type="Resource" id="Resource_wyl5w"]
 script = ExtResource("2_sb13r")
-slot = 0
+slot = 1
 armor_value = 500
 evasion_value = 0
 texture_tint = Color(1, 1, 1, 1)
 item_name = ""
+weight = 0.0
 
 [sub_resource type="Resource" id="Resource_ctgvc"]
 script = ExtResource("2_sb13r")
@@ -24,6 +25,7 @@ armor_value = 500
 evasion_value = 0
 texture_tint = Color(1, 1, 1, 1)
 item_name = ""
+weight = 0.0
 
 [sub_resource type="Resource" id="Resource_oa8iq"]
 script = ExtResource("3_ts3ge")
@@ -196,13 +198,68 @@ _data = {
 "attack_west": SubResource("Animation_qoegs")
 }
 
+[sub_resource type="Animation" id="Animation_ehtl6"]
+resource_name = "fade_in"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TransitionLayer/TransitionRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0666667, 0.2),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_d5eyf"]
+resource_name = "fade_out"
+length = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TransitionLayer/TransitionRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333),
+"transitions": PackedFloat32Array(0.5, 1.86607),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_byqc0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TransitionLayer/TransitionRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jrg88"]
+_data = {
+"RESET": SubResource("Animation_byqc0"),
+"fade_in": SubResource("Animation_ehtl6"),
+"fade_out": SubResource("Animation_d5eyf")
+}
+
 [node name="Player" type="Node2D" groups=["player"]]
 z_index = 1
 script = ExtResource("1_iqw8t")
 debug_draw = true
-is_character = true
 entity_name = "Player"
 equipment = SubResource("Resource_oa8iq")
+is_character = true
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_ys2la")
@@ -222,3 +279,24 @@ animation_player = NodePath("../AnimationPlayer")
 
 [node name="SightController" type="Node" parent="."]
 script = ExtResource("6_i4krp")
+
+[node name="TransitionLayer" type="CanvasLayer" parent="."]
+
+[node name="TransitionRect" type="ColorRect" parent="TransitionLayer"]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="LevelTransitionPlayer" type="AnimationPlayer" parent="TransitionLayer"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_jrg88")
+}
+autoplay = "fade_in"

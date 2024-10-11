@@ -33,12 +33,24 @@ var cells : Dictionary = {}
 
 
 func _ready():
-	for x in world_size.x:
-		for y in world_size.y:
-			cells[Vector2i(x, y)] = GridCell.new(Vector2i(x, y))
+	clear_cells()
 	
 	cycle_timer.timeout.connect(on_cycle_timeout)
 	cycle_wait_timer.timeout.connect(on_cycle_wait_timeout)
+
+
+func world_ready():
+	world_updated.emit()
+	
+	reset_cells()
+	
+	restart_timers()
+
+
+func clear_cells() -> void:
+	for x in world_size.x:
+		for y in world_size.y:
+			cells[Vector2i(x, y)] = GridCell.new(Vector2i(x, y))
 
 
 func get_cell(pos: Vector2i) -> GridCell:
@@ -52,7 +64,8 @@ func add_entity(e: Entity):
 		cells[e.grid_position] = cell
 	
 	cell.add_entity(e)
-	e.died.connect(on_entity_death)
+	if !e.died.is_connected(on_entity_death):
+		e.died.connect(on_entity_death)
 
 
 func remove_entity(entity: Entity) -> void:
@@ -106,12 +119,7 @@ func _process_entities():
 			action.owner = e
 			_perform_action(action)
 	
-	for cell : GridCell in cells.values():
-		if cell.character:
-			cell.character.processed_this_frame = false
-		for e in cell.get_entities():
-			e.processed_this_frame = false
-		cell.reset_display()
+	reset_cells()
 	
 	restart_timers()
 	
@@ -119,6 +127,14 @@ func _process_entities():
 	
 	GridWorld.world_updated.emit()
 
+
+func reset_cells() -> void:
+	for cell: GridCell in cells.values():
+		if cell.character:
+			cell.character.processed_this_frame = false
+		for e in cell.get_entities():
+			e.processed_this_frame = false
+		cell.reset_display()
 
 func restart_timers() -> void:
 	cycle_wait_timer.start()
@@ -265,6 +281,19 @@ func set_tooltip_position(pos: Vector2i) -> void:
 	if !cell.in_vision:
 		return
 	
+	var tooltip_name := ""
+	var tooltip_description := ""
+	
 	if cell.character:
-		set_tooltip_name(cell.character.get_entity_name())
-		set_tooltip_description(cell.character.get_description())
+		tooltip_name = cell.character.get_entity_name()
+		tooltip_description = cell.character.get_description()
+	
+	if !tooltip_name && cell.get_entities().size() > 0:
+		var entity := cell.get_entities()[0]
+		if entity:
+			tooltip_name = entity.get_entity_name()
+			tooltip_description = entity.get_description()
+	
+	if tooltip_name:
+		set_tooltip_name(tooltip_name)
+		set_tooltip_description(tooltip_description)

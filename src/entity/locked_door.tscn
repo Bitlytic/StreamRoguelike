@@ -1,0 +1,32 @@
+[gd_scene load_steps=8 format=3 uid="uid://c27k4tj0htwqi"]
+
+[ext_resource type="Script" path="res://src/entity/door.gd" id="1_yr03r"]
+[ext_resource type="Texture2D" uid="uid://d1dtxy8sb2lia" path="res://assets/art/kenney-1bit.png" id="2_822lw"]
+[ext_resource type="AudioStream" uid="uid://cy14cmhlu43k4" path="res://assets/sound/kenney/doorOpen_2.ogg" id="3_yu3wr"]
+[ext_resource type="AudioStream" uid="uid://dj8x0buu7hjjb" path="res://assets/sound/kenney/doorClose_4.ogg" id="4_gb1df"]
+[ext_resource type="AudioStream" uid="uid://du2mfwouurloq" path="res://assets/sound/kenney/metalClick.ogg" id="5_y0rrq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4b5v7"]
+atlas = ExtResource("2_822lw")
+region = Rect2(32, 144, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g5c00"]
+atlas = ExtResource("2_822lw")
+region = Rect2(48, 144, 16, 16)
+
+[node name="LockedDoor" type="Node2D"]
+script = ExtResource("1_yr03r")
+open_texture = SubResource("AtlasTexture_4b5v7")
+closed_texture = SubResource("AtlasTexture_g5c00")
+locked_color = Color(1, 0.423529, 0.611765, 1)
+unlocked_color = Color(1, 1, 1, 1)
+locked = true
+open_sound = ExtResource("3_yu3wr")
+close_sound = ExtResource("4_gb1df")
+unlock_sound = ExtResource("5_y0rrq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(1, 0.423529, 0.611765, 1)
+position = Vector2(-8, -8)
+texture = SubResource("AtlasTexture_4b5v7")
+centered = false

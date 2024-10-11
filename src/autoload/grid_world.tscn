@@ -1,15 +1,15 @@
 [gd_scene load_steps=5 format=3 uid="uid://oqkhrathx5bo"]
 
-[ext_resource type="Script" path="res://src/world/grid_world.gd" id="1_ajg5n"]
-[ext_resource type="Texture2D" uid="uid://d1dtxy8sb2lia" path="res://assets/art/kenney-1bit.png" id="2_nhreb"]
-[ext_resource type="PackedScene" uid="uid://ba2d3b1iwgs6" path="res://ui/scenes/tooltip.tscn" id="3_f65yv"]
+[ext_resource type="Script" path="res://src/world/grid_world.gd" id="1_ej7cb"]
+[ext_resource type="Texture2D" uid="uid://d1dtxy8sb2lia" path="res://assets/art/kenney-1bit.png" id="2_mpxwf"]
+[ext_resource type="PackedScene" uid="uid://ba2d3b1iwgs6" path="res://ui/scenes/tooltip.tscn" id="3_8xtrk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jem6k"]
-atlas = ExtResource("2_nhreb")
+atlas = ExtResource("2_mpxwf")
 region = Rect2(480, 176, 16, 16)
 
 [node name="GridWorld" type="Node2D" groups=["world"]]
-script = ExtResource("1_ajg5n")
+script = ExtResource("1_ej7cb")
 
 [node name="CycleTimer" type="Timer" parent="."]
 wait_time = 0.6
@@ -23,6 +23,6 @@ visible = false
 z_index = 2
 texture = SubResource("AtlasTexture_jem6k")
 
-[node name="Tooltip" parent="." instance=ExtResource("3_f65yv")]
+[node name="Tooltip" parent="." instance=ExtResource("3_8xtrk")]
 visible = false
 z_index = 2

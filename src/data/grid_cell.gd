@@ -1,4 +1,5 @@
 class_name GridCell
+extends RefCounted
 
 
 var character : Entity

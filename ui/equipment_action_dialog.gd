@@ -16,6 +16,7 @@ func _physics_process(delta: float) -> void:
 
 
 func display_actions(item: Item):
+	label.text = item.item_name
 	self.item = item
 	
 	var action_types : Array[int] = [ActionType.UNEQUIP]
@@ -44,4 +45,4 @@ func populate_options(actions: Array[int]):
 	for action in actions:
 		match(action):
 			ActionType.UNEQUIP:
-				create_button("Unequip", UnequipAction.new(item))
+				create_button("Unequip", UnequipAction.new(item), "E")

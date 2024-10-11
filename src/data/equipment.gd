@@ -11,7 +11,6 @@ extends Resource
 @export var boots : Armor
 
 
-#TODO: Create calc armor and evasion values
 func get_armor() -> int:
 	var total_armor := 0
 	
@@ -40,3 +39,21 @@ func get_evasion() -> int:
 		total_evasion += boots.get_evasion()
 	
 	return total_evasion
+
+
+func get_weight() -> float:
+	var total_weight := 0
+	
+	if weapon:
+		total_weight += weapon.weight
+	
+	if helmet:
+		total_weight += helmet.weight
+	
+	if chestplate:
+		total_weight += chestplate.weight
+	
+	if boots:
+		total_weight += boots.weight
+	
+	return total_weight

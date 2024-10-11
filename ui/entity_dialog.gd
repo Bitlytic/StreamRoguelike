@@ -15,11 +15,15 @@ func _physics_process(delta: float) -> void:
 func display_entities(cell: GridCell):
 	clear_options()
 	
+	var index := 1
+	
 	if cell.character && cell.character is not Player:
-		create_button(cell.character.get_entity_name(), cell.character)
+		create_button(cell.character.get_entity_name(), cell.character, str(index))
+		index += 1
 	
 	for e in cell.get_entities():
-		create_button(e.get_entity_name(), e)
+		create_button(e.get_entity_name(), e, str(index))
+		index += 1
 	
 	if action_buttons.size() <= 0:
 		entity_selected.emit(null)

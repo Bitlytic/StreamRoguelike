@@ -20,6 +20,10 @@ layout_mode = 2
 text = ">"
 horizontal_alignment = 2
 
+[node name="KeyCodeLabel" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.968627, 0.843137, 0.513726, 1)
+
 [node name="ActionLabel" type="Label" parent="HBoxContainer"]
 layout_mode = 2
 text = "Attack"

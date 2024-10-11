@@ -2,8 +2,12 @@ class_name EnemyState
 extends State
 
 
-@onready var player : Player = get_tree().get_first_node_in_group("player")
 @onready var enemy : Enemy = get_owner()
+var player: Player:
+	get():
+		if !player:
+			player = get_tree().get_first_node_in_group("player")
+		return player
 
 
 func move_toward_pos(pos: Vector2i) -> EntityAction:

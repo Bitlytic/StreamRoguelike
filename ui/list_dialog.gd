@@ -17,6 +17,8 @@ var current_focused_index := 0
 
 func _ready():
 	label.text = list_name
+	
+	visibility_changed.connect(on_visibility_changed)
 
 
 func clear_options():
@@ -51,12 +53,20 @@ func _change_focus(direction: int):
 	action_buttons[current_focused_index].grab_focus()
 
 
-func create_button(text: String, result: Object):
+func create_button(text: String, result: Object, key_code: String = ""):
 	var spawned_button : ActionButton = action_button_scene.instantiate()
 	
 	spawned_button.result = result
 	spawned_button.option_name = text
+	spawned_button.key_code = key_code
 	
 	action_buttons.append(spawned_button)
 	
 	button_container.add_child(spawned_button)
+
+
+func on_visibility_changed() -> void:
+	if !visible:
+		for button in action_buttons:
+			button.queue_free()
+		action_buttons.clear()

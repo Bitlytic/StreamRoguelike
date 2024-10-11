@@ -8,6 +8,7 @@ extends Entity
 
 @onready var animation_controller: AnimationController = $AnimationController
 @onready var sight_controller: SightController = $SightController
+@onready var level_transition_player: AnimationPlayer = $TransitionLayer/LevelTransitionPlayer
 
 
 enum AimingMode {
@@ -29,24 +30,47 @@ var positions_to_check : Array[Vector2i]
 
 var last_target : Entity
 
+var in_level_transition := false
 
 func _ready():
-	super()
-	
 	health_changed.connect(on_health_changed)
 	on_health_changed(health)
 	
 	sight_controller.vision_range = vision_range
 	
+	add_to_group("player")
+	
+	register_self()
+
+
+func register_self() -> void:
+	level_transition_player.play("fade_in")
+	
+	grid_position = global_position / GridWorld.cell_size.floor()
+	
+	GridWorld.add_entity(self)
+	
 	# TODO: Please fix this one day. This feels really gross
 	await get_tree().process_frame
 	update_sight()
 	await get_tree().process_frame
-	GridWorld.world_updated.emit()
+	GridWorld.world_ready()
 	update_sight()
 
 
+func fade_out(stairs: StairEntity) -> void:
+	
+	in_level_transition = true
+	level_transition_player.play("fade_out")
+	await level_transition_player.animation_finished
+	GridWorld.player_input(TravelAction.new(stairs))
+	in_level_transition = false
+
+
 func _unhandled_input(event: InputEvent) -> void:
+	if in_level_transition:
+		return
+	
 	if event is InputEventMouseMotion:
 		_handle_mouse_movement()
 	elif event is InputEventMouseButton:
@@ -62,6 +86,8 @@ func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_pressed("debug_info"):
 		print("armor: ", equipment.get_armor())
 		print("evasion: ", equipment.get_evasion())
+		print("Equipment weight: ", equipment.get_weight())
+		print("Inventory weight: ", inventory.get_weight())
 	
 	if ActionManager.aiming:
 		if (_process_cursor_movement(target_direction)):
@@ -149,6 +175,11 @@ func _process_auto_actions(target_direction: Vector2i):
 		action = _try_move_to(target_direction)
 	elif Input.is_action_pressed("move_wait"):
 		action.type = ActionType.WAIT
+	elif Input.is_action_pressed("next_level"):
+		var cell : GridCell = GridWorld.get_cell(grid_position)
+		var stairs : StairEntity = cell.get_first_match(Predicates.is_stair_entity)
+		if stairs:
+			fade_out(stairs)
 	
 	if action.type != ActionType.NONE:
 		GridWorld.player_input(action)

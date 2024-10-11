@@ -20,3 +20,4 @@ dice_roll = SubResource("Resource_khuqu")
 texture = SubResource("AtlasTexture_iyljy")
 texture_tint = Color(1, 1, 1, 1)
 item_name = "Axe"
+weight = 5.0

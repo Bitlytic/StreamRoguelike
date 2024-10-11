@@ -50,8 +50,8 @@ func populate_options(actions: Array[int]):
 	for action in actions:
 		match(action):
 			ActionType.DROP_ITEM:
-				create_button("Drop", DropAction.new(item_slot))
+				create_button("Drop", DropAction.new(item_slot), "D")
 			ActionType.EQUIP:
-				create_button("Equip", EquipAction.new(item_slot))
+				create_button("Equip", EquipAction.new(item_slot), "E")
 			ActionType.USE_ITEM:
-				create_button("Use", UseItemAction.new(item_slot))
+				create_button("Use", UseItemAction.new(item_slot), "U")

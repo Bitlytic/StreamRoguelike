@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=4 uid="uid://f8ghk3wbo38j"]
+[gd_scene load_steps=31 format=4 uid="uid://f8ghk3wbo38j"]
 
 [ext_resource type="PackedScene" uid="uid://dkhrcr6y2unah" path="res://src/entity/wall.tscn" id="1_jg00e"]
 [ext_resource type="PackedScene" uid="uid://oaanpb1irxop" path="res://src/player/player.tscn" id="2_2maip"]
@@ -15,6 +15,8 @@
 [ext_resource type="Resource" uid="uid://bdlpx87828fub" path="res://resources/armor/leather_chestplate.tres" id="12_q1gmv"]
 [ext_resource type="Resource" uid="uid://mj5rnxhiks3s" path="res://resources/armor/iron_chestplate.tres" id="13_uephb"]
 [ext_resource type="Resource" uid="uid://bii8q822ugauu" path="res://resources/armor/iron_cap.tres" id="14_q3jwa"]
+[ext_resource type="PackedScene" uid="uid://b6ius8fa17brn" path="res://src/entity/staircase.tscn" id="16_ljxm4"]
+[ext_resource type="Script" path="res://src/player/player_spawn.gd" id="17_x5gft"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_ovget"]
 resource_name = "Tiles"
@@ -39,6 +41,7 @@ script = ExtResource("6_mm8bc")
 texture = SubResource("AtlasTexture_umao2")
 texture_tint = Color(1, 1, 1, 1)
 item_name = "Spear"
+weight = 0.0
 
 [sub_resource type="Resource" id="Resource_dekfl"]
 script = ExtResource("7_mrrbf")
@@ -75,54 +78,59 @@ tile_set = SubResource("TileSet_28ccd")
 [node name="ItemEntity" parent="Items" instance=ExtResource("5_e3wws")]
 position = Vector2(296, 280)
 item = SubResource("Resource_mq13i")
+max_weight = null
 equipment = SubResource("Resource_dekfl")
 
 [node name="ItemEntity6" parent="Items" instance=ExtResource("5_e3wws")]
 position = Vector2(56, 312)
 item = ExtResource("6_lfy4y")
+max_weight = null
 equipment = SubResource("Resource_hkmk5")
 
 [node name="ItemEntity2" parent="Items" instance=ExtResource("5_e3wws")]
 position = Vector2(424, 120)
 item = ExtResource("7_yonjw")
+max_weight = null
 equipment = SubResource("Resource_l65iq")
 
 [node name="ItemEntity3" parent="Items" instance=ExtResource("5_e3wws")]
 position = Vector2(168, 136)
 item = ExtResource("8_mkscg")
+max_weight = null
 equipment = SubResource("Resource_x6ng8")
 
 [node name="ItemEntity4" parent="Items" instance=ExtResource("5_e3wws")]
 position = Vector2(408, 232)
 item = ExtResource("9_m0bnd")
+max_weight = null
 equipment = SubResource("Resource_al6ou")
 
 [node name="ItemEntity5" parent="Items" instance=ExtResource("5_e3wws")]
 position = Vector2(376, 216)
 item = ExtResource("6_lfy4y")
+max_weight = null
 equipment = SubResource("Resource_t3ih8")
 
 [node name="ItemEntity7" parent="Items" instance=ExtResource("5_e3wws")]
 position = Vector2(40, 72)
 item = ExtResource("12_q1gmv")
+max_weight = null
 equipment = SubResource("Resource_t3ih8")
 
 [node name="ItemEntity8" parent="Items" instance=ExtResource("5_e3wws")]
 position = Vector2(72, 72)
 item = ExtResource("13_uephb")
+max_weight = null
 equipment = SubResource("Resource_t3ih8")
 
 [node name="ItemEntity9" parent="Items" instance=ExtResource("5_e3wws")]
 position = Vector2(72, 56)
 item = ExtResource("14_q3jwa")
+max_weight = null
 equipment = SubResource("Resource_t3ih8")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(312, 152)
-
-[node name="Player" parent="." instance=ExtResource("2_2maip")]
-position = Vector2(40, 40)
-max_health = 25
 
 [node name="Objects" type="Node2D" parent="."]
 
@@ -133,9 +141,18 @@ locked = true
 [node name="Key" parent="." instance=ExtResource("5_e3wws")]
 position = Vector2(72, 248)
 item = ExtResource("9_m0bnd")
+max_weight = null
 equipment = SubResource("Resource_55idd")
 
 [node name="GrassSpawner" type="Node" parent="."]
 script = ExtResource("9_pi4jy")
 noise = SubResource("FastNoiseLite_p7yku")
 sample_minimum = -0.25
+
+[node name="Staircase" parent="." instance=ExtResource("16_ljxm4")]
+position = Vector2(72, 40)
+next_level = "res://scenes/level_1.tscn"
+
+[node name="PlayerSpawn" type="Node2D" parent="."]
+position = Vector2(40, 40)
+script = ExtResource("17_x5gft")

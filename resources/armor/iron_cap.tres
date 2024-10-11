@@ -15,3 +15,4 @@ evasion_value = -1
 texture = SubResource("AtlasTexture_iq7o2")
 texture_tint = Color(0.666569, 0.666569, 0.666569, 1)
 item_name = "Iron Cap"
+weight = 3.0

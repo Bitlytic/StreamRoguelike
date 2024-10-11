@@ -175,8 +175,8 @@ _data = {
 
 [node name="Enemy" type="Node2D"]
 script = ExtResource("1_3qv4u")
-is_character = true
 equipment = ExtResource("2_wbdi6")
+is_character = true
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_1fto6")

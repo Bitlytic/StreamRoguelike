@@ -63,15 +63,15 @@ func populate_options(actions: Array[int]):
 	for action in actions:
 		match(action):
 			ActionType.ATTACK:
-				create_button("Attack", AttackAction.new())
+				create_button("Attack", AttackAction.new(), "A")
 			ActionType.MOVE:
-				create_button("Move", MoveAction.new())
+				create_button("Walk", MoveAction.new(), "W")
 			ActionType.PICK_UP:
-				create_button("Pick Up", PickUpAction.new())
+				create_button("Get", PickUpAction.new(), "G")
 			ActionType.OPEN:
 				var open_text := "Open"
 				if target_entity.open:
 					open_text = "Close"
-				create_button(open_text, OpenAction.new())
+				create_button(open_text, OpenAction.new(), "O")
 			ActionType.UNLOCK:
-				create_button("Unlock", UnlockAction.new())
+				create_button("Unlock", UnlockAction.new(), "O")
