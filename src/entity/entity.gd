@@ -28,6 +28,7 @@ const SPRITE_OFFSET := Vector2(8, 0)
 @export var discovered_color := Color("#434343")
 @export var vision_color := Color("#FFFFFF")
 
+
 var player: Player:
 	get():
 		if !player:
@@ -47,24 +48,35 @@ var inventory := Inventory.new()
 
 var cell_size := Vector2(16, 16)
 
+var effects_holder : Node
+
 var grid_position : Vector2i : 
 	set(val):
 		grid_position = val
 		_update_render_position()
 
+var stunned := false
+var vulnerable := false
+var weak := false
 
 func _ready():
 	if !Engine.is_editor_hint():
 		grid_position = global_position / GridWorld.cell_size.floor()
 		
 		GridWorld.add_entity(self)
+		name = get_entity_name()
+		
+		effects_holder = Node.new()
+		add_child(effects_holder)
 
 
 func _process(_delta: float) -> void:
 	if Engine.is_editor_hint():
 		global_position = (global_position / GridWorld.cell_size).floor() * GridWorld.cell_size + Vector2(8, 8)
 
+
 func do_process() -> EntityAction:
+	tick_effects()
 	return EntityAction.new()
 
 
@@ -74,6 +86,9 @@ func _update_render_position() -> void:
 
 func process_attack(attack: Attack) -> void:
 	_take_damage(attack.damage)
+	
+	for effect in attack.effects:
+		effect.apply_effect(self)
 
 
 func _take_damage(damage: int) -> void:
@@ -131,3 +146,25 @@ func get_weight() -> float:
 
 func get_max_weight() -> float:
 	return max_weight
+
+
+func get_effects() -> Array[Effect]:
+	var effects : Array[Effect]
+	
+	for c in effects_holder.get_children():
+		if c is Effect:
+			effects.append(c)
+	
+	return effects
+
+
+func tick_effects() -> void:
+	for c in effects_holder.get_children():
+		if c is Effect:
+			c.tick_effect()
+
+
+func reset_modifiers():
+	stunned = false
+	vulnerable = false
+	weak = false

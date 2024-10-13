@@ -90,11 +90,16 @@ func player_input(action: EntityAction):
 	if action.type == ActionType.NONE:
 		return
 	
-	action.owner = player
+	player.reset_modifiers()
+	player.tick_effects()
 	
-	# TODO: this sucks, don't do this eventually
+	if player.stunned:
+		action = EntityAction.new(ActionType.WAIT)
+	
 	if action is AttackAction && !action.weapon:
 		action.weapon = player.equipment.weapon
+	
+	action.owner = player
 	
 	_perform_action(action)
 	
@@ -135,6 +140,7 @@ func reset_cells() -> void:
 		for e in cell.get_entities():
 			e.processed_this_frame = false
 		cell.reset_display()
+
 
 func restart_timers() -> void:
 	cycle_wait_timer.start()

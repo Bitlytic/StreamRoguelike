@@ -20,6 +20,7 @@ var current_player_reaction_time := 0
 
 var can_see_player := false
 
+
 func _ready() -> void:
 	super()
 	
@@ -34,13 +35,16 @@ func _ready() -> void:
 
 
 func do_process():
+	reset_modifiers()
+	
+	tick_effects()
+	
+	if stunned:
+		return EntityAction.new()
+	
 	#TODO: If performance sucks, this is probably why
 	GridWorld.update_pathfinding(self, a_star_grid)
 	
-	
-	# TODO: Performance sometimes sucks, this is the reason.
-	# One optimization is to only update fov in the player direction
-	# Another is to only check the fov from the player, and use that to determine enemy fov
 	if in_vision:
 		var dist_to_player := player.grid_position.distance_to(grid_position)
 		can_see_player = dist_to_player <= vision_range
@@ -97,5 +101,3 @@ func check_for_player() -> bool:
 
 func get_description() -> String:
 	return "A bad dude, he wants to hurt you\nHP: %d/%d" % [health, max_health]
-	
-	

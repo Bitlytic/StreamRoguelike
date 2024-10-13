@@ -12,3 +12,4 @@ script = ExtResource("1_myx3l")
 texture = SubResource("AtlasTexture_p87lt")
 texture_tint = Color(1, 1, 1, 1)
 item_name = "Key"
+weight = 0.0

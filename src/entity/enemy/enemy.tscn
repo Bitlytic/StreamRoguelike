@@ -183,14 +183,15 @@ texture = ExtResource("2_1fto6")
 region_enabled = true
 region_rect = Rect2(400, 96, 16, 16)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationController" type="Node" parent="." node_paths=PackedStringArray("animation_player")]
+script = ExtResource("3_ijsc8")
+animation_player = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationController"]
+root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_ag73b")
 }
-
-[node name="AnimationController" type="Node" parent="." node_paths=PackedStringArray("animation_player")]
-script = ExtResource("3_ijsc8")
-animation_player = NodePath("../AnimationPlayer")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("4_xqqcd")

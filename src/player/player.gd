@@ -50,6 +50,9 @@ func register_self() -> void:
 	
 	GridWorld.add_entity(self)
 	
+	effects_holder = Node.new()
+	add_child(effects_holder)
+	
 	# TODO: Please fix this one day. This feels really gross
 	await get_tree().process_frame
 	update_sight()

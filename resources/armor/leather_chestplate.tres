@@ -15,3 +15,4 @@ evasion_value = 1
 texture = SubResource("AtlasTexture_ct0jg")
 texture_tint = Color(0.46, 0.318933, 0.0368, 1)
 item_name = "Leather Chestplate"
+weight = 0.0

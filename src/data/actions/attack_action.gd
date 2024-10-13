@@ -39,7 +39,12 @@ func perform_action() -> void:
 		else:
 			var armor_value := target.equipment.get_armor()
 			attack.damage -= randi_range(0, armor_value)
-			attack.damage = max(0, attack.damage)
+		
+		if owner.weak:
+			attack.damage -= randi_range(2, 4)
+		
+		if target.vulnerable:
+			attack.damage += randi_range(2, 4)
 		
 		target.process_attack(attack)
 		
