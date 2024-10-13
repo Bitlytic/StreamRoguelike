@@ -146,6 +146,7 @@ func reset_cells() -> void:
 func restart_timers() -> void:
 	cycle_wait_timer.start()
 	cycle_timer.stop()
+	MessageManager.current_time = 0.0
 
 
 func _perform_action(action: EntityAction):
