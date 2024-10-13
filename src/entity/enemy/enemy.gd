@@ -39,6 +39,9 @@ func do_process():
 	
 	tick_effects()
 	
+	if self.is_queued_for_deletion():
+		return EntityAction.new()
+	
 	if stunned:
 		return EntityAction.new()
 	

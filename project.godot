@@ -22,6 +22,7 @@ GridWorld="*res://src/autoload/grid_world.tscn"
 PlayerEventBus="*res://src/autoload/player_event_bus.gd"
 SoundManager="*res://src/autoload/sound_manager.gd"
 LevelManager="*res://src/autoload/level_manager.gd"
+MessageManager="*res://src/autoload/message_manager.gd"
 
 [debug]
 

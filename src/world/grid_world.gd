@@ -110,8 +110,9 @@ func _process_entities():
 	for cell : GridCell in cells.values():
 		if cell.character && !cell.character.processed_this_frame:
 			var action : EntityAction = cell.character.do_process()
-			action.owner = cell.character
-			_perform_action(action)
+			if cell.character:
+				action.owner = cell.character
+				_perform_action(action)
 		
 		for e in cell.get_entities():
 			if e is Player:

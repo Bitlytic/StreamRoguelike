@@ -6,8 +6,6 @@ var attack_sounds := [
 ]
 
 
-var damage_number_scene : PackedScene = preload("res://ui/scenes/damage_number.tscn")
-
 var weapon : Weapon
 
 
@@ -47,9 +45,3 @@ func perform_action() -> void:
 			attack.damage += randi_range(2, 4)
 		
 		target.process_attack(attack)
-		
-		var spawned := damage_number_scene.instantiate()
-		spawned.attack = attack
-		
-		target.get_tree().current_scene.add_child(spawned)
-		spawned.global_position = target.global_position

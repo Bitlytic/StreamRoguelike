@@ -89,6 +89,8 @@ func process_attack(attack: Attack) -> void:
 	
 	for effect in attack.effects:
 		effect.apply_effect(self)
+	
+	MessageManager.add_message(grid_position, Message.from_attack(attack))
 
 
 func _take_damage(damage: int) -> void:

@@ -19,6 +19,7 @@ region = Rect2(576, 48, 16, 16)
 script = ExtResource("1_24yyf")
 dice_roll = SubResource("Resource_5o1i4")
 effects = Array[ExtResource("2_e8efm")]([])
+action_type = 2
 texture = SubResource("AtlasTexture_ysj3d")
 texture_tint = Color(1, 1, 1, 1)
 item_name = "Spear"

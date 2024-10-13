@@ -1,14 +1,14 @@
 [gd_scene load_steps=6 format=3 uid="uid://cmon3ygi0xp0c"]
 
-[ext_resource type="Script" path="res://ui/damage_number.gd" id="1_fsps1"]
-[ext_resource type="Theme" uid="uid://g27u5fdw6jtd" path="res://ui/theme/main_theme.tres" id="1_h6b8p"]
+[ext_resource type="Theme" uid="uid://g27u5fdw6jtd" path="res://ui/theme/main_theme.tres" id="1_vodub"]
+[ext_resource type="Script" path="res://ui/world_message.gd" id="2_ctpgx"]
 
 [sub_resource type="Animation" id="Animation_2rwfx"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("DamageText:position")
+tracks/0/path = NodePath("Control/MessageText:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -20,7 +20,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("DamageText:self_modulate")
+tracks/1/path = NodePath("Control/MessageText:self_modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -35,7 +35,7 @@ resource_name = "idle"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("DamageText:position")
+tracks/0/path = NodePath("Control/MessageText:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -47,7 +47,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("DamageText:self_modulate")
+tracks/1/path = NodePath("Control/MessageText:self_modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -77,17 +77,23 @@ _data = {
 "idle": SubResource("Animation_d81f2")
 }
 
-[node name="DamageNumber" type="Control"]
+[node name="WorldMessage" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_h6b8p")
-script = ExtResource("1_fsps1")
+theme = ExtResource("1_vodub")
+script = ExtResource("2_ctpgx")
 
-[node name="DamageText" type="Label" parent="."]
+[node name="Control" type="Control" parent="."]
+anchors_preset = 0
+offset_top = -9.0
+offset_right = 40.0
+offset_bottom = 31.0
+
+[node name="MessageText" type="Label" parent="Control"]
 z_index = 10
 layout_mode = 0
 offset_right = 24.0

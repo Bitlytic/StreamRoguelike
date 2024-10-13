@@ -3,12 +3,12 @@ extends Effect
 
 
 func _ready() -> void:
-	print("Stunned!")
+	MessageManager.add_message(target.grid_position, Message.new("*Stunned*", BityColors.PURPLE))
 
 
 func tick_effect() -> void:
 	super()
 	
-	print("Still stunned!")
+	MessageManager.add_message(target.grid_position, Message.new("*Stun*", BityColors.PURPLE))
 	
 	target.stunned = true

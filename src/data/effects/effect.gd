@@ -16,5 +16,4 @@ func tick_effect() -> void:
 	
 	if turns_left <= 0:
 		queue_free()
-		print("Freeing!")
 		return
