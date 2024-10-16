@@ -19,7 +19,6 @@ region = Rect2(576, 112, 16, 16)
 script = ExtResource("1_45v2o")
 dice_roll = SubResource("Resource_pnihj")
 effects = Array[ExtResource("2_nkvl2")]([])
-action_type = 2
 texture = SubResource("AtlasTexture_1l2ln")
 texture_tint = Color(1, 1, 1, 1)
 item_name = "Sword"

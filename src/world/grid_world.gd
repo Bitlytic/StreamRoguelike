@@ -17,7 +17,7 @@ var aiming_reticle := false
 var reticle_position : Vector2i:
 	set(val):
 		reticle_position = val
-		reticle.global_position = val*Vector2i(cell_size)
+		reticle.global_position = val*Vector2i(cell_size) + Vector2i(cell_size / 2.0)
 
 
 var player : Player:
@@ -48,6 +48,8 @@ func world_ready():
 
 
 func clear_cells() -> void:
+	cells.clear()
+	
 	for x in world_size.x:
 		for y in world_size.y:
 			cells[Vector2i(x, y)] = GridCell.new(Vector2i(x, y))
@@ -68,7 +70,7 @@ func add_entity(e: Entity):
 		e.died.connect(on_entity_death)
 
 
-func remove_entity(entity: Entity) -> void:
+func remove_entity(entity: Entity, free: bool = true) -> void:
 	var cell = get_cell(entity.grid_position)
 	cell.remove_entity(entity)
 	entity.queue_free()
@@ -236,6 +238,9 @@ func clamp_to_bounds(pos: Vector2i) -> Vector2i:
 func set_player_vision(tiles: Array[Vector2]) -> void:
 	
 	for cell : GridCell in cells.values():
+		if cell.character is Player:
+			print(cell.grid_position)
+		
 		if tiles.has(Vector2(cell.grid_position)):
 			cell.set_player_visible(true)
 		else:

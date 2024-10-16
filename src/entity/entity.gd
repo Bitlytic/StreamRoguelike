@@ -81,7 +81,7 @@ func do_process() -> EntityAction:
 
 
 func _update_render_position() -> void:
-	global_position = Vector2(grid_position)*cell_size
+	global_position = Vector2(grid_position)*cell_size + (cell_size / 2.0)
 
 
 func process_attack(attack: Attack) -> void:

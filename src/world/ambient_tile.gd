@@ -26,6 +26,7 @@ func _ready() -> void:
 	GridWorld.world_updated.connect(on_world_updated)
 	
 	grid_position = Vector2i(global_position.floor() / GridWorld.cell_size)
+	global_position += GridWorld.cell_size / 2.0
 	cell = GridWorld.get_cell(grid_position)
 	cell.ambient_tile = self
 	

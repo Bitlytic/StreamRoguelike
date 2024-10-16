@@ -27,19 +27,19 @@ var grid_position : Vector2i:
 
 
 func update_position() -> void:
-	var offset := 8
+	var offset := 16
 	
 	global_position.x = grid_position.x * GridWorld.cell_size.x + offset
-	global_position.y = grid_position.y * GridWorld.cell_size.y - offset
+	global_position.y = grid_position.y * GridWorld.cell_size.y
 	
 	if global_position.x + panel.size.x + 16 > get_viewport_rect().size.x:
-		panel.position.x = -panel.size.x - offset*2
+		panel.position.x = -panel.size.x
 	else:
 		panel.position.x = 0
 	
 	
 	if global_position.y + panel.size.y + 16 > get_viewport_rect().size.y:
-		panel.position.y = -panel.size.y + offset*2
+		panel.position.y = -panel.size.y + offset
 	else:
 		panel.position.y = 0
 

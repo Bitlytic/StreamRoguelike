@@ -16,7 +16,6 @@ var effects : Array[WeaponEffect]
 var elemental_type : Element
 
 
-# TODO: Change from enum to AttackEffect class
 func _init(damage: int = 0, effects: Array[WeaponEffect] = [], elemental_type: Element = Element.NONE):
 	self.damage = damage
 	self.effects = effects

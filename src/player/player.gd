@@ -87,10 +87,17 @@ func _unhandled_input(event: InputEvent) -> void:
 	var target_direction := Direction.direction_to_vector2(input_direction)
 	
 	if Input.is_action_pressed("debug_info"):
-		print("armor: ", equipment.get_armor())
-		print("evasion: ", equipment.get_evasion())
-		print("Equipment weight: ", equipment.get_weight())
-		print("Inventory weight: ", inventory.get_weight())
+		print(in_vision)
+		print(grid_position)
+		var cell : GridCell = GridWorld.get_cell(grid_position)
+		print(cell.in_vision)
+		
+		if cell.character:
+			print(cell.character)
+		
+		for e in cell.get_entities():
+			print(e)
+		
 	
 	if ActionManager.aiming:
 		if (_process_cursor_movement(target_direction)):
@@ -228,7 +235,7 @@ func clear_aiming() -> void:
 
 func _handle_mouse_movement() -> void:
 	if ActionManager.aiming:
-		var mouse_pos : Vector2 = get_global_mouse_position() + GridWorld.cell_size / 2.0
+		var mouse_pos : Vector2 = get_global_mouse_position()
 		mouse_pos /= GridWorld.cell_size
 		current_aiming_position = mouse_pos
 		_process_cursor_movement(Vector2i.ZERO)
@@ -253,6 +260,7 @@ func on_health_changed(_new_health: int) -> void:
 
 
 func update_sight():
+	sight_controller.vision_range = vision_range
 	sight_controller.update_fov()
 	
 	GridWorld.set_player_vision(sight_controller.visible_tiles)

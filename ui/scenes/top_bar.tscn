@@ -8,7 +8,7 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qt0ys"]
 
 [node name="TopBar" type="HBoxContainer"]
-custom_minimum_size = Vector2(0, 20)
+custom_minimum_size = Vector2(0, 30)
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 20.0
@@ -25,7 +25,7 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_5vok3")
 [node name="HPLabel" type="Label" parent="PlayerStats"]
 layout_mode = 2
 size_flags_vertical = 0
-theme_override_font_sizes/font_size = 14
+theme_override_font_sizes/font_size = 18
 text = "HP: 0/10"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -37,7 +37,7 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_qt0ys")
 
 [node name="InfoLabel" type="Label" parent="Information"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 14
+theme_override_font_sizes/font_size = 18
 text = "[Pick a direction to interact with]"
 horizontal_alignment = 1
 vertical_alignment = 1

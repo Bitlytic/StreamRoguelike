@@ -26,7 +26,7 @@ func display_actions(target_entity: Entity):
 	
 	action_types.append(ActionType.ATTACK)
 	
-	if !target_entity.is_character && !target_entity.is_passable(null):
+	if !target_entity.is_character && target_entity.is_passable(null):
 		action_types.append(ActionType.MOVE)
 	
 	if target_entity is ItemEntity:

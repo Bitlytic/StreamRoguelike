@@ -15,7 +15,7 @@ func switch_to_level(scene: PackedScene) -> void:
 	
 	
 	# Place player back in
-	await get_tree().tree_changed
+	await get_tree().process_frame
 	add_player(player)
 
 

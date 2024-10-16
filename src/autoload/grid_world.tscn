@@ -10,6 +10,7 @@ region = Rect2(480, 176, 16, 16)
 
 [node name="GridWorld" type="Node2D" groups=["world"]]
 script = ExtResource("1_ej7cb")
+world_size = Vector2i(60, 32)
 
 [node name="CycleTimer" type="Timer" parent="."]
 wait_time = 0.6

@@ -55,10 +55,13 @@ script = ExtResource("6_0olfa")
 list_name = "Items"
 
 [node name="EquipmentDialog" parent="UI" instance=ExtResource("8_wyelg")]
-offset_left = 320.0
-offset_top = 180.0
-offset_right = 320.0
-offset_bottom = 180.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
 theme = ExtResource("3_cw17j")
 
 [node name="ItemActionDialog" parent="UI" instance=ExtResource("7_hqe7c")]
@@ -72,10 +75,13 @@ grow_vertical = 2
 theme = ExtResource("3_cw17j")
 
 [node name="EquipmentActionDialog" parent="UI" instance=ExtResource("10_w755q")]
-offset_left = 320.0
-offset_top = 180.0
-offset_right = 320.0
-offset_bottom = 180.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
 theme = ExtResource("3_cw17j")
 script = ExtResource("11_bggal")
 list_name = "List"
