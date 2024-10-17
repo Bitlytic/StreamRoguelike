@@ -183,11 +183,15 @@ func can_see(from: Vector2i, to: Vector2i, e: Enemy) -> bool:
 	return true
 
 
-func update_pathfinding(entity: Entity, a_star_grid: AStarGrid2D) -> void:
+func update_pathfinding(entity: Entity, a_star_grid: AStarGrid2D, only_visible: bool = false) -> void:
 	a_star_grid.fill_solid_region(Rect2i(0, 0, world_size.x, world_size.y), false)
 	
 	for cell_pos : Vector2i in cells.keys():
 		var cell : GridCell = cells.get(cell_pos)
+		if only_visible && !cell.discovered:
+			a_star_grid.set_point_solid(cell_pos)
+			continue
+		
 		if cell.character == entity || cell.character is Player:
 			continue
 		
@@ -238,8 +242,6 @@ func clamp_to_bounds(pos: Vector2i) -> Vector2i:
 func set_player_vision(tiles: Array[Vector2]) -> void:
 	
 	for cell : GridCell in cells.values():
-		if cell.character is Player:
-			print(cell.grid_position)
 		
 		if tiles.has(Vector2(cell.grid_position)):
 			cell.set_player_visible(true)

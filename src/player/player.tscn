@@ -300,3 +300,6 @@ libraries = {
 "": SubResource("AnimationLibrary_jrg88")
 }
 autoplay = "fade_in"
+
+[node name="WalkTimer" type="Timer" parent="."]
+wait_time = 0.01

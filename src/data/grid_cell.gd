@@ -7,6 +7,7 @@ var _entities : Array[Entity]
 var ambient_tile : AmbientTile
 
 var in_vision := false
+var discovered := false
 
 var displayed := true
 
@@ -128,6 +129,9 @@ func get_first_match(test_func : Callable) -> Entity:
 
 
 func set_player_visible(v: bool) -> void:
+	if v && !discovered:
+		discovered = true
+	
 	for e in get_entities():
 		e.in_vision = v
 	

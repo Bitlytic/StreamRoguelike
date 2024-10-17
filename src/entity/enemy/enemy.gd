@@ -78,7 +78,6 @@ func _draw() -> void:
 		var p1 = points[i + 1] * 16 - Vector2i(global_position)
 		draw_line(p0, p1, draw_color, 2.0)
 	
-	
 	for pos in sight_controller.visible_tiles:
 		var world_coords : Vector2 = GridWorld.cell_size * (pos - Vector2(grid_position))
 		

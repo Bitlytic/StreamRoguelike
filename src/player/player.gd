@@ -9,12 +9,13 @@ extends Entity
 @onready var animation_controller: AnimationController = $AnimationController
 @onready var sight_controller: SightController = $SightController
 @onready var level_transition_player: AnimationPlayer = $TransitionLayer/LevelTransitionPlayer
-
+@onready var walk_timer: Timer = $WalkTimer
 
 enum AimingMode {
 	NONE,
 	RANGED,
-	INFO
+	INFO,
+	WALK
 }
 
 var current_aiming_mode := AimingMode.NONE:
@@ -24,6 +25,16 @@ var current_aiming_mode := AimingMode.NONE:
 
 var picking_direction := false
 
+var walking := false:
+	set(val):
+		walking = val
+		if walking:
+			walk_timer.start()
+		else:
+			walk_timer.stop()
+
+var walk_target : Vector2i
+
 var current_aiming_position : Vector2i
 
 var positions_to_check : Array[Vector2i]
@@ -32,15 +43,23 @@ var last_target : Entity
 
 var in_level_transition := false
 
+var a_star_grid := AStarGrid2D.new()
+
+
 func _ready():
 	health_changed.connect(on_health_changed)
 	on_health_changed(health)
+	
+	a_star_grid.region = Rect2i(Vector2i(0, 0), GridWorld.world_size + Vector2i(1, 1))
+	a_star_grid.update()
 	
 	sight_controller.vision_range = vision_range
 	
 	add_to_group("player")
 	
 	register_self()
+	
+	walk_timer.timeout.connect(on_walk_timer_timeout)
 
 
 func register_self() -> void:
@@ -70,6 +89,13 @@ func fade_out(stairs: StairEntity) -> void:
 	in_level_transition = false
 
 
+func on_walk_timer_timeout() -> void:
+	if !walking:
+		return
+	
+	walk_to_target()
+
+
 func _unhandled_input(event: InputEvent) -> void:
 	if in_level_transition:
 		return
@@ -86,18 +112,8 @@ func _unhandled_input(event: InputEvent) -> void:
 	var input_direction : int = Direction.get_player_direction()
 	var target_direction := Direction.direction_to_vector2(input_direction)
 	
-	if Input.is_action_pressed("debug_info"):
-		print(in_vision)
-		print(grid_position)
-		var cell : GridCell = GridWorld.get_cell(grid_position)
-		print(cell.in_vision)
-		
-		if cell.character:
-			print(cell.character)
-		
-		for e in cell.get_entities():
-			print(e)
-		
+	if walking:
+		return
 	
 	if ActionManager.aiming:
 		if (_process_cursor_movement(target_direction)):
@@ -150,32 +166,31 @@ func _process_gui(input_direction: int, target_direction: Vector2i) -> bool:
 		if !equipment.ranged_weapon:
 			return false
 		
-		current_aiming_mode = AimingMode.RANGED
-		current_aiming_position = grid_position
-		
-		if last_target && is_instance_valid(last_target) && last_target.in_vision:
-			current_aiming_position = last_target.grid_position
-		
-		GridWorld.show_reticle()
-		GridWorld.update_reticle_position(current_aiming_position)
-		queue_redraw()
-		ActionManager.show_aiming()
+		set_aiming_mode(AimingMode.RANGED)
 		return true
 	
 	if Input.is_action_pressed("inspect"):
-		current_aiming_mode = AimingMode.INFO
-		current_aiming_position = grid_position
-		
-		if last_target && is_instance_valid(last_target) && last_target.in_vision:
-			current_aiming_position = last_target.grid_position
-		
-		GridWorld.show_reticle()
-		GridWorld.update_reticle_position(current_aiming_position)
-		queue_redraw()
-		ActionManager.show_aiming()
+		set_aiming_mode(AimingMode.INFO)
+		return true
+	
+	if Input.is_action_pressed("target_walk"):
+		set_aiming_mode(AimingMode.WALK)
 		return true
 	
 	return false
+
+
+func set_aiming_mode(aiming_mode: int) -> void:
+	current_aiming_mode = aiming_mode
+	current_aiming_position = grid_position
+	
+	if last_target && is_instance_valid(last_target) && last_target.in_vision:
+		current_aiming_position = last_target.grid_position
+	
+	GridWorld.show_reticle()
+	GridWorld.update_reticle_position(current_aiming_position)
+	queue_redraw()
+	ActionManager.show_aiming()
 
 
 func _process_auto_actions(target_direction: Vector2i):
@@ -222,6 +237,8 @@ func accept_aiming() -> void:
 	match current_aiming_mode:
 		AimingMode.RANGED:
 			attack_ranged_target()
+		AimingMode.WALK:
+			set_walk_target()
 	
 	clear_aiming()
 
@@ -305,6 +322,11 @@ func attack_ranged_target() -> void:
 	GridWorld.player_input(action)
 
 
+func set_walk_target() -> void:
+	walking = true
+	walk_target = current_aiming_position
+
+
 func _draw() -> void:
 	if !debug_draw:
 		return
@@ -349,6 +371,43 @@ func _try_move_to(target_direction: Vector2i) -> EntityAction:
 			action = UnlockAction.new(door, key_slot)
 	
 	return action
+
+
+func walk_to_target() -> void:
+	if can_see_danger():
+		walking = false
+		return
+	
+	GridWorld.update_pathfinding(self, a_star_grid, true)
+	
+	var path := a_star_grid.get_id_path(grid_position, walk_target, true)
+	
+	path.pop_front()
+	
+	#TODO: This sometimes messes up when it shouldn't
+	if path.size() <= 0:
+		walking = false
+		return
+	
+	#TODO: this crashes sometimes
+	var target_direction = path[0] - grid_position
+	
+	var action = _try_move_to(target_direction)
+	
+	GridWorld.player_input(action)
+	
+	if grid_position == walk_target:
+		walking = false
+
+
+func can_see_danger() -> bool:
+	for tile in sight_controller.visible_tiles:
+		var cell : GridCell = GridWorld.get_cell(Vector2i(tile))
+		
+		if cell.character && cell.character is Enemy:
+			return true
+	
+	return false
 
 
 func _can_move_to_cell(cell: GridCell) -> bool:
