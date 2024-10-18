@@ -1,11 +1,18 @@
 extends Node2D
 
 
+@onready var heat_map: Node = $HeatMap
+
 var stairs_scene : PackedScene = preload("res://src/entity/staircase.tscn")
 
 var wall_scene : PackedScene = preload("res://src/entity/wall.tscn")
 
+class Test:
+	var value = 5
+
 func _ready() -> void:
+	
+	seed(0)
 	
 	var tree := BSPTree.new()
 	tree.generate()
@@ -24,20 +31,36 @@ func _ready() -> void:
 		else:
 			output_str += "-"
 	
-	var room : Rect2i = tree.get_first_room()
+	var first_room : Rect2i = tree.get_first_room()
 	
-	if room:
+	heat_map.generate_heat_map(first_room.get_center())
+	
+	for room in tree.rooms:
+		room.heat = heat_map.get_room_average(room.rect)
+	
+	tree.rooms.sort_custom(func(a, b): return a.heat < b.heat)
+	
+	if first_room:
 		var player_spawn = PlayerSpawn.new()
-		player_spawn.global_position = Vector2(room.get_center())*GridWorld.cell_size + GridWorld.cell_size / 2.0
+		player_spawn.global_position = Vector2(first_room.get_center())*GridWorld.cell_size + GridWorld.cell_size / 2.0
 		add_child(player_spawn)
 	
-	var end_room : Rect2i = tree.get_last_room()
+	var end_index := randi_range(1, 3)
+	var end_room := tree.rooms[tree.rooms.size() - end_index]
 	
 	if end_room:
 		var staircase := stairs_scene.instantiate()
-		staircase.global_position = Vector2(end_room.get_center()) * GridWorld.cell_size + GridWorld.cell_size / 2.0
+		staircase.global_position = Vector2(end_room.rect.get_center()) * GridWorld.cell_size + GridWorld.cell_size / 2.0
 		staircase.next_level = "res://scenes/level_testing.tscn"
 		add_child(staircase)
+	
+	
+	for room : BSPTree.Room in tree.rooms:
+		if randf_range(0, 1) > 0:
+			var item : ItemEntity = LootGenerationUtil.generate_loot(room.heat, 0)
+			
+			item.grid_position = room.rect.get_center()
+			get_tree().current_scene.add_child(item)
 
 
 func spawn_wall(index: int) -> void:
@@ -47,4 +70,3 @@ func spawn_wall(index: int) -> void:
 	wall.grid_position.y = index / GridWorld.world_size.x
 	
 	add_child(wall)
-	

@@ -1,38 +1,9 @@
-[gd_scene load_steps=26 format=3 uid="uid://oaanpb1irxop"]
+[gd_scene load_steps=19 format=3 uid="uid://oaanpb1irxop"]
 
 [ext_resource type="Script" path="res://src/player/player.gd" id="1_iqw8t"]
-[ext_resource type="Resource" uid="uid://c0slctsr58idx" path="res://resources/weapons/bow.tres" id="2_igauv"]
-[ext_resource type="Script" path="res://src/data/item/armor.gd" id="2_sb13r"]
 [ext_resource type="Texture2D" uid="uid://d1dtxy8sb2lia" path="res://assets/art/kenney-1bit.png" id="2_ys2la"]
 [ext_resource type="Script" path="res://src/components/animation_controller.gd" id="3_phlvu"]
-[ext_resource type="Script" path="res://src/data/equipment.gd" id="3_ts3ge"]
-[ext_resource type="Resource" uid="uid://cxnmcvlqypql7" path="res://resources/weapons/axe.tres" id="4_08l8g"]
 [ext_resource type="Script" path="res://src/player/sight_controller.gd" id="6_i4krp"]
-
-[sub_resource type="Resource" id="Resource_wyl5w"]
-script = ExtResource("2_sb13r")
-slot = 1
-armor_value = 500
-evasion_value = 0
-texture_tint = Color(1, 1, 1, 1)
-item_name = ""
-weight = 0.0
-
-[sub_resource type="Resource" id="Resource_ctgvc"]
-script = ExtResource("2_sb13r")
-slot = 0
-armor_value = 500
-evasion_value = 0
-texture_tint = Color(1, 1, 1, 1)
-item_name = ""
-weight = 0.0
-
-[sub_resource type="Resource" id="Resource_oa8iq"]
-script = ExtResource("3_ts3ge")
-weapon = ExtResource("4_08l8g")
-ranged_weapon = ExtResource("2_igauv")
-helmet = SubResource("Resource_ctgvc")
-chestplate = SubResource("Resource_wyl5w")
 
 [sub_resource type="Animation" id="Animation_yhvbl"]
 length = 0.001
@@ -258,7 +229,6 @@ z_index = 1
 script = ExtResource("1_iqw8t")
 debug_draw = true
 entity_name = "Player"
-equipment = SubResource("Resource_oa8iq")
 is_character = true
 
 [node name="Sprite" type="Sprite2D" parent="."]

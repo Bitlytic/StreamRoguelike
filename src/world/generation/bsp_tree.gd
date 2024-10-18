@@ -5,6 +5,7 @@ var min_size := 6
 var max_leaf_size := 16
 var map : Array[bool]
 var leaves: Array[Leaf]
+var rooms : Array[Room]
 
 
 func _init():
@@ -45,6 +46,7 @@ func get_first_room() -> Rect2i:
 	
 	return Rect2i()
 
+
 func get_last_room() -> Rect2i:
 	var room := Rect2i()
 	
@@ -55,10 +57,12 @@ func get_last_room() -> Rect2i:
 	return room
 
 
-func create_room(room: Rect2i):
-	for x in range(room.size.x):
-		for y in range(room.size.y):
-			map[coord_to_index(room.position.x + x, room.position.y + y)] = false
+func create_room(rect: Rect2i):
+	rooms.append(Room.new(rect))
+	
+	for x in range(rect.size.x):
+		for y in range(rect.size.y):
+			map[coord_to_index(rect.position.x + x, rect.position.y + y)] = false
 
 
 func create_hall(room1: Rect2i, room2: Rect2i):
@@ -99,6 +103,8 @@ class Leaf:
 	var child_1 : Leaf
 	var child_2 : Leaf
 	var room : Rect2i
+	
+	var average_heat : int
 	
 	func _init(x, y, width, height):
 		pos = Vector2i(x, y)
@@ -188,3 +194,15 @@ class Leaf:
 			return room_1
 		else:
 			return room_2
+
+class Room:
+	var heat := 0
+	var rect : Rect2i
+	
+	
+	func _init(rect: Rect2i):
+		self.rect = rect
+	
+	
+	func _to_string() -> String:
+		return "[%d, %d] - %d" % [rect.get_center().x, rect.get_center().y, heat]

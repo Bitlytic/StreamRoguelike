@@ -354,6 +354,19 @@ func _try_move_to(target_direction: Vector2i) -> EntityAction:
 	
 	var cell : GridCell = GridWorld.get_cell(action_position)
 	
+	if !GridWorld.is_in_bounds(action_position):
+		return action
+	
+	if Input.is_action_pressed("attack_modifier"):
+		var entity : Entity = cell.character
+		
+		if !entity:
+			if cell.get_entity_count() > 0:
+				entity = cell.get_entities()[0]
+		
+		if entity:
+			return AttackAction.new(equipment.weapon, entity)
+	
 	if _can_move_to_cell(cell):
 		action = MoveAction.new()
 		action.position = action_position

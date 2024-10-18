@@ -153,7 +153,6 @@ func restart_timers() -> void:
 
 func _perform_action(action: EntityAction):
 	action.perform_action()
-	
 	action.owner.processed_this_frame = true
 
 
@@ -312,3 +311,7 @@ func set_tooltip_position(pos: Vector2i) -> void:
 	if tooltip_name:
 		set_tooltip_name(tooltip_name)
 		set_tooltip_description(tooltip_description)
+
+
+func get_index_from_pos(pos: Vector2i) -> int:
+	return world_size.x * pos.y + pos.x
