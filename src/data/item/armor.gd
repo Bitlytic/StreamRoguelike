@@ -11,6 +11,7 @@ enum ArmorSlot {
 
 @export var armor_value := 0
 @export var evasion_value := 0
+@export var on_hit_effects : Array[OnHitEffect]
 
 
 func get_armor() -> int:

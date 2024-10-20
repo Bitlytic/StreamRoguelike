@@ -30,6 +30,8 @@ func perform_action() -> void:
 		else:
 			attack.damage = 1
 		
+		attack.attacker = owner
+		
 		var evasion_value := target.equipment.get_evasion()
 		 
 		if randi_range(1, 20) <= evasion_value:

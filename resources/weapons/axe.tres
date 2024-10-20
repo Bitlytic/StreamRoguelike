@@ -1,9 +1,11 @@
-[gd_resource type="Resource" script_class="BasicWeapon" load_steps=9 format=3 uid="uid://cxnmcvlqypql7"]
+[gd_resource type="Resource" script_class="BasicWeapon" load_steps=13 format=3 uid="uid://cxnmcvlqypql7"]
 
 [ext_resource type="Script" path="res://src/data/dice_roll.gd" id="1_20hgl"]
 [ext_resource type="Script" path="res://src/data/item/basic_weapon.gd" id="1_ixl2f"]
 [ext_resource type="Texture2D" uid="uid://d1dtxy8sb2lia" path="res://assets/art/kenney-1bit.png" id="2_ec78r"]
 [ext_resource type="Script" path="res://src/data/effects/weapon_effect.gd" id="2_wnniu"]
+[ext_resource type="Script" path="res://src/data/effects/on_hit/on_hit_effect.gd" id="3_nvnwc"]
+[ext_resource type="Script" path="res://src/data/effects/on_hit/life_steal_effect.gd" id="4_xeu7r"]
 
 [sub_resource type="Resource" id="Resource_khuqu"]
 script = ExtResource("1_20hgl")
@@ -23,6 +25,17 @@ effect_type = 1
 apply_chance = 0.1
 turn_count = 5
 
+[sub_resource type="Resource" id="Resource_6jll2"]
+script = ExtResource("2_wnniu")
+effect_type = 0
+apply_chance = 25.0
+turn_count = 5
+
+[sub_resource type="Resource" id="Resource_sg7sg"]
+script = ExtResource("4_xeu7r")
+chance = 0.1
+effective_percentage = 0.44
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_iyljy"]
 atlas = ExtResource("2_ec78r")
 region = Rect2(640, 112, 16, 16)
@@ -30,7 +43,8 @@ region = Rect2(640, 112, 16, 16)
 [resource]
 script = ExtResource("1_ixl2f")
 dice_roll = SubResource("Resource_khuqu")
-effects = Array[ExtResource("2_wnniu")]([SubResource("Resource_tpkev"), SubResource("Resource_2hdxu")])
+effects = Array[ExtResource("2_wnniu")]([SubResource("Resource_tpkev"), SubResource("Resource_2hdxu"), SubResource("Resource_6jll2")])
+on_hit_effects = Array[ExtResource("3_nvnwc")]([SubResource("Resource_sg7sg")])
 texture = SubResource("AtlasTexture_iyljy")
 texture_tint = Color(1, 1, 1, 1)
 item_name = "Axe"

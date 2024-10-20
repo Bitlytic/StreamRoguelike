@@ -1,0 +1,554 @@
+[gd_scene load_steps=50 format=3 uid="uid://bv43180lmpy61"]
+
+[ext_resource type="Script" path="res://src/world/prefabs/prefab_room.gd" id="1_7gonx"]
+[ext_resource type="PackedScene" uid="uid://dkhrcr6y2unah" path="res://src/entity/wall.tscn" id="2_5xm8m"]
+[ext_resource type="Script" path="res://src/entity/entity.gd" id="3_bu6et"]
+[ext_resource type="Script" path="res://src/data/equipment.gd" id="4_dt66m"]
+[ext_resource type="PackedScene" uid="uid://c27k4tj0htwqi" path="res://src/entity/locked_door.tscn" id="5_fxga1"]
+[ext_resource type="PackedScene" uid="uid://1tr6jfjdpacw" path="res://src/entity/item/item_entity.tscn" id="6_ft58x"]
+[ext_resource type="Resource" uid="uid://dp5hw11qph52p" path="res://resources/key/key.tres" id="7_86abe"]
+[ext_resource type="Resource" uid="uid://cyud1nt6gqpl1" path="res://resources/weapons/spear.tres" id="8_2ojsj"]
+
+[sub_resource type="Resource" id="Resource_jnkgy"]
+script = ExtResource("4_dt66m")
+
+[sub_resource type="Resource" id="Resource_0javh"]
+script = ExtResource("4_dt66m")
+
+[sub_resource type="Resource" id="Resource_mm283"]
+script = ExtResource("4_dt66m")
+
+[sub_resource type="Resource" id="Resource_ej02m"]
+script = ExtResource("4_dt66m")
+
+[sub_resource type="Resource" id="Resource_hh3q1"]
+script = ExtResource("4_dt66m")
+
+[sub_resource type="Resource" id="Resource_qwl0u"]
+script = ExtResource("4_dt66m")
+
+[sub_resource type="Resource" id="Resource_liacd"]
+script = ExtResource("4_dt66m")
+
+[sub_resource type="Resource" id="Resource_amtur"]
+script = ExtResource("4_dt66m")
+
+[sub_resource type="Resource" id="Resource_cqurj"]
+script = ExtResource("4_dt66m")
+
+[sub_resource type="Resource" id="Resource_kknor"]
+script = ExtResource("4_dt66m")
+
+[sub_resource type="Resource" id="Resource_rpynd"]
+script = ExtResource("4_dt66m")
+
+[sub_resource type="Resource" id="Resource_f5nq1"]
+script = ExtResource("4_dt66m")
+
+[sub_resource type="Resource" id="Resource_71tec"]
+script = ExtResource("4_dt66m")
+
+[sub_resource type="Resource" id="Resource_mhgn6"]
+script = ExtResource("4_dt66m")
+
+[sub_resource type="Resource" id="Resource_u8ij2"]
+script = ExtResource("4_dt66m")
+
+[sub_resource type="Resource" id="Resource_yjbfd"]
+script = ExtResource("4_dt66m")
+
+[sub_resource type="Resource" id="Resource_c7yp7"]
+script = ExtResource("4_dt66m")
+
+[sub_resource type="Resource" id="Resource_3asv4"]
+script = ExtResource("4_dt66m")
+
+[sub_resource type="Resource" id="Resource_l3qiq"]
+script = ExtResource("4_dt66m")
+
+[sub_resource type="Resource" id="Resource_itiyt"]
+script = ExtResource("4_dt66m")
+
+[sub_resource type="Resource" id="Resource_jbj0a"]
+script = ExtResource("4_dt66m")
+
+[sub_resource type="Resource" id="Resource_1k5jr"]
+script = ExtResource("4_dt66m")
+
+[sub_resource type="Resource" id="Resource_wagxc"]
+script = ExtResource("4_dt66m")
+
+[sub_resource type="Resource" id="Resource_h1u2c"]
+script = ExtResource("4_dt66m")
+
+[sub_resource type="Resource" id="Resource_l34lo"]
+script = ExtResource("4_dt66m")
+
+[sub_resource type="Resource" id="Resource_svgkd"]
+script = ExtResource("4_dt66m")
+
+[sub_resource type="Resource" id="Resource_bgw6p"]
+script = ExtResource("4_dt66m")
+
+[sub_resource type="Resource" id="Resource_qe48r"]
+script = ExtResource("4_dt66m")
+
+[sub_resource type="Resource" id="Resource_7jswa"]
+script = ExtResource("4_dt66m")
+
+[sub_resource type="Resource" id="Resource_grxal"]
+script = ExtResource("4_dt66m")
+
+[sub_resource type="Resource" id="Resource_mihu1"]
+script = ExtResource("4_dt66m")
+
+[sub_resource type="Resource" id="Resource_gdy8u"]
+script = ExtResource("4_dt66m")
+
+[sub_resource type="Resource" id="Resource_p1n34"]
+script = ExtResource("4_dt66m")
+
+[sub_resource type="Resource" id="Resource_18kg1"]
+script = ExtResource("4_dt66m")
+
+[sub_resource type="Resource" id="Resource_8l5kk"]
+script = ExtResource("4_dt66m")
+
+[sub_resource type="Resource" id="Resource_i53d6"]
+script = ExtResource("4_dt66m")
+
+[sub_resource type="Resource" id="Resource_4axrd"]
+script = ExtResource("4_dt66m")
+
+[sub_resource type="Resource" id="Resource_6p4g1"]
+script = ExtResource("4_dt66m")
+
+[sub_resource type="Resource" id="Resource_aoxlp"]
+script = ExtResource("4_dt66m")
+
+[sub_resource type="Resource" id="Resource_hxyk8"]
+script = ExtResource("4_dt66m")
+
+[sub_resource type="Resource" id="Resource_iny77"]
+script = ExtResource("4_dt66m")
+
+[node name="PrefabRoom" type="Node2D"]
+script = ExtResource("1_7gonx")
+room_size = Vector2i(9, 9)
+
+[node name="Walls" type="Node" parent="."]
+
+[node name="Wall" type="Node2D" parent="Walls" instance=ExtResource("2_5xm8m")]
+position = Vector2(-8, -8)
+script = ExtResource("3_bu6et")
+entity_name = "Wall"
+equipment = SubResource("Resource_jnkgy")
+blocks_vision = true
+blocks_movement = true
+discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
+
+[node name="@Node2D@91156" type="Node2D" parent="Walls" instance=ExtResource("2_5xm8m")]
+position = Vector2(8, -8)
+script = ExtResource("3_bu6et")
+entity_name = "Wall"
+equipment = SubResource("Resource_0javh")
+blocks_vision = true
+blocks_movement = true
+discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
+
+[node name="@Node2D@91157" type="Node2D" parent="Walls" instance=ExtResource("2_5xm8m")]
+position = Vector2(24, -8)
+script = ExtResource("3_bu6et")
+entity_name = "Wall"
+equipment = SubResource("Resource_mm283")
+blocks_vision = true
+blocks_movement = true
+discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
+
+[node name="@Node2D@91158" type="Node2D" parent="Walls" instance=ExtResource("2_5xm8m")]
+position = Vector2(40, -8)
+script = ExtResource("3_bu6et")
+entity_name = "Wall"
+equipment = SubResource("Resource_ej02m")
+blocks_vision = true
+blocks_movement = true
+discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
+
+[node name="@Node2D@91159" type="Node2D" parent="Walls" instance=ExtResource("2_5xm8m")]
+position = Vector2(56, -8)
+script = ExtResource("3_bu6et")
+entity_name = "Wall"
+equipment = SubResource("Resource_hh3q1")
+blocks_vision = true
+blocks_movement = true
+discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
+
+[node name="@Node2D@91160" type="Node2D" parent="Walls" instance=ExtResource("2_5xm8m")]
+position = Vector2(72, -8)
+script = ExtResource("3_bu6et")
+entity_name = "Wall"
+equipment = SubResource("Resource_qwl0u")
+blocks_vision = true
+blocks_movement = true
+discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
+
+[node name="@Node2D@91161" type="Node2D" parent="Walls" instance=ExtResource("2_5xm8m")]
+position = Vector2(88, -8)
+script = ExtResource("3_bu6et")
+entity_name = "Wall"
+equipment = SubResource("Resource_liacd")
+blocks_vision = true
+blocks_movement = true
+discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
+
+[node name="@Node2D@91162" type="Node2D" parent="Walls" instance=ExtResource("2_5xm8m")]
+position = Vector2(104, -8)
+script = ExtResource("3_bu6et")
+entity_name = "Wall"
+equipment = SubResource("Resource_amtur")
+blocks_vision = true
+blocks_movement = true
+discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
+
+[node name="@Node2D@91163" type="Node2D" parent="Walls" instance=ExtResource("2_5xm8m")]
+position = Vector2(120, -8)
+script = ExtResource("3_bu6et")
+entity_name = "Wall"
+equipment = SubResource("Resource_cqurj")
+blocks_vision = true
+blocks_movement = true
+discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
+
+[node name="@Node2D@91164" type="Node2D" parent="Walls" instance=ExtResource("2_5xm8m")]
+position = Vector2(136, -8)
+script = ExtResource("3_bu6et")
+entity_name = "Wall"
+equipment = SubResource("Resource_kknor")
+blocks_vision = true
+blocks_movement = true
+discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
+
+[node name="@Node2D@91165" type="Node2D" parent="Walls" instance=ExtResource("2_5xm8m")]
+position = Vector2(152, -8)
+script = ExtResource("3_bu6et")
+entity_name = "Wall"
+equipment = SubResource("Resource_rpynd")
+blocks_vision = true
+blocks_movement = true
+discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
+
+[node name="@Node2D@91166" type="Node2D" parent="Walls" instance=ExtResource("2_5xm8m")]
+position = Vector2(-8, 8)
+script = ExtResource("3_bu6et")
+entity_name = "Wall"
+equipment = SubResource("Resource_f5nq1")
+blocks_vision = true
+blocks_movement = true
+discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
+
+[node name="@Node2D@91167" type="Node2D" parent="Walls" instance=ExtResource("2_5xm8m")]
+position = Vector2(152, 8)
+script = ExtResource("3_bu6et")
+entity_name = "Wall"
+equipment = SubResource("Resource_71tec")
+blocks_vision = true
+blocks_movement = true
+discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
+
+[node name="@Node2D@91168" type="Node2D" parent="Walls" instance=ExtResource("2_5xm8m")]
+position = Vector2(-8, 24)
+script = ExtResource("3_bu6et")
+entity_name = "Wall"
+equipment = SubResource("Resource_mhgn6")
+blocks_vision = true
+blocks_movement = true
+discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
+
+[node name="@Node2D@91169" type="Node2D" parent="Walls" instance=ExtResource("2_5xm8m")]
+position = Vector2(152, 24)
+script = ExtResource("3_bu6et")
+entity_name = "Wall"
+equipment = SubResource("Resource_u8ij2")
+blocks_vision = true
+blocks_movement = true
+discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
+
+[node name="@Node2D@91170" type="Node2D" parent="Walls" instance=ExtResource("2_5xm8m")]
+position = Vector2(-8, 40)
+script = ExtResource("3_bu6et")
+entity_name = "Wall"
+equipment = SubResource("Resource_yjbfd")
+blocks_vision = true
+blocks_movement = true
+discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
+
+[node name="@Node2D@91171" type="Node2D" parent="Walls" instance=ExtResource("2_5xm8m")]
+position = Vector2(152, 40)
+script = ExtResource("3_bu6et")
+entity_name = "Wall"
+equipment = SubResource("Resource_c7yp7")
+blocks_vision = true
+blocks_movement = true
+discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
+
+[node name="@Node2D@91172" type="Node2D" parent="Walls" instance=ExtResource("2_5xm8m")]
+position = Vector2(-8, 56)
+script = ExtResource("3_bu6et")
+entity_name = "Wall"
+equipment = SubResource("Resource_3asv4")
+blocks_vision = true
+blocks_movement = true
+discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
+
+[node name="@Node2D@91173" type="Node2D" parent="Walls" instance=ExtResource("2_5xm8m")]
+position = Vector2(152, 56)
+script = ExtResource("3_bu6et")
+entity_name = "Wall"
+equipment = SubResource("Resource_l3qiq")
+blocks_vision = true
+blocks_movement = true
+discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
+
+[node name="@Node2D@91174" type="Node2D" parent="Walls" instance=ExtResource("2_5xm8m")]
+position = Vector2(-8, 72)
+script = ExtResource("3_bu6et")
+entity_name = "Wall"
+equipment = SubResource("Resource_itiyt")
+blocks_vision = true
+blocks_movement = true
+discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
+
+[node name="@Node2D@91175" type="Node2D" parent="Walls" instance=ExtResource("2_5xm8m")]
+position = Vector2(152, 72)
+script = ExtResource("3_bu6et")
+entity_name = "Wall"
+equipment = SubResource("Resource_jbj0a")
+blocks_vision = true
+blocks_movement = true
+discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
+
+[node name="@Node2D@91176" type="Node2D" parent="Walls" instance=ExtResource("2_5xm8m")]
+position = Vector2(-8, 88)
+script = ExtResource("3_bu6et")
+entity_name = "Wall"
+equipment = SubResource("Resource_1k5jr")
+blocks_vision = true
+blocks_movement = true
+discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
+
+[node name="@Node2D@91177" type="Node2D" parent="Walls" instance=ExtResource("2_5xm8m")]
+position = Vector2(152, 88)
+script = ExtResource("3_bu6et")
+entity_name = "Wall"
+equipment = SubResource("Resource_wagxc")
+blocks_vision = true
+blocks_movement = true
+discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
+
+[node name="@Node2D@91178" type="Node2D" parent="Walls" instance=ExtResource("2_5xm8m")]
+position = Vector2(-8, 104)
+script = ExtResource("3_bu6et")
+entity_name = "Wall"
+equipment = SubResource("Resource_h1u2c")
+blocks_vision = true
+blocks_movement = true
+discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
+
+[node name="@Node2D@91179" type="Node2D" parent="Walls" instance=ExtResource("2_5xm8m")]
+position = Vector2(152, 104)
+script = ExtResource("3_bu6et")
+entity_name = "Wall"
+equipment = SubResource("Resource_l34lo")
+blocks_vision = true
+blocks_movement = true
+discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
+
+[node name="@Node2D@91180" type="Node2D" parent="Walls" instance=ExtResource("2_5xm8m")]
+position = Vector2(-8, 120)
+script = ExtResource("3_bu6et")
+entity_name = "Wall"
+equipment = SubResource("Resource_svgkd")
+blocks_vision = true
+blocks_movement = true
+discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
+
+[node name="@Node2D@91181" type="Node2D" parent="Walls" instance=ExtResource("2_5xm8m")]
+position = Vector2(152, 120)
+script = ExtResource("3_bu6et")
+entity_name = "Wall"
+equipment = SubResource("Resource_bgw6p")
+blocks_vision = true
+blocks_movement = true
+discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
+
+[node name="@Node2D@91182" type="Node2D" parent="Walls" instance=ExtResource("2_5xm8m")]
+position = Vector2(-8, 136)
+script = ExtResource("3_bu6et")
+entity_name = "Wall"
+equipment = SubResource("Resource_qe48r")
+blocks_vision = true
+blocks_movement = true
+discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
+
+[node name="@Node2D@91183" type="Node2D" parent="Walls" instance=ExtResource("2_5xm8m")]
+position = Vector2(152, 136)
+script = ExtResource("3_bu6et")
+entity_name = "Wall"
+equipment = SubResource("Resource_7jswa")
+blocks_vision = true
+blocks_movement = true
+discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
+
+[node name="@Node2D@91184" type="Node2D" parent="Walls" instance=ExtResource("2_5xm8m")]
+position = Vector2(-8, 152)
+script = ExtResource("3_bu6et")
+entity_name = "Wall"
+equipment = SubResource("Resource_grxal")
+blocks_vision = true
+blocks_movement = true
+discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
+
+[node name="@Node2D@91185" type="Node2D" parent="Walls" instance=ExtResource("2_5xm8m")]
+position = Vector2(8, 152)
+script = ExtResource("3_bu6et")
+entity_name = "Wall"
+equipment = SubResource("Resource_mihu1")
+blocks_vision = true
+blocks_movement = true
+discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
+
+[node name="@Node2D@91186" type="Node2D" parent="Walls" instance=ExtResource("2_5xm8m")]
+position = Vector2(24, 152)
+script = ExtResource("3_bu6et")
+entity_name = "Wall"
+equipment = SubResource("Resource_gdy8u")
+blocks_vision = true
+blocks_movement = true
+discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
+
+[node name="@Node2D@91187" type="Node2D" parent="Walls" instance=ExtResource("2_5xm8m")]
+position = Vector2(40, 152)
+script = ExtResource("3_bu6et")
+entity_name = "Wall"
+equipment = SubResource("Resource_p1n34")
+blocks_vision = true
+blocks_movement = true
+discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
+
+[node name="@Node2D@91188" type="Node2D" parent="Walls" instance=ExtResource("2_5xm8m")]
+position = Vector2(56, 152)
+script = ExtResource("3_bu6et")
+entity_name = "Wall"
+equipment = SubResource("Resource_18kg1")
+blocks_vision = true
+blocks_movement = true
+discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
+
+[node name="@Node2D@91189" type="Node2D" parent="Walls" instance=ExtResource("2_5xm8m")]
+position = Vector2(72, 152)
+script = ExtResource("3_bu6et")
+entity_name = "Wall"
+equipment = SubResource("Resource_8l5kk")
+blocks_vision = true
+blocks_movement = true
+discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
+
+[node name="@Node2D@91190" type="Node2D" parent="Walls" instance=ExtResource("2_5xm8m")]
+position = Vector2(88, 152)
+script = ExtResource("3_bu6et")
+entity_name = "Wall"
+equipment = SubResource("Resource_i53d6")
+blocks_vision = true
+blocks_movement = true
+discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
+
+[node name="@Node2D@91191" type="Node2D" parent="Walls" instance=ExtResource("2_5xm8m")]
+position = Vector2(104, 152)
+script = ExtResource("3_bu6et")
+entity_name = "Wall"
+equipment = SubResource("Resource_4axrd")
+blocks_vision = true
+blocks_movement = true
+discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
+
+[node name="@Node2D@91192" type="Node2D" parent="Walls" instance=ExtResource("2_5xm8m")]
+position = Vector2(120, 152)
+script = ExtResource("3_bu6et")
+entity_name = "Wall"
+equipment = SubResource("Resource_6p4g1")
+blocks_vision = true
+blocks_movement = true
+discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
+
+[node name="@Node2D@91193" type="Node2D" parent="Walls" instance=ExtResource("2_5xm8m")]
+position = Vector2(136, 152)
+script = ExtResource("3_bu6et")
+entity_name = "Wall"
+equipment = SubResource("Resource_aoxlp")
+blocks_vision = true
+blocks_movement = true
+discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
+
+[node name="@Node2D@91194" type="Node2D" parent="Walls" instance=ExtResource("2_5xm8m")]
+position = Vector2(152, 152)
+script = ExtResource("3_bu6et")
+entity_name = "Wall"
+equipment = SubResource("Resource_hxyk8")
+blocks_vision = true
+blocks_movement = true
+discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
+
+[node name="Wall" parent="." instance=ExtResource("2_5xm8m")]
+position = Vector2(72, 40)
+equipment = SubResource("Resource_iny77")
+
+[node name="Wall2" parent="." instance=ExtResource("2_5xm8m")]
+position = Vector2(88, 40)
+equipment = SubResource("Resource_iny77")
+
+[node name="Wall3" parent="." instance=ExtResource("2_5xm8m")]
+position = Vector2(88, 72)
+equipment = SubResource("Resource_iny77")
+
+[node name="Wall4" parent="." instance=ExtResource("2_5xm8m")]
+position = Vector2(88, 56)
+equipment = SubResource("Resource_iny77")
+
+[node name="Wall5" parent="." instance=ExtResource("2_5xm8m")]
+position = Vector2(56, 56)
+equipment = SubResource("Resource_iny77")
+
+[node name="Wall6" parent="." instance=ExtResource("2_5xm8m")]
+position = Vector2(56, 40)
+equipment = SubResource("Resource_iny77")
+
+[node name="Wall7" parent="." instance=ExtResource("2_5xm8m")]
+position = Vector2(56, 72)
+equipment = SubResource("Resource_iny77")
+
+[node name="Wall11" parent="." instance=ExtResource("2_5xm8m")]
+position = Vector2(56, 88)
+equipment = SubResource("Resource_iny77")
+
+[node name="Wall12" parent="." instance=ExtResource("2_5xm8m")]
+position = Vector2(88, 88)
+equipment = SubResource("Resource_iny77")
+
+[node name="Wall9" parent="." instance=ExtResource("2_5xm8m")]
+position = Vector2(56, 104)
+equipment = SubResource("Resource_iny77")
+
+[node name="Wall10" parent="." instance=ExtResource("2_5xm8m")]
+position = Vector2(88, 104)
+equipment = SubResource("Resource_iny77")
+
+[node name="LockedDoor" parent="." instance=ExtResource("5_fxga1")]
+position = Vector2(72, 104)
+
+[node name="ItemEntity" parent="." instance=ExtResource("6_ft58x")]
+position = Vector2(72, 72)
+item = ExtResource("7_86abe")
+
+[node name="ItemEntity2" parent="." instance=ExtResource("6_ft58x")]
+position = Vector2(72, 56)
+item = ExtResource("8_2ojsj")

@@ -34,7 +34,7 @@ func show_messages():
 		var spawned_scene : WorldMessage = message_scene.instantiate()
 		spawned_scene.message = message
 		get_tree().current_scene.add_child(spawned_scene)
-		spawned_scene.global_position = Vector2(pos) * GridWorld.cell_size
+		spawned_scene.global_position = GridWorld.get_global_position(pos)
 		
 		if queue.size() <= 0:
 			message_queues.erase(pos)

@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="BasicWeapon" load_steps=7 format=3 uid="uid://cyud1nt6gqpl1"]
+[gd_resource type="Resource" script_class="BasicWeapon" load_steps=8 format=3 uid="uid://cyud1nt6gqpl1"]
 
 [ext_resource type="Script" path="res://src/data/item/basic_weapon.gd" id="1_24yyf"]
 [ext_resource type="Script" path="res://src/data/dice_roll.gd" id="1_eh2ym"]
 [ext_resource type="Texture2D" uid="uid://d1dtxy8sb2lia" path="res://assets/art/kenney-1bit.png" id="2_0yyes"]
 [ext_resource type="Script" path="res://src/data/effects/weapon_effect.gd" id="2_e8efm"]
+[ext_resource type="Script" path="res://src/data/effects/on_hit/on_hit_effect.gd" id="3_ri13i"]
 
 [sub_resource type="Resource" id="Resource_5o1i4"]
 script = ExtResource("1_eh2ym")
@@ -19,6 +20,7 @@ region = Rect2(576, 48, 16, 16)
 script = ExtResource("1_24yyf")
 dice_roll = SubResource("Resource_5o1i4")
 effects = Array[ExtResource("2_e8efm")]([])
+on_hit_effects = Array[ExtResource("3_ri13i")]([])
 texture = SubResource("AtlasTexture_ysj3d")
 texture_tint = Color(1, 1, 1, 1)
 item_name = "Spear"

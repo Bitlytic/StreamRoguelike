@@ -2,6 +2,8 @@ class_name Player
 extends Entity
 
 
+var level_1 := preload("res://scenes/level_1.tscn")
+
 @export var debug_draw := false
 
 @export var vision_range := 8
@@ -99,6 +101,9 @@ func on_walk_timer_timeout() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if in_level_transition:
 		return
+	
+	if Input.is_action_just_pressed("debug_info"):
+		print(grid_position)
 	
 	if event is InputEventMouseMotion:
 		_handle_mouse_movement()

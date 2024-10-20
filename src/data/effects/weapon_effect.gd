@@ -20,7 +20,7 @@ enum EffectType {
 @export var turn_count := 5
 
 
-func apply_effect(entity: Entity) -> void:
+func apply_effect(entity: Entity, owner: Entity = null) -> void:
 	var effect : Effect
 	
 	if randf_range(0, 1) > apply_chance:

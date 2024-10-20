@@ -87,8 +87,17 @@ func _update_render_position() -> void:
 func process_attack(attack: Attack) -> void:
 	_take_damage(attack.damage)
 	
+	attack.target = self
+	
 	for effect in attack.effects:
 		effect.apply_effect(self)
+	
+	if attack.attacker && attack.attacker != self:
+		for effect: OnHitEffect in attack.on_hit_effects:
+			effect.perform_effect(attack)
+		
+		for effect: OnHitEffect in equipment.get_on_hit_effects():
+			effect.perform_effect(attack)
 	
 	MessageManager.add_message(grid_position, Message.from_attack(attack))
 
@@ -105,6 +114,11 @@ func _take_damage(damage: int) -> void:
 
 
 func heal(amount: int) -> void:
+	var message := Message.new()
+	message.color = BityColors.SHAMROCK
+	message.text = str(amount)
+	
+	MessageManager.add_message(grid_position, message)
 	
 	health += amount
 	if health > max_health:

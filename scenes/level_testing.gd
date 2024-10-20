@@ -7,12 +7,7 @@ var stairs_scene : PackedScene = preload("res://src/entity/staircase.tscn")
 
 var wall_scene : PackedScene = preload("res://src/entity/wall.tscn")
 
-class Test:
-	var value = 5
-
 func _ready() -> void:
-	
-	seed(0)
 	
 	var tree := BSPTree.new()
 	tree.generate()
@@ -20,16 +15,14 @@ func _ready() -> void:
 	var output_str:= ""
 	
 	for i in tree.map.size():
-		if i % GridWorld.world_size.x == 0:
-			output_str += "\n"
+		var e : Entity = tree.map[i]
 		
-		var val = tree.map[i]
-		
-		if val:
-			spawn_wall(i)
-			output_str += "#"
-		else:
-			output_str += "-"
+		if e:
+			e.grid_position = GridWorld.get_pos_from_index(i)
+			if e.get_parent():
+				e.reparent(self)
+			else:
+				add_child(e)
 	
 	var first_room : Rect2i = tree.get_first_room()
 	
@@ -50,23 +43,16 @@ func _ready() -> void:
 	
 	if end_room:
 		var staircase := stairs_scene.instantiate()
-		staircase.global_position = Vector2(end_room.rect.get_center()) * GridWorld.cell_size + GridWorld.cell_size / 2.0
+		staircase.global_position = Vector2(first_room.get_center()) * GridWorld.cell_size + GridWorld.cell_size / 2.0
 		staircase.next_level = "res://scenes/level_testing.tscn"
 		add_child(staircase)
 	
 	
 	for room : BSPTree.Room in tree.rooms:
+		if room.prefab:
+			continue
 		if randf_range(0, 1) > 0:
 			var item : ItemEntity = LootGenerationUtil.generate_loot(room.heat, 0)
 			
 			item.grid_position = room.rect.get_center()
 			get_tree().current_scene.add_child(item)
-
-
-func spawn_wall(index: int) -> void:
-	var wall := wall_scene.instantiate()
-	
-	wall.grid_position.x = index % GridWorld.world_size.x
-	wall.grid_position.y = index / GridWorld.world_size.x
-	
-	add_child(wall)

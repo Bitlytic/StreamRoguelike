@@ -3,17 +3,21 @@ class_name BSPTree
 var max_size := 12
 var min_size := 6
 var max_leaf_size := 16
-var map : Array[bool]
+var map : Array[Entity]
 var leaves: Array[Leaf]
 var rooms : Array[Room]
+
+var wall_scene : PackedScene = preload("res://src/entity/wall.tscn")
 
 
 func _init():
 	map.resize(GridWorld.world_size.x * GridWorld.world_size.y)
 
+
 func generate():
-	# Array of booleans, false means wall, true means air
-	map.fill(true)
+	for y in GridWorld.world_size.y:
+		for x in GridWorld.world_size.x:
+			map[GridWorld.get_index_from_pos(Vector2i(x, y))] = wall_scene.instantiate()
 	
 	leaves.clear()
 	
@@ -57,16 +61,19 @@ func get_last_room() -> Rect2i:
 	return room
 
 
-func create_room(rect: Rect2i):
-	rooms.append(Room.new(rect))
+func create_room(rect: Rect2i, prefab: bool = false):
+	rooms.append(Room.new(rect, prefab))
 	
 	for x in range(rect.size.x):
 		for y in range(rect.size.y):
-			map[coord_to_index(rect.position.x + x, rect.position.y + y)] = false
+			map[coord_to_index(rect.position.x + x, rect.position.y + y)] = null
+
+
+func add_entity(entity: Entity) -> void:
+	map[coord_to_index(entity.grid_position.x, entity.grid_position.y)] = entity
 
 
 func create_hall(room1: Rect2i, room2: Rect2i):
-	
 	var center1 = room1.get_center()
 	var center2 = room2.get_center()
 	
@@ -81,14 +88,24 @@ func create_hall(room1: Rect2i, room2: Rect2i):
 func create_horizontal_tunnel(x1: int, x2: int, y: int):
 	var start = min(x1, x2)
 	var size = abs(x1 - x2)
-	for x in range(size):
-		map[coord_to_index(start + x, y)] = false
+	for x in range(size + 1):
+		dig_tunnel_space(start + x, y)
+
 
 func create_vertical_tunnel(y1: int, y2: int, x: int):
 	var start = min(y1, y2)
 	var size = abs(y1 - y2)
-	for y in range(size):
-		map[coord_to_index(x, start + y)] = false
+	for y in range(size + 1):
+		dig_tunnel_space(x, start + y)
+
+
+func dig_tunnel_space(x: int, y: int) -> void:
+	for r in rooms:
+		if r.rect.has_point(Vector2i(x, y)):
+			return
+	
+	map[coord_to_index(x, y)] = null
+
 
 func coord_to_index(x: int, y: int) -> int:
 	return GridWorld.world_size.x * y + x
@@ -155,18 +172,40 @@ class Leaf:
 			if child_1 && child_2:
 				bsp_tree.create_hall(child_1.get_room(), child_2.get_room())
 		else:
-			var width := randi_range(bsp_tree.min_size, min(bsp_tree.max_size, size.x - 1))
-			var height := randi_range(bsp_tree.min_size, min(bsp_tree.max_size, size.y - 1))
-			var x := randi_range(pos.x, pos.x + (size.x - 1) - width)
-			var y := randi_range(pos.y, pos.y + (size.y - 1) - height)
-			if x == 0:
-				x += 1
-			if y == 0:
-				y += 1
-			
-			room = Rect2i(x, y, width, height)
-			
-			bsp_tree.create_room(room)
+			if randf_range(0, 1) > 0.1:
+				var max_size := size
+				if pos.x == 0:
+					pos.x += 1
+					size.x -= 1
+				if pos.y == 0:
+					pos.y += 1
+					size.y -= 1
+				
+				var spawned_room : PrefabRoom = PrefabGenerator.generate_room(max_size)
+				
+				room = Rect2i(pos.x, pos.y, spawned_room.room_size.x, spawned_room.room_size.y)
+				
+				bsp_tree.create_room(room, true)
+				for entity in spawned_room.get_children():
+					if entity is Entity:
+						var grid_offset : Vector2i = floor(entity.global_position / Vector2(16, 16))
+						entity.grid_position = grid_offset + pos
+						bsp_tree.add_entity(entity)
+			else:
+				var width := randi_range(bsp_tree.min_size, min(bsp_tree.max_size, size.x - 1))
+				var height := randi_range(bsp_tree.min_size, min(bsp_tree.max_size, size.y - 1))
+				var x := randi_range(pos.x, pos.x + (size.x - 1) - width)
+				var y := randi_range(pos.y, pos.y + (size.y - 1) - height)
+				if x == 0:
+					x += 1
+					width -= 1
+				if y == 0:
+					y += 1
+					height -= 1
+				
+				room = Rect2i(x, y, width, height)
+				
+				bsp_tree.create_room(room)
 	
 	
 	func get_room() -> Rect2i:
@@ -198,10 +237,12 @@ class Leaf:
 class Room:
 	var heat := 0
 	var rect : Rect2i
+	var prefab : bool
 	
 	
-	func _init(rect: Rect2i):
+	func _init(rect: Rect2i, prefab: bool = false):
 		self.rect = rect
+		self.prefab = prefab
 	
 	
 	func _to_string() -> String:

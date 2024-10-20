@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="RangedWeapon" load_steps=7 format=3 uid="uid://c0slctsr58idx"]
+[gd_resource type="Resource" script_class="RangedWeapon" load_steps=8 format=3 uid="uid://c0slctsr58idx"]
 
 [ext_resource type="Script" path="res://src/data/dice_roll.gd" id="1_6tvl4"]
 [ext_resource type="Script" path="res://src/data/item/ranged_weapon.gd" id="1_l7ia6"]
 [ext_resource type="Script" path="res://src/data/effects/weapon_effect.gd" id="2_0tpgb"]
 [ext_resource type="Texture2D" uid="uid://d1dtxy8sb2lia" path="res://assets/art/kenney-1bit.png" id="3_r7334"]
+[ext_resource type="Script" path="res://src/data/effects/on_hit/on_hit_effect.gd" id="3_ylnjp"]
 
 [sub_resource type="Resource" id="Resource_05iv0"]
 script = ExtResource("1_6tvl4")
@@ -20,6 +21,7 @@ script = ExtResource("1_l7ia6")
 accuracy = 0.25
 dice_roll = SubResource("Resource_05iv0")
 effects = Array[ExtResource("2_0tpgb")]([])
+on_hit_effects = Array[ExtResource("3_ylnjp")]([])
 texture = SubResource("AtlasTexture_k1qg1")
 texture_tint = Color(0.60179, 0.449493, 0.14911, 1)
 item_name = "Wooden Bow"

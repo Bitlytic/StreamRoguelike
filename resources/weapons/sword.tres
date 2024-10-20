@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="BasicWeapon" load_steps=7 format=3 uid="uid://dki4f1fh7wt05"]
+[gd_resource type="Resource" script_class="BasicWeapon" load_steps=8 format=3 uid="uid://dki4f1fh7wt05"]
 
 [ext_resource type="Script" path="res://src/data/item/basic_weapon.gd" id="1_45v2o"]
 [ext_resource type="Script" path="res://src/data/dice_roll.gd" id="1_gyhol"]
 [ext_resource type="Texture2D" uid="uid://d1dtxy8sb2lia" path="res://assets/art/kenney-1bit.png" id="2_m173c"]
 [ext_resource type="Script" path="res://src/data/effects/weapon_effect.gd" id="2_nkvl2"]
+[ext_resource type="Script" path="res://src/data/effects/on_hit/on_hit_effect.gd" id="3_3a4kt"]
 
 [sub_resource type="Resource" id="Resource_pnihj"]
 script = ExtResource("1_gyhol")
@@ -19,6 +20,7 @@ region = Rect2(576, 112, 16, 16)
 script = ExtResource("1_45v2o")
 dice_roll = SubResource("Resource_pnihj")
 effects = Array[ExtResource("2_nkvl2")]([])
+on_hit_effects = Array[ExtResource("3_3a4kt")]([])
 texture = SubResource("AtlasTexture_1l2ln")
 texture_tint = Color(1, 1, 1, 1)
 item_name = "Sword"

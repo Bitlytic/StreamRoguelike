@@ -57,3 +57,19 @@ func get_weight() -> float:
 		total_weight += boots.weight
 	
 	return total_weight
+
+
+func get_on_hit_effects() -> Array[OnHitEffect]:
+	
+	var on_hit_effects : Array[OnHitEffect]
+	
+	if helmet:
+		on_hit_effects.append_array(helmet.on_hit_effects)
+	
+	if chestplate:
+		on_hit_effects.append_array(chestplate.on_hit_effects)
+	
+	if boots:
+		on_hit_effects.append_array(boots.on_hit_effects)
+	
+	return on_hit_effects

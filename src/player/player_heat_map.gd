@@ -39,6 +39,8 @@ func generate_heat_map(starting_pos: Vector2i):
 			continue
 		
 		val /= 10
+		if val >= 10:
+			val = "a"
 		
 		output_str += str(val)
 	

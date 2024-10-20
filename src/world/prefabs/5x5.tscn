@@ -1,0 +1,196 @@
+[gd_scene load_steps=29 format=3 uid="uid://bgd2hj48rci3f"]
+
+[ext_resource type="Script" path="res://src/world/prefabs/prefab_room.gd" id="1_pqc74"]
+[ext_resource type="PackedScene" uid="uid://bvbty718biabw" path="res://src/entity/enemy/enemy.tscn" id="2_md0mt"]
+[ext_resource type="PackedScene" uid="uid://dkhrcr6y2unah" path="res://src/entity/wall.tscn" id="2_nyqs4"]
+[ext_resource type="Script" path="res://src/data/equipment.gd" id="4_dtfqc"]
+
+[sub_resource type="Resource" id="Resource_aj7bp"]
+script = ExtResource("4_dtfqc")
+
+[sub_resource type="Resource" id="Resource_jl5kv"]
+script = ExtResource("4_dtfqc")
+
+[sub_resource type="Resource" id="Resource_fqv3h"]
+script = ExtResource("4_dtfqc")
+
+[sub_resource type="Resource" id="Resource_k3g5o"]
+script = ExtResource("4_dtfqc")
+
+[sub_resource type="Resource" id="Resource_f1dux"]
+script = ExtResource("4_dtfqc")
+
+[sub_resource type="Resource" id="Resource_hdcx7"]
+script = ExtResource("4_dtfqc")
+
+[sub_resource type="Resource" id="Resource_bdvxw"]
+script = ExtResource("4_dtfqc")
+
+[sub_resource type="Resource" id="Resource_o3mn2"]
+script = ExtResource("4_dtfqc")
+
+[sub_resource type="Resource" id="Resource_uvmdo"]
+script = ExtResource("4_dtfqc")
+
+[sub_resource type="Resource" id="Resource_lan77"]
+script = ExtResource("4_dtfqc")
+
+[sub_resource type="Resource" id="Resource_ga83k"]
+script = ExtResource("4_dtfqc")
+
+[sub_resource type="Resource" id="Resource_egu11"]
+script = ExtResource("4_dtfqc")
+
+[sub_resource type="Resource" id="Resource_hhybk"]
+script = ExtResource("4_dtfqc")
+
+[sub_resource type="Resource" id="Resource_es18i"]
+script = ExtResource("4_dtfqc")
+
+[sub_resource type="Resource" id="Resource_egnw7"]
+script = ExtResource("4_dtfqc")
+
+[sub_resource type="Resource" id="Resource_q3rie"]
+script = ExtResource("4_dtfqc")
+
+[sub_resource type="Resource" id="Resource_2pdm7"]
+script = ExtResource("4_dtfqc")
+
+[sub_resource type="Resource" id="Resource_vvgqe"]
+script = ExtResource("4_dtfqc")
+
+[sub_resource type="Resource" id="Resource_23yad"]
+script = ExtResource("4_dtfqc")
+
+[sub_resource type="Resource" id="Resource_lrx7c"]
+script = ExtResource("4_dtfqc")
+
+[sub_resource type="Resource" id="Resource_lcyd1"]
+script = ExtResource("4_dtfqc")
+
+[sub_resource type="Resource" id="Resource_o5j73"]
+script = ExtResource("4_dtfqc")
+
+[sub_resource type="Resource" id="Resource_aydus"]
+script = ExtResource("4_dtfqc")
+
+[sub_resource type="Resource" id="Resource_n7o4l"]
+script = ExtResource("4_dtfqc")
+
+[node name="PrefabRoom" type="Node2D"]
+script = ExtResource("1_pqc74")
+room_size = Vector2i(5, 5)
+
+[node name="Walls" type="Node" parent="."]
+
+[node name="Wall" parent="Walls" instance=ExtResource("2_nyqs4")]
+position = Vector2(-8, -8)
+equipment = SubResource("Resource_aj7bp")
+
+[node name="@Node2D@77733" parent="Walls" instance=ExtResource("2_nyqs4")]
+position = Vector2(8, -8)
+equipment = SubResource("Resource_jl5kv")
+
+[node name="@Node2D@77734" parent="Walls" instance=ExtResource("2_nyqs4")]
+position = Vector2(24, -8)
+equipment = SubResource("Resource_fqv3h")
+
+[node name="@Node2D@77735" parent="Walls" instance=ExtResource("2_nyqs4")]
+position = Vector2(40, -8)
+equipment = SubResource("Resource_k3g5o")
+
+[node name="@Node2D@77736" parent="Walls" instance=ExtResource("2_nyqs4")]
+position = Vector2(56, -8)
+equipment = SubResource("Resource_f1dux")
+
+[node name="@Node2D@77737" parent="Walls" instance=ExtResource("2_nyqs4")]
+position = Vector2(72, -8)
+equipment = SubResource("Resource_hdcx7")
+
+[node name="@Node2D@77738" parent="Walls" instance=ExtResource("2_nyqs4")]
+position = Vector2(88, -8)
+equipment = SubResource("Resource_bdvxw")
+
+[node name="@Node2D@77739" parent="Walls" instance=ExtResource("2_nyqs4")]
+position = Vector2(-8, 8)
+equipment = SubResource("Resource_o3mn2")
+
+[node name="@Node2D@77740" parent="Walls" instance=ExtResource("2_nyqs4")]
+position = Vector2(88, 8)
+equipment = SubResource("Resource_uvmdo")
+
+[node name="@Node2D@77741" parent="Walls" instance=ExtResource("2_nyqs4")]
+position = Vector2(-8, 24)
+equipment = SubResource("Resource_lan77")
+
+[node name="@Node2D@77742" parent="Walls" instance=ExtResource("2_nyqs4")]
+position = Vector2(88, 24)
+equipment = SubResource("Resource_ga83k")
+
+[node name="@Node2D@77743" parent="Walls" instance=ExtResource("2_nyqs4")]
+position = Vector2(-8, 40)
+equipment = SubResource("Resource_egu11")
+
+[node name="@Node2D@77744" parent="Walls" instance=ExtResource("2_nyqs4")]
+position = Vector2(88, 40)
+equipment = SubResource("Resource_hhybk")
+
+[node name="@Node2D@77745" parent="Walls" instance=ExtResource("2_nyqs4")]
+position = Vector2(-8, 56)
+equipment = SubResource("Resource_es18i")
+
+[node name="@Node2D@77746" parent="Walls" instance=ExtResource("2_nyqs4")]
+position = Vector2(88, 56)
+equipment = SubResource("Resource_egnw7")
+
+[node name="@Node2D@77747" parent="Walls" instance=ExtResource("2_nyqs4")]
+position = Vector2(-8, 72)
+equipment = SubResource("Resource_q3rie")
+
+[node name="@Node2D@77748" parent="Walls" instance=ExtResource("2_nyqs4")]
+position = Vector2(88, 72)
+equipment = SubResource("Resource_2pdm7")
+
+[node name="@Node2D@77749" parent="Walls" instance=ExtResource("2_nyqs4")]
+position = Vector2(-8, 88)
+equipment = SubResource("Resource_vvgqe")
+
+[node name="@Node2D@77750" parent="Walls" instance=ExtResource("2_nyqs4")]
+position = Vector2(8, 88)
+equipment = SubResource("Resource_23yad")
+
+[node name="@Node2D@77751" parent="Walls" instance=ExtResource("2_nyqs4")]
+position = Vector2(24, 88)
+equipment = SubResource("Resource_lrx7c")
+
+[node name="@Node2D@77752" parent="Walls" instance=ExtResource("2_nyqs4")]
+position = Vector2(40, 88)
+equipment = SubResource("Resource_lcyd1")
+
+[node name="@Node2D@77753" parent="Walls" instance=ExtResource("2_nyqs4")]
+position = Vector2(56, 88)
+equipment = SubResource("Resource_o5j73")
+
+[node name="@Node2D@77754" parent="Walls" instance=ExtResource("2_nyqs4")]
+position = Vector2(72, 88)
+equipment = SubResource("Resource_aydus")
+
+[node name="@Node2D@77755" parent="Walls" instance=ExtResource("2_nyqs4")]
+position = Vector2(88, 88)
+equipment = SubResource("Resource_n7o4l")
+
+[node name="Enemy" parent="." instance=ExtResource("2_md0mt")]
+position = Vector2(24, 8)
+max_health = 1
+
+[node name="Enemy2" parent="." instance=ExtResource("2_md0mt")]
+position = Vector2(56, 40)
+max_health = 1
+
+[node name="Enemy3" parent="." instance=ExtResource("2_md0mt")]
+position = Vector2(72, 8)
+max_health = 1
+
+[node name="Enemy4" parent="." instance=ExtResource("2_md0mt")]
+position = Vector2(8, 40)
+max_health = 1

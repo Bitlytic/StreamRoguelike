@@ -186,6 +186,10 @@ func update_pathfinding(entity: Entity, a_star_grid: AStarGrid2D, only_visible: 
 	a_star_grid.fill_solid_region(Rect2i(0, 0, world_size.x, world_size.y), false)
 	
 	for cell_pos : Vector2i in cells.keys():
+		var difference = entity.grid_position - cell_pos
+		if difference.length() > 10:
+			continue
+		
 		var cell : GridCell = cells.get(cell_pos)
 		if only_visible && !cell.discovered:
 			a_star_grid.set_point_solid(cell_pos)
@@ -315,3 +319,11 @@ func set_tooltip_position(pos: Vector2i) -> void:
 
 func get_index_from_pos(pos: Vector2i) -> int:
 	return world_size.x * pos.y + pos.x
+
+
+func get_pos_from_index(index: int) -> Vector2i:
+	return Vector2i(index % GridWorld.world_size.x, index / GridWorld.world_size.x)
+
+
+func get_global_position(pos: Vector2i) -> Vector2:
+	return Vector2(pos) * GridWorld.cell_size + GridWorld.cell_size / 2.0
