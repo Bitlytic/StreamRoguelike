@@ -31,7 +31,7 @@ func _ready() -> void:
 	
 	sight_controller.vision_range = vision_range
 	
-	GridWorld.update_pathfinding(self, a_star_grid)
+	GridWorld.update_pathfinding(self, a_star_grid, false, vision_range)
 
 
 func do_process():
@@ -46,7 +46,7 @@ func do_process():
 		return EntityAction.new()
 	
 	#TODO: If performance sucks, this is probably why
-	GridWorld.update_pathfinding(self, a_star_grid)
+	GridWorld.update_pathfinding(self, a_star_grid, false, vision_range)
 	
 	if in_vision:
 		var dist_to_player := player.grid_position.distance_to(grid_position)

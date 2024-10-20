@@ -182,13 +182,14 @@ func can_see(from: Vector2i, to: Vector2i, e: Enemy) -> bool:
 	return true
 
 
-func update_pathfinding(entity: Entity, a_star_grid: AStarGrid2D, only_visible: bool = false) -> void:
+func update_pathfinding(entity: Entity, a_star_grid: AStarGrid2D, only_visible: bool = false, max_distance: int = 0) -> void:
 	a_star_grid.fill_solid_region(Rect2i(0, 0, world_size.x, world_size.y), false)
 	
 	for cell_pos : Vector2i in cells.keys():
-		var difference = entity.grid_position - cell_pos
-		if difference.length() > 10:
-			continue
+		if max_distance:
+			var difference = entity.grid_position - cell_pos
+			if difference.length() > 10:
+				continue
 		
 		var cell : GridCell = cells.get(cell_pos)
 		if only_visible && !cell.discovered:
