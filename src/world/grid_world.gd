@@ -328,3 +328,7 @@ func get_pos_from_index(index: int) -> Vector2i:
 
 func get_global_position(pos: Vector2i) -> Vector2:
 	return Vector2(pos) * GridWorld.cell_size + GridWorld.cell_size / 2.0
+
+
+func get_grid_position(pos: Vector2) -> Vector2i:
+	return floor(pos / Vector2(world_size))

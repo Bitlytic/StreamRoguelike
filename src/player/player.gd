@@ -103,7 +103,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	
 	if Input.is_action_just_pressed("debug_info"):
-		print(grid_position)
+		print(equipment.get_weight())
 	
 	if event is InputEventMouseMotion:
 		_handle_mouse_movement()
@@ -392,7 +392,9 @@ func _try_move_to(target_direction: Vector2i) -> EntityAction:
 
 
 func walk_to_target() -> void:
-	if can_see_danger():
+	var input_direction := Direction.get_player_direction()
+	
+	if input_direction || Input.is_action_just_pressed("ui_cancel") || can_see_danger():
 		walking = false
 		return
 	

@@ -5,6 +5,8 @@ extends Node2D
 ## Inner area not including walls
 @export var room_size: Vector2i
 
+@export var blocks_spawn : bool
+
 @export var reload : bool:
 	set(val):
 		generate_walls()

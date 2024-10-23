@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cl05ksgmauo6f"]
+
+[ext_resource type="Script" path="res://src/entity/item/generated_item_entity.gd" id="1_e1wos"]
+
+[node name="GenerateItemEntity" type="Node2D"]
+position = Vector2(8, 8)
+script = ExtResource("1_e1wos")

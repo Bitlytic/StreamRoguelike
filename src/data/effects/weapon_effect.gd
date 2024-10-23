@@ -40,3 +40,22 @@ func apply_effect(entity: Entity, owner: Entity = null) -> void:
 		return
 	
 	entity.effects_holder.add_child(effect)
+
+
+func _to_string() -> String:
+	var effect_name : String
+	
+	match(effect_type):
+		EffectType.STUN:
+			effect_name = "Stun"
+		EffectType.FIRE:
+			effect_name = "Fire"
+		EffectType.WEAK:
+			effect_name = "Weak"
+		EffectType.VULNERABLE:
+			effect_name = "Vulnerable"
+	
+	if !effect_name:
+		return "<NULL>"
+	
+	return "%s (%d%%)" % [effect_name, int(apply_chance * 100)]

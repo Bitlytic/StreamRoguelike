@@ -16,4 +16,7 @@ func perform_effect(attack: Attack) -> void:
 		message.color = BityColors.RED
 		message.text = "-" + str(thorns_amount)
 		MessageManager.add_message(attack.attacker.grid_position, message)
-	
+
+
+func _to_string() -> String:
+	return "Thorns (%d%%)" % [floor(effective_percentage * 100)]

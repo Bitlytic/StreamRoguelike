@@ -8,7 +8,7 @@ signal item_action_selected(action: EntityAction)
 var item_slot : ItemSlot
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if !visible:
 		return
 	
@@ -55,3 +55,5 @@ func populate_options(actions: Array[int]):
 				create_button("Equip", EquipAction.new(item_slot), "E")
 			ActionType.USE_ITEM:
 				create_button("Use", UseItemAction.new(item_slot), "U")
+	
+	create_button("Inspect", InspectAction.new(item_slot.item), "I")

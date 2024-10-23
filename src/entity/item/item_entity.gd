@@ -28,6 +28,10 @@ func get_entity_name() -> String:
 	return str(item)
 
 
+func get_description() -> String:
+	return item.get_description()
+
+
 func update_sprite():
 	if sprite:
 		sprite.texture = item.texture

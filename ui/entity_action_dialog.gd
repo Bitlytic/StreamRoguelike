@@ -9,7 +9,7 @@ var target_entity: Entity
 
 
 func _ready():
-	connect_options(on_action_selected)
+	super()
 
 
 func _physics_process(delta: float) -> void:
@@ -31,6 +31,7 @@ func display_actions(target_entity: Entity):
 	
 	if target_entity is ItemEntity:
 		action_types.append(ActionType.PICK_UP)
+		action_types.append(ActionType.INSPECT)
 	
 	if target_entity is DoorEntity:
 		action_types.append(ActionType.OPEN)
@@ -66,6 +67,8 @@ func populate_options(actions: Array[int]):
 				create_button("Attack", AttackAction.new(), "A")
 			ActionType.MOVE:
 				create_button("Walk", MoveAction.new(), "W")
+			ActionType.INSPECT:
+				create_button("Inspect", InspectAction.new(target_entity.item), "I")
 			ActionType.PICK_UP:
 				create_button("Get", PickUpAction.new(), "G")
 			ActionType.OPEN:

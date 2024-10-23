@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://ijfmb68a156c"]
+[gd_scene load_steps=14 format=3 uid="uid://ijfmb68a156c"]
 
 [ext_resource type="Script" path="res://src/autoload/action_manager.gd" id="1_rqua3"]
 [ext_resource type="PackedScene" uid="uid://cm801b11b3i4" path="res://ui/scenes/action_dialog.tscn" id="2_1hkv7"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://ceuginjgu77gv" path="res://ui/scenes/equipment_dialog.tscn" id="8_wyelg"]
 [ext_resource type="PackedScene" uid="uid://dtk0s4u5tm2c5" path="res://ui/scenes/equipment_action_dialog.tscn" id="10_w755q"]
 [ext_resource type="Script" path="res://ui/equipment_action_dialog.gd" id="11_bggal"]
+[ext_resource type="PackedScene" uid="uid://bpymikexc84ol" path="res://ui/scenes/item_description_dialog.tscn" id="12_5fxgt"]
 
 [node name="ActionManager" type="Node"]
 script = ExtResource("1_rqua3")
@@ -84,6 +85,16 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("3_cw17j")
 script = ExtResource("11_bggal")
+list_name = "List"
+
+[node name="ItemDescriptionDialog" parent="UI" instance=ExtResource("12_5fxgt")]
+offset_left = 480.0
+offset_top = 270.0
+offset_right = 480.0
+offset_bottom = 270.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("3_cw17j")
 list_name = "List"
 
 [node name="HUD" type="CanvasLayer" parent="."]

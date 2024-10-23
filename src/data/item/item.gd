@@ -10,3 +10,7 @@ extends Resource
 
 func _to_string() -> String:
 	return item_name
+
+
+func get_description() -> String:
+	return "No description for this item yet."

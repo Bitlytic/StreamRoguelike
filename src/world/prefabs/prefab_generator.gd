@@ -6,6 +6,7 @@ static var _r : Array[PackedScene] = [
 	preload("res://src/world/prefabs/3x3.tscn"),
 	preload("res://src/world/prefabs/5x5.tscn"),
 	preload("res://src/world/prefabs/9x9.tscn"),
+	preload("res://src/world/prefabs/5x5_good_item.tscn")
 ]
 
 

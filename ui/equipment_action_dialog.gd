@@ -46,3 +46,5 @@ func populate_options(actions: Array[int]):
 		match(action):
 			ActionType.UNEQUIP:
 				create_button("Unequip", UnequipAction.new(item), "E")
+	
+	create_button("Inspect", InspectAction.new(item), "I")

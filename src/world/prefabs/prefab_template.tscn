@@ -1,0 +1,123 @@
+[gd_scene load_steps=20 format=3 uid="uid://bkygb04gn30ll"]
+
+[ext_resource type="Script" path="res://src/world/prefabs/prefab_room.gd" id="1_8aa36"]
+[ext_resource type="PackedScene" uid="uid://dkhrcr6y2unah" path="res://src/entity/wall.tscn" id="2_3jh0y"]
+[ext_resource type="Script" path="res://src/data/equipment.gd" id="3_jpvjq"]
+
+[sub_resource type="Resource" id="Resource_21xex"]
+script = ExtResource("3_jpvjq")
+
+[sub_resource type="Resource" id="Resource_v00di"]
+script = ExtResource("3_jpvjq")
+
+[sub_resource type="Resource" id="Resource_yby8k"]
+script = ExtResource("3_jpvjq")
+
+[sub_resource type="Resource" id="Resource_aret8"]
+script = ExtResource("3_jpvjq")
+
+[sub_resource type="Resource" id="Resource_iu2hb"]
+script = ExtResource("3_jpvjq")
+
+[sub_resource type="Resource" id="Resource_lfft5"]
+script = ExtResource("3_jpvjq")
+
+[sub_resource type="Resource" id="Resource_e8vab"]
+script = ExtResource("3_jpvjq")
+
+[sub_resource type="Resource" id="Resource_svjlo"]
+script = ExtResource("3_jpvjq")
+
+[sub_resource type="Resource" id="Resource_pkx5t"]
+script = ExtResource("3_jpvjq")
+
+[sub_resource type="Resource" id="Resource_v6kwc"]
+script = ExtResource("3_jpvjq")
+
+[sub_resource type="Resource" id="Resource_4yihq"]
+script = ExtResource("3_jpvjq")
+
+[sub_resource type="Resource" id="Resource_gs8l8"]
+script = ExtResource("3_jpvjq")
+
+[sub_resource type="Resource" id="Resource_6ohmh"]
+script = ExtResource("3_jpvjq")
+
+[sub_resource type="Resource" id="Resource_5tlfc"]
+script = ExtResource("3_jpvjq")
+
+[sub_resource type="Resource" id="Resource_svf8y"]
+script = ExtResource("3_jpvjq")
+
+[sub_resource type="Resource" id="Resource_tef4m"]
+script = ExtResource("3_jpvjq")
+
+[node name="PrefabRoom" type="Node2D"]
+script = ExtResource("1_8aa36")
+room_size = Vector2i(3, 3)
+
+[node name="Walls" type="Node" parent="."]
+
+[node name="Wall" parent="Walls" instance=ExtResource("2_3jh0y")]
+position = Vector2(-8, -8)
+equipment = SubResource("Resource_21xex")
+
+[node name="@Node2D@84587" parent="Walls" instance=ExtResource("2_3jh0y")]
+position = Vector2(8, -8)
+equipment = SubResource("Resource_v00di")
+
+[node name="@Node2D@84588" parent="Walls" instance=ExtResource("2_3jh0y")]
+position = Vector2(24, -8)
+equipment = SubResource("Resource_yby8k")
+
+[node name="@Node2D@84589" parent="Walls" instance=ExtResource("2_3jh0y")]
+position = Vector2(40, -8)
+equipment = SubResource("Resource_aret8")
+
+[node name="@Node2D@84590" parent="Walls" instance=ExtResource("2_3jh0y")]
+position = Vector2(56, -8)
+equipment = SubResource("Resource_iu2hb")
+
+[node name="@Node2D@84591" parent="Walls" instance=ExtResource("2_3jh0y")]
+position = Vector2(-8, 8)
+equipment = SubResource("Resource_lfft5")
+
+[node name="@Node2D@84592" parent="Walls" instance=ExtResource("2_3jh0y")]
+position = Vector2(56, 8)
+equipment = SubResource("Resource_e8vab")
+
+[node name="@Node2D@84593" parent="Walls" instance=ExtResource("2_3jh0y")]
+position = Vector2(-8, 24)
+equipment = SubResource("Resource_svjlo")
+
+[node name="@Node2D@84594" parent="Walls" instance=ExtResource("2_3jh0y")]
+position = Vector2(56, 24)
+equipment = SubResource("Resource_pkx5t")
+
+[node name="@Node2D@84595" parent="Walls" instance=ExtResource("2_3jh0y")]
+position = Vector2(-8, 40)
+equipment = SubResource("Resource_v6kwc")
+
+[node name="@Node2D@84596" parent="Walls" instance=ExtResource("2_3jh0y")]
+position = Vector2(56, 40)
+equipment = SubResource("Resource_4yihq")
+
+[node name="@Node2D@84597" parent="Walls" instance=ExtResource("2_3jh0y")]
+position = Vector2(-8, 56)
+equipment = SubResource("Resource_gs8l8")
+
+[node name="@Node2D@84598" parent="Walls" instance=ExtResource("2_3jh0y")]
+position = Vector2(8, 56)
+equipment = SubResource("Resource_6ohmh")
+
+[node name="@Node2D@84599" parent="Walls" instance=ExtResource("2_3jh0y")]
+position = Vector2(24, 56)
+equipment = SubResource("Resource_5tlfc")
+
+[node name="@Node2D@84600" parent="Walls" instance=ExtResource("2_3jh0y")]
+position = Vector2(40, 56)
+equipment = SubResource("Resource_svf8y")
+
+[node name="@Node2D@84601" parent="Walls" instance=ExtResource("2_3jh0y")]
+position = Vector2(56, 56)
+equipment = SubResource("Resource_tef4m")

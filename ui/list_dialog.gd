@@ -70,3 +70,5 @@ func on_visibility_changed() -> void:
 		for button in action_buttons:
 			button.queue_free()
 		action_buttons.clear()
+	
+	label.text = list_name

@@ -12,3 +12,7 @@ func perform_effect(attack: Attack) -> void:
 	
 	var heal_amount = ceil(attack.damage * effective_percentage)
 	attack.attacker.heal(heal_amount)
+
+
+func _to_string() -> String:
+	return "Life Steal (%d%%)" % [floor(effective_percentage * 100)]

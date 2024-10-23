@@ -18,6 +18,13 @@ func calc() -> int:
 	return total
 
 
+func get_min() -> int:
+	return dice_roll_times + constant_damage
+
+
+func get_max() -> int:
+	return dice_size*dice_roll_times + constant_damage
+
 func _to_string() -> String:
 	var str = "%dd%d" % [dice_roll_times, dice_size]
 	

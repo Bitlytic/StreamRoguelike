@@ -61,8 +61,8 @@ func get_last_room() -> Rect2i:
 	return room
 
 
-func create_room(rect: Rect2i, prefab: bool = false):
-	rooms.append(Room.new(rect, prefab))
+func create_room(rect: Rect2i, prefab: bool = false, blocks_spawn: bool = false):
+	rooms.append(Room.new(rect, prefab, blocks_spawn))
 	
 	for x in range(rect.size.x):
 		for y in range(rect.size.y):
@@ -150,14 +150,14 @@ class Leaf:
 		if max <= min_leaf_size:
 			return false
 		
-		var split = randi_range(min_leaf_size, max)
+		var split_size = randi_range(min_leaf_size, max)
 		
 		if split_horizontally:
-			child_1 = Leaf.new(pos.x, pos.y, size.x, split)
-			child_2 = Leaf.new(pos.x, pos.y + split, size.x, size.y - split)
+			child_1 = Leaf.new(pos.x, pos.y, size.x, split_size)
+			child_2 = Leaf.new(pos.x, pos.y + split_size, size.x, size.y - split_size)
 		else:
-			child_1 = Leaf.new(pos.x, pos.y, split, size.y)
-			child_2 = Leaf.new(pos.x + split, pos.y, size.x - split, size.y)
+			child_1 = Leaf.new(pos.x, pos.y, split_size, size.y)
+			child_2 = Leaf.new(pos.x + split_size, pos.y, size.x - split_size, size.y)
 		
 		return true
 	
@@ -172,7 +172,7 @@ class Leaf:
 			if child_1 && child_2:
 				bsp_tree.create_hall(child_1.get_room(), child_2.get_room())
 		else:
-			if randf_range(0, 1) > 0.1:
+			if randf_range(0, 1) > 0.5:
 				var max_size := size
 				if pos.x == 0:
 					pos.x += 1
@@ -185,7 +185,7 @@ class Leaf:
 				
 				room = Rect2i(pos.x, pos.y, spawned_room.room_size.x, spawned_room.room_size.y)
 				
-				bsp_tree.create_room(room, true)
+				bsp_tree.create_room(room, true, spawned_room.blocks_spawn)
 				for entity in spawned_room.get_children():
 					if entity is Entity:
 						var grid_offset : Vector2i = floor(entity.global_position / Vector2(16, 16))
@@ -238,11 +238,13 @@ class Room:
 	var heat := 0
 	var rect : Rect2i
 	var prefab : bool
+	var blocks_spawn : bool
 	
 	
-	func _init(rect: Rect2i, prefab: bool = false):
+	func _init(rect: Rect2i, prefab: bool = false, blocks_spawn: bool = false):
 		self.rect = rect
 		self.prefab = prefab
+		self.blocks_spawn = blocks_spawn
 	
 	
 	func _to_string() -> String:

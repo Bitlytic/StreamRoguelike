@@ -11,6 +11,7 @@ signal item_picked(slot: ItemSlot)
 @onready var equipment_dialog: EquipmentDialog = $UI/EquipmentDialog
 @onready var equipment_action_dialog: EquipmentActionDialog = $UI/EquipmentActionDialog
 @onready var item_action_dialog: ItemActionDialog = $UI/ItemActionDialog
+@onready var item_description_dialog: ItemDescriptionDialog = $UI/ItemDescriptionDialog
 @onready var top_bar: TopBar = $HUD/TopBar
 
 
@@ -28,6 +29,7 @@ func _ready():
 	equipment_dialog.equipment_selected.connect(on_equipment_selected)
 	item_action_dialog.item_action_selected.connect(on_item_action_selected)
 	equipment_action_dialog.equipment_action_selected.connect(on_item_action_selected)
+	item_description_dialog.description_closed.connect(on_description_closed)
 	
 	clean_up()
 	
@@ -52,6 +54,10 @@ func show_dialog(cell: GridCell, target_position: Vector2i):
 
 
 func on_action_selected(action: EntityAction):
+	if action is InspectAction:
+		show_description_dialog(action)
+		return
+	
 	if target_entity && is_instance_valid(target_entity):
 		action.target = target_entity
 	action.position = target_position
@@ -94,6 +100,10 @@ func on_item_selected(slot: ItemSlot) -> void:
 
 
 func on_item_action_selected(action: EntityAction) -> void:
+	if action is InspectAction:
+		show_description_dialog(action)
+		return
+	
 	item_action_dialog.hide()
 	picking_item = false
 	
@@ -110,6 +120,16 @@ func on_equipment_selected(item: Item) -> void:
 	equipment_action_dialog.display_actions(item)
 
 
+func on_description_closed() -> void:
+	clean_up()
+
+
+func show_description_dialog(action: InspectAction) -> void:
+	clean_up()
+	picking_item = true
+	item_description_dialog.display_actions(action.item)
+
+
 func clean_up():
 	action_dialog.hide()
 	entity_dialog.hide()
@@ -117,6 +137,7 @@ func clean_up():
 	item_action_dialog.hide()
 	equipment_dialog.hide()
 	equipment_action_dialog.hide()
+	item_description_dialog.hide()
 	picking_action = false
 	picking_item = false
 

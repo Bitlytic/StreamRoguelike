@@ -4,10 +4,11 @@
 [ext_resource type="Texture2D" uid="uid://d1dtxy8sb2lia" path="res://assets/art/kenney-1bit.png" id="2_ul8vy"]
 
 [node name="Wall" type="Node2D"]
+position = Vector2(8, 8)
 script = ExtResource("1_oe3du")
+entity_name = "Wall"
 blocks_vision = true
 blocks_movement = true
-entity_name = "Wall"
 discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

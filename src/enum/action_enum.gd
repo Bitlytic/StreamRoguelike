@@ -12,5 +12,6 @@ enum {
 	USE_ITEM,
 	OPEN,
 	UNLOCK,
-	TRAVEL
+	TRAVEL,
+	INSPECT
 }

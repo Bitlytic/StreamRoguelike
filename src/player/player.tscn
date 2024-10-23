@@ -1,17 +1,55 @@
-[gd_scene load_steps=23 format=3 uid="uid://oaanpb1irxop"]
+[gd_scene load_steps=31 format=3 uid="uid://oaanpb1irxop"]
 
 [ext_resource type="Script" path="res://src/player/player.gd" id="1_iqw8t"]
 [ext_resource type="Script" path="res://src/data/equipment.gd" id="2_b0uco"]
-[ext_resource type="Resource" uid="uid://mj5rnxhiks3s" path="res://resources/armor/iron_chestplate.tres" id="2_iyhej"]
 [ext_resource type="Texture2D" uid="uid://d1dtxy8sb2lia" path="res://assets/art/kenney-1bit.png" id="2_ys2la"]
-[ext_resource type="Resource" uid="uid://cxnmcvlqypql7" path="res://resources/weapons/axe.tres" id="3_muorb"]
 [ext_resource type="Script" path="res://src/components/animation_controller.gd" id="3_phlvu"]
+[ext_resource type="Script" path="res://src/data/item/armor.gd" id="3_qj1di"]
+[ext_resource type="Script" path="res://src/data/effects/weapon_effect.gd" id="4_62f15"]
+[ext_resource type="Script" path="res://src/data/effects/on_hit/on_hit_effect.gd" id="5_3h0d1"]
 [ext_resource type="Script" path="res://src/player/sight_controller.gd" id="6_i4krp"]
+[ext_resource type="Script" path="res://src/data/dice_roll.gd" id="6_iq20f"]
+[ext_resource type="Script" path="res://src/data/item/basic_weapon.gd" id="6_wm5e6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xyfbt"]
+atlas = ExtResource("2_ys2la")
+region = Rect2(512, 0, 16, 16)
+
+[sub_resource type="Resource" id="Resource_c3auo"]
+script = ExtResource("3_qj1di")
+slot = 0
+armor_value = 1
+evasion_value = -1
+on_hit_effects = Array[ExtResource("5_3h0d1")]([])
+texture = SubResource("AtlasTexture_xyfbt")
+texture_tint = Color(1, 1, 1, 1)
+item_name = "Shitty Helmet"
+weight = 2.0
+
+[sub_resource type="Resource" id="Resource_n0bqt"]
+script = ExtResource("6_iq20f")
+dice_size = 2
+dice_roll_times = 1
+constant_damage = 1
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hqcj6"]
+atlas = ExtResource("2_ys2la")
+region = Rect2(512, 96, 16, 16)
+
+[sub_resource type="Resource" id="Resource_vgusv"]
+script = ExtResource("6_wm5e6")
+dice_roll = SubResource("Resource_n0bqt")
+effects = Array[ExtResource("4_62f15")]([])
+on_hit_effects = Array[ExtResource("5_3h0d1")]([])
+texture = SubResource("AtlasTexture_hqcj6")
+texture_tint = Color(0.637843, 0.637843, 0.637843, 1)
+item_name = "Shitty Dagger"
+weight = 1.0
 
 [sub_resource type="Resource" id="Resource_nkkm7"]
 script = ExtResource("2_b0uco")
-weapon = ExtResource("3_muorb")
-chestplate = ExtResource("2_iyhej")
+weapon = SubResource("Resource_vgusv")
+helmet = SubResource("Resource_c3auo")
 
 [sub_resource type="Animation" id="Animation_yhvbl"]
 length = 0.001
@@ -237,6 +275,7 @@ z_index = 1
 script = ExtResource("1_iqw8t")
 debug_draw = true
 entity_name = "Player"
+max_weight = 20.0
 equipment = SubResource("Resource_nkkm7")
 is_character = true
 

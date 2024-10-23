@@ -1,7 +1,12 @@
 extends Node
 
 
+var current_level := 0
+
+
 func switch_to_level(scene: PackedScene) -> void:
+	
+	current_level += 1
 	
 	# Pluck the player out of Scene
 	var player := get_tree().get_first_node_in_group("player")
