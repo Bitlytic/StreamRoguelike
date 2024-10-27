@@ -14,4 +14,7 @@ func perform_action() -> void:
 			return
 		owner.inventory.add_item(target.item, target.count)
 		
+		if owner is Player:
+			PlayerEventBus.weight_changed.emit(owner)
+		
 		GridWorld.remove_entity(target)

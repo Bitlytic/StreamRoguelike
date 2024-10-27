@@ -1,5 +1,9 @@
 class_name BSPTree
 
+## Taken from
+## https://github.com/AtTheMatinee/dungeon-generation/blob/master/dungeonGenerationAlgorithms.py#L511
+## Thank you
+
 var max_size := 12
 var min_size := 6
 var max_leaf_size := 16

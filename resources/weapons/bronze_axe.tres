@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="BasicWeapon" load_steps=8 format=3 uid="uid://c2gbrtpjex4re"]
+
+[ext_resource type="Script" path="res://src/data/effects/weapon_effect.gd" id="1_81pbx"]
+[ext_resource type="Script" path="res://src/data/dice_roll.gd" id="1_tnu1e"]
+[ext_resource type="Script" path="res://src/data/effects/on_hit/on_hit_effect.gd" id="2_hg4la"]
+[ext_resource type="Script" path="res://src/data/item/basic_weapon.gd" id="3_v5u6y"]
+[ext_resource type="Texture2D" uid="uid://d1dtxy8sb2lia" path="res://assets/art/kenney-1bit.png" id="5_hkqlo"]
+
+[sub_resource type="Resource" id="Resource_fc0yh"]
+script = ExtResource("1_tnu1e")
+dice_size = 3
+dice_roll_times = 1
+constant_damage = 0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_23xmw"]
+atlas = ExtResource("5_hkqlo")
+region = Rect2(640, 128, 16, 16)
+
+[resource]
+script = ExtResource("3_v5u6y")
+dice_roll = SubResource("Resource_fc0yh")
+effects = Array[ExtResource("1_81pbx")]([])
+on_hit_effects = Array[ExtResource("2_hg4la")]([])
+texture = SubResource("AtlasTexture_23xmw")
+texture_tint = Color(0.35, 0.231583, 0.147, 1)
+item_name = "Bronze Axe"
+weight = 2.0

@@ -19,3 +19,5 @@ func perform_action() -> void:
 		if target && target.has_method("unlock"):
 			target.unlock()
 			owner.inventory.remove_item(slot.item, 1)
+			if owner is Player:
+				PlayerEventBus.weight_changed.emit(owner)

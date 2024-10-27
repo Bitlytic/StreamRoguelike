@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="BasicWeapon" load_steps=8 format=3 uid="uid://c2yh5vu6o1ow8"]
+
+[ext_resource type="Script" path="res://src/data/dice_roll.gd" id="1_y8ar4"]
+[ext_resource type="Script" path="res://src/data/effects/weapon_effect.gd" id="2_4p8k3"]
+[ext_resource type="Script" path="res://src/data/effects/on_hit/on_hit_effect.gd" id="3_07lbi"]
+[ext_resource type="Script" path="res://src/data/item/basic_weapon.gd" id="4_tjhpy"]
+[ext_resource type="Texture2D" uid="uid://d1dtxy8sb2lia" path="res://assets/art/kenney-1bit.png" id="5_3tirh"]
+
+[sub_resource type="Resource" id="Resource_fc0yh"]
+script = ExtResource("1_y8ar4")
+dice_size = 1
+dice_roll_times = 2
+constant_damage = 2
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_23xmw"]
+atlas = ExtResource("5_3tirh")
+region = Rect2(560, 112, 16, 16)
+
+[resource]
+script = ExtResource("4_tjhpy")
+dice_roll = SubResource("Resource_fc0yh")
+effects = Array[ExtResource("2_4p8k3")]([])
+on_hit_effects = Array[ExtResource("3_07lbi")]([])
+texture = SubResource("AtlasTexture_23xmw")
+texture_tint = Color(0.576, 0.5984, 0.64, 1)
+item_name = "Iron Sword"
+weight = 3.0

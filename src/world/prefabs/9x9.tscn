@@ -346,7 +346,7 @@ equipment = SubResource("Resource_iny77")
 position = Vector2(72, 104)
 
 [node name="ItemEntity" parent="." instance=ExtResource("6_ft58x")]
-position = Vector2(72, 56)
+position = Vector2(72, 72)
 item = ExtResource("7_86abe")
 
 [node name="GenerateItemEntity" parent="." instance=ExtResource("7_sabhk")]

@@ -15,3 +15,6 @@ func perform_action() -> void:
 			target = owner
 		slot.item.use_item(target)
 		owner.inventory.remove_item(slot.item, 1)
+		
+		if owner is Player:
+			PlayerEventBus.weight_changed.emit()

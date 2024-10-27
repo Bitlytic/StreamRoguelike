@@ -24,3 +24,6 @@ func perform_action():
 	owner.get_tree().current_scene.add_child(spawned_entity)
 	
 	owner.inventory.remove_item(slot.item, slot.count)
+	
+	if owner is Player:
+		PlayerEventBus.weight_changed.emit(owner)

@@ -12,7 +12,8 @@ enum EffectType {
 	## Cause enemy to deal less damage for [code]x[/code] turns
 	WEAK,
 	## Cause enemy to take more damage for [code]x[/code] turns
-	VULNERABLE
+	VULNERABLE,
+	MAX
 }
 
 @export var effect_type : EffectType

@@ -17,6 +17,24 @@ theme = ExtResource("1_20utr")
 alignment = 1
 script = ExtResource("1_q8vh0")
 
+[node name="WeightStats" type="PanelContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_5vok3")
+
+[node name="WeightLabel" type="Label" parent="WeightStats"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 18
+text = "Weight: 2.0/20.0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Spacer" type="ReferenceRect" parent="."]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+border_width = 0.0
+
 [node name="PlayerStats" type="PanelContainer" parent="."]
 layout_mode = 2
 size_flags_vertical = 0
@@ -30,7 +48,31 @@ text = "HP: 0/10"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Spacer2" type="ReferenceRect" parent="."]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+border_width = 0.0
+
+[node name="FloorNum" type="PanelContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_5vok3")
+
+[node name="FloorLabel" type="Label" parent="FloorNum"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 18
+text = "Floor: 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Spacer3" type="ReferenceRect" parent="."]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+border_width = 0.0
+
 [node name="Information" type="PanelContainer" parent="."]
+visible = false
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_qt0ys")

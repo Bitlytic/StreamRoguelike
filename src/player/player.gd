@@ -436,3 +436,7 @@ func _can_move_to_cell(cell: GridCell) -> bool:
 
 func _can_unlock_door(door: DoorEntity, key_slot: ItemSlot) -> bool:
 	return door.locked && key_slot != null
+
+
+func on_items_changed() -> void:
+	PlayerEventBus.weight_changed.emit(self)

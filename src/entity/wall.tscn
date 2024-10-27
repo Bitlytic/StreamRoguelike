@@ -1,12 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://dkhrcr6y2unah"]
+[gd_scene load_steps=5 format=3 uid="uid://dkhrcr6y2unah"]
 
 [ext_resource type="Script" path="res://src/entity/entity.gd" id="1_oe3du"]
+[ext_resource type="Script" path="res://src/data/equipment.gd" id="2_irl7x"]
 [ext_resource type="Texture2D" uid="uid://d1dtxy8sb2lia" path="res://assets/art/kenney-1bit.png" id="2_ul8vy"]
+
+[sub_resource type="Resource" id="Resource_2gi0x"]
+script = ExtResource("2_irl7x")
 
 [node name="Wall" type="Node2D"]
 position = Vector2(8, 8)
 script = ExtResource("1_oe3du")
 entity_name = "Wall"
+equipment = SubResource("Resource_2gi0x")
 blocks_vision = true
 blocks_movement = true
 discovered_color = Color(0.262932, 0.262932, 0.262932, 1)

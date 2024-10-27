@@ -1,9 +1,8 @@
-[gd_scene load_steps=30 format=3 uid="uid://bgd2hj48rci3f"]
+[gd_scene load_steps=29 format=3 uid="uid://bgd2hj48rci3f"]
 
 [ext_resource type="Script" path="res://src/world/prefabs/prefab_room.gd" id="1_pqc74"]
 [ext_resource type="PackedScene" uid="uid://bvbty718biabw" path="res://src/entity/enemy/enemy.tscn" id="2_md0mt"]
 [ext_resource type="PackedScene" uid="uid://dkhrcr6y2unah" path="res://src/entity/wall.tscn" id="2_nyqs4"]
-[ext_resource type="Script" path="res://src/entity/entity.gd" id="3_thwpt"]
 [ext_resource type="Script" path="res://src/data/equipment.gd" id="4_dtfqc"]
 
 [sub_resource type="Resource" id="Resource_6y6je"]
@@ -85,221 +84,101 @@ blocks_spawn = true
 
 [node name="Walls" type="Node" parent="."]
 
-[node name="Wall" type="Node2D" parent="Walls" instance=ExtResource("2_nyqs4")]
+[node name="Wall" parent="Walls" instance=ExtResource("2_nyqs4")]
 position = Vector2(-8, -8)
-script = ExtResource("3_thwpt")
-entity_name = "Wall"
 equipment = SubResource("Resource_6y6je")
-blocks_vision = true
-blocks_movement = true
-discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
 
-[node name="@Node2D@101387" type="Node2D" parent="Walls" instance=ExtResource("2_nyqs4")]
+[node name="@Node2D@101387" parent="Walls" instance=ExtResource("2_nyqs4")]
 position = Vector2(8, -8)
-script = ExtResource("3_thwpt")
-entity_name = "Wall"
 equipment = SubResource("Resource_6802m")
-blocks_vision = true
-blocks_movement = true
-discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
 
-[node name="@Node2D@101388" type="Node2D" parent="Walls" instance=ExtResource("2_nyqs4")]
+[node name="@Node2D@101388" parent="Walls" instance=ExtResource("2_nyqs4")]
 position = Vector2(24, -8)
-script = ExtResource("3_thwpt")
-entity_name = "Wall"
 equipment = SubResource("Resource_02dey")
-blocks_vision = true
-blocks_movement = true
-discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
 
-[node name="@Node2D@101389" type="Node2D" parent="Walls" instance=ExtResource("2_nyqs4")]
+[node name="@Node2D@101389" parent="Walls" instance=ExtResource("2_nyqs4")]
 position = Vector2(40, -8)
-script = ExtResource("3_thwpt")
-entity_name = "Wall"
 equipment = SubResource("Resource_3u7q3")
-blocks_vision = true
-blocks_movement = true
-discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
 
-[node name="@Node2D@101390" type="Node2D" parent="Walls" instance=ExtResource("2_nyqs4")]
+[node name="@Node2D@101390" parent="Walls" instance=ExtResource("2_nyqs4")]
 position = Vector2(56, -8)
-script = ExtResource("3_thwpt")
-entity_name = "Wall"
 equipment = SubResource("Resource_e7o6k")
-blocks_vision = true
-blocks_movement = true
-discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
 
-[node name="@Node2D@101391" type="Node2D" parent="Walls" instance=ExtResource("2_nyqs4")]
+[node name="@Node2D@101391" parent="Walls" instance=ExtResource("2_nyqs4")]
 position = Vector2(72, -8)
-script = ExtResource("3_thwpt")
-entity_name = "Wall"
 equipment = SubResource("Resource_fxn7u")
-blocks_vision = true
-blocks_movement = true
-discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
 
-[node name="@Node2D@101392" type="Node2D" parent="Walls" instance=ExtResource("2_nyqs4")]
+[node name="@Node2D@101392" parent="Walls" instance=ExtResource("2_nyqs4")]
 position = Vector2(88, -8)
-script = ExtResource("3_thwpt")
-entity_name = "Wall"
 equipment = SubResource("Resource_8y8ud")
-blocks_vision = true
-blocks_movement = true
-discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
 
-[node name="@Node2D@101393" type="Node2D" parent="Walls" instance=ExtResource("2_nyqs4")]
+[node name="@Node2D@101393" parent="Walls" instance=ExtResource("2_nyqs4")]
 position = Vector2(-8, 8)
-script = ExtResource("3_thwpt")
-entity_name = "Wall"
 equipment = SubResource("Resource_it6ji")
-blocks_vision = true
-blocks_movement = true
-discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
 
-[node name="@Node2D@101394" type="Node2D" parent="Walls" instance=ExtResource("2_nyqs4")]
+[node name="@Node2D@101394" parent="Walls" instance=ExtResource("2_nyqs4")]
 position = Vector2(88, 8)
-script = ExtResource("3_thwpt")
-entity_name = "Wall"
 equipment = SubResource("Resource_5swpj")
-blocks_vision = true
-blocks_movement = true
-discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
 
-[node name="@Node2D@101395" type="Node2D" parent="Walls" instance=ExtResource("2_nyqs4")]
+[node name="@Node2D@101395" parent="Walls" instance=ExtResource("2_nyqs4")]
 position = Vector2(-8, 24)
-script = ExtResource("3_thwpt")
-entity_name = "Wall"
 equipment = SubResource("Resource_il5g0")
-blocks_vision = true
-blocks_movement = true
-discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
 
-[node name="@Node2D@101396" type="Node2D" parent="Walls" instance=ExtResource("2_nyqs4")]
+[node name="@Node2D@101396" parent="Walls" instance=ExtResource("2_nyqs4")]
 position = Vector2(88, 24)
-script = ExtResource("3_thwpt")
-entity_name = "Wall"
 equipment = SubResource("Resource_k1yib")
-blocks_vision = true
-blocks_movement = true
-discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
 
-[node name="@Node2D@101397" type="Node2D" parent="Walls" instance=ExtResource("2_nyqs4")]
+[node name="@Node2D@101397" parent="Walls" instance=ExtResource("2_nyqs4")]
 position = Vector2(-8, 40)
-script = ExtResource("3_thwpt")
-entity_name = "Wall"
 equipment = SubResource("Resource_r2pdp")
-blocks_vision = true
-blocks_movement = true
-discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
 
-[node name="@Node2D@101398" type="Node2D" parent="Walls" instance=ExtResource("2_nyqs4")]
+[node name="@Node2D@101398" parent="Walls" instance=ExtResource("2_nyqs4")]
 position = Vector2(88, 40)
-script = ExtResource("3_thwpt")
-entity_name = "Wall"
 equipment = SubResource("Resource_xockl")
-blocks_vision = true
-blocks_movement = true
-discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
 
-[node name="@Node2D@101399" type="Node2D" parent="Walls" instance=ExtResource("2_nyqs4")]
+[node name="@Node2D@101399" parent="Walls" instance=ExtResource("2_nyqs4")]
 position = Vector2(-8, 56)
-script = ExtResource("3_thwpt")
-entity_name = "Wall"
 equipment = SubResource("Resource_p2mav")
-blocks_vision = true
-blocks_movement = true
-discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
 
-[node name="@Node2D@101400" type="Node2D" parent="Walls" instance=ExtResource("2_nyqs4")]
+[node name="@Node2D@101400" parent="Walls" instance=ExtResource("2_nyqs4")]
 position = Vector2(88, 56)
-script = ExtResource("3_thwpt")
-entity_name = "Wall"
 equipment = SubResource("Resource_idsdp")
-blocks_vision = true
-blocks_movement = true
-discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
 
-[node name="@Node2D@101401" type="Node2D" parent="Walls" instance=ExtResource("2_nyqs4")]
+[node name="@Node2D@101401" parent="Walls" instance=ExtResource("2_nyqs4")]
 position = Vector2(-8, 72)
-script = ExtResource("3_thwpt")
-entity_name = "Wall"
 equipment = SubResource("Resource_2qw3s")
-blocks_vision = true
-blocks_movement = true
-discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
 
-[node name="@Node2D@101402" type="Node2D" parent="Walls" instance=ExtResource("2_nyqs4")]
+[node name="@Node2D@101402" parent="Walls" instance=ExtResource("2_nyqs4")]
 position = Vector2(88, 72)
-script = ExtResource("3_thwpt")
-entity_name = "Wall"
 equipment = SubResource("Resource_2icl6")
-blocks_vision = true
-blocks_movement = true
-discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
 
-[node name="@Node2D@101403" type="Node2D" parent="Walls" instance=ExtResource("2_nyqs4")]
+[node name="@Node2D@101403" parent="Walls" instance=ExtResource("2_nyqs4")]
 position = Vector2(-8, 88)
-script = ExtResource("3_thwpt")
-entity_name = "Wall"
 equipment = SubResource("Resource_yhgc4")
-blocks_vision = true
-blocks_movement = true
-discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
 
-[node name="@Node2D@101404" type="Node2D" parent="Walls" instance=ExtResource("2_nyqs4")]
+[node name="@Node2D@101404" parent="Walls" instance=ExtResource("2_nyqs4")]
 position = Vector2(8, 88)
-script = ExtResource("3_thwpt")
-entity_name = "Wall"
 equipment = SubResource("Resource_vjbcy")
-blocks_vision = true
-blocks_movement = true
-discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
 
-[node name="@Node2D@101405" type="Node2D" parent="Walls" instance=ExtResource("2_nyqs4")]
+[node name="@Node2D@101405" parent="Walls" instance=ExtResource("2_nyqs4")]
 position = Vector2(24, 88)
-script = ExtResource("3_thwpt")
-entity_name = "Wall"
 equipment = SubResource("Resource_3e648")
-blocks_vision = true
-blocks_movement = true
-discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
 
-[node name="@Node2D@101406" type="Node2D" parent="Walls" instance=ExtResource("2_nyqs4")]
+[node name="@Node2D@101406" parent="Walls" instance=ExtResource("2_nyqs4")]
 position = Vector2(40, 88)
-script = ExtResource("3_thwpt")
-entity_name = "Wall"
 equipment = SubResource("Resource_tn3kh")
-blocks_vision = true
-blocks_movement = true
-discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
 
-[node name="@Node2D@101407" type="Node2D" parent="Walls" instance=ExtResource("2_nyqs4")]
+[node name="@Node2D@101407" parent="Walls" instance=ExtResource("2_nyqs4")]
 position = Vector2(56, 88)
-script = ExtResource("3_thwpt")
-entity_name = "Wall"
 equipment = SubResource("Resource_sydpu")
-blocks_vision = true
-blocks_movement = true
-discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
 
-[node name="@Node2D@101408" type="Node2D" parent="Walls" instance=ExtResource("2_nyqs4")]
+[node name="@Node2D@101408" parent="Walls" instance=ExtResource("2_nyqs4")]
 position = Vector2(72, 88)
-script = ExtResource("3_thwpt")
-entity_name = "Wall"
 equipment = SubResource("Resource_aaxmu")
-blocks_vision = true
-blocks_movement = true
-discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
 
-[node name="@Node2D@101409" type="Node2D" parent="Walls" instance=ExtResource("2_nyqs4")]
+[node name="@Node2D@101409" parent="Walls" instance=ExtResource("2_nyqs4")]
 position = Vector2(88, 88)
-script = ExtResource("3_thwpt")
-entity_name = "Wall"
 equipment = SubResource("Resource_152em")
-blocks_vision = true
-blocks_movement = true
-discovered_color = Color(0.262932, 0.262932, 0.262932, 1)
 
 [node name="Enemy" parent="." instance=ExtResource("2_md0mt")]
 position = Vector2(24, 8)

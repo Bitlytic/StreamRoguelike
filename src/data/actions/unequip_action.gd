@@ -25,6 +25,8 @@ func perform_action() -> void:
 					_swap_item("chestplate")
 				Armor.ArmorSlot.BOOTS:
 					_swap_item("boots")
+		
+		PlayerEventBus.weight_changed.emit(owner)
 
 
 func _swap_item(property_name: String) -> void:

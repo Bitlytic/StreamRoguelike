@@ -49,7 +49,7 @@ func _ready() -> void:
 	
 	if end_room:
 		var staircase := stairs_scene.instantiate()
-		staircase.global_position = Vector2(end_room.rect.get_center()) * GridWorld.cell_size + GridWorld.cell_size / 2.0
+		staircase.global_position = Vector2(first_room.rect.get_center()) * GridWorld.cell_size + GridWorld.cell_size / 2.0
 		staircase.next_level = "res://scenes/level_testing.tscn"
 		add_child(staircase)
 	
@@ -58,7 +58,9 @@ func _ready() -> void:
 		if room.prefab:
 			continue
 		if randf_range(0, 1) > 2:
-			var item : ItemEntity = LootGenerationUtil.generate_loot(room.heat, 0)
+			# TODO: Revisit this for fully random rooms
+			pass
+			#var item : ItemEntity = LootGenerationUtil.generate_loot(room.heat, 0)
 			
-			item.grid_position = room.rect.get_center()
-			get_tree().current_scene.add_child(item)
+			#item.grid_position = room.rect.get_center()
+			#get_tree().current_scene.add_child(item)
