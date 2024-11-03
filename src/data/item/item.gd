@@ -7,6 +7,8 @@ extends Resource
 @export var item_name : String
 @export var weight : float = 0.0
 
+var has_looted := false
+
 
 func _to_string() -> String:
 	return item_name

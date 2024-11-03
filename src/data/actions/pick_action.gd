@@ -19,5 +19,8 @@ func perform_action() -> void:
 		
 		if target.item is Key:
 			PlayerEventBus.keys_changed.emit(owner)
+		elif !target.item.has_looted:
+			target.item.has_looted = true
+			ActionLog.add_action(ItemLootAction.new(target.item))
 		
 		GridWorld.remove_entity(target)

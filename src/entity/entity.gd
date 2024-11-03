@@ -87,7 +87,12 @@ func _update_render_position() -> void:
 
 
 func process_attack(attack: Attack) -> void:
+	
 	_take_damage(attack.damage)
+	
+	if health == 0:
+		if self is Player:
+			ActionLog.add_action(DeathLogItem.new(attack.attacker))
 	
 	attack.target = self
 	

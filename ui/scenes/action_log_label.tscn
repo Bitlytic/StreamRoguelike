@@ -1,4 +1,9 @@
 [gd_scene format=3 uid="uid://bp60fd66wta23"]
 
-[node name="ActionLogLabel" type="Label"]
+[node name="ActionLogLabel" type="RichTextLabel"]
+offset_right = 162.0
+offset_bottom = 23.0
+bbcode_enabled = true
 text = "You took 15 damage."
+fit_content = true
+autowrap_mode = 0

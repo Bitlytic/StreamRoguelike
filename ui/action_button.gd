@@ -10,7 +10,7 @@ signal option_selected(result: Object)
 
 @onready var selection_caret: Label = $HBoxContainer/SelectionCaret
 @onready var selection_caret2: Label = $HBoxContainer/SelectionCaret2
-@onready var action_label: Label = $HBoxContainer/ActionLabel
+@onready var action_label: RichTextLabel = $HBoxContainer/ActionLabel
 @onready var key_code_label: Label = $HBoxContainer/KeyCodeLabel
 
 

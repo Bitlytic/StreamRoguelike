@@ -28,7 +28,7 @@ func get_attack() -> Attack:
 func _to_string() -> String:
 	var str = super()
 	
-	str += " " + str(dice_roll)
+	str += " " + "[color=%s]" % [BityColors.RED.to_html()] + str(dice_roll) + "[/color]"
 	
 	return str
 

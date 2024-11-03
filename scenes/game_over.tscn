@@ -42,3 +42,6 @@ layout_mode = 2
 
 [node name="Label" parent="MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("3_vb5uf")]
 layout_mode = 2
+bbcode_enabled = true
+fit_content = true
+autowrap_mode = 0

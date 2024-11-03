@@ -18,6 +18,9 @@ func _init(weapon: Weapon = null, target: Entity = null):
 func perform_action() -> void:
 	
 	if target:
+		if target.health <= 0:
+			return
+		
 		if owner.has_method("play_attack_animation"):
 			owner.play_attack_animation(self)
 		
