@@ -28,6 +28,6 @@ dice_roll = SubResource("Resource_fc0yh")
 effects = Array[ExtResource("2_pvmy8")]([SubResource("Resource_doye2")])
 on_hit_effects = Array[ExtResource("3_8gted")]([])
 texture = SubResource("AtlasTexture_23xmw")
-texture_tint = Color(0.35, 0.231583, 0.147, 1)
+texture_tint = Color(0.509804, 0.337255, 0.215686, 1)
 item_name = "Bronze Spear"
 weight = 3.0

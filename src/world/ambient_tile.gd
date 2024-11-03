@@ -11,15 +11,22 @@ var in_vision := false :
 		if val:
 			discovered = true
 			modulate = vision_color
+			bg_rect.show()
 		else:
 			if discovered:
 				modulate = discovered_color
+				bg_rect.show()
 			else:
 				modulate = Color(0, 0, 0, 0)
 
 
 var grid_position : Vector2i
 var cell : GridCell
+
+var has_grass : bool
+
+@onready var grass: Sprite2D = $Grass
+@onready var bg_rect: ColorRect = $BGRect
 
 
 func _ready() -> void:
@@ -37,8 +44,19 @@ func on_world_updated():
 	
 	if cell.get_entity_count():
 		if cell.character && !cell.character.in_vision:
-			show()
+			show_grass()
 			return
-		hide()
+		hide_grass()
 	else:
-		show()
+		show_grass()
+
+
+func show_grass():
+	if has_grass:
+		grass.show()
+	else:
+		grass.hide()
+
+
+func hide_grass():
+	grass.hide()

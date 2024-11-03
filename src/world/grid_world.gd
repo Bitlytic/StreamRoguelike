@@ -32,6 +32,11 @@ var player : Player:
 var cells : Dictionary = {}
 
 
+var active := true
+
+var enemies_killed := 0
+
+
 func _ready():
 	clear_cells()
 	
@@ -151,6 +156,11 @@ func restart_timers() -> void:
 	MessageManager.current_time = 0.0
 
 
+func stop_timers() -> void:
+	cycle_wait_timer.stop()
+	cycle_timer.stop()
+
+
 func _perform_action(action: EntityAction):
 	action.perform_action()
 	action.owner.processed_this_frame = true
@@ -209,8 +219,14 @@ func update_pathfinding(entity: Entity, a_star_grid: AStarGrid2D, only_visible: 
 
 func on_entity_death(entity: Entity) -> void:
 	if entity is Player:
-		#TODO: Game over stuff
-		print("The player fuckin died")
+		active = false
+		get_tree().change_scene_to_file("res://scenes/game_over.tscn")
+		stop_timers()
+	else:
+		ActionLog.add_action(CombatLogItem.new(entity.get_entity_name(), entity.damage_to_player))
+	
+	if entity is Enemy:
+		enemies_killed += 1
 	
 	remove_entity(entity)
 
@@ -220,6 +236,9 @@ func on_cycle_wait_timeout() -> void:
 
 
 func on_cycle_timeout() -> void:
+	if !active:
+		return
+	
 	for cell : GridCell in cells.values():
 		if aiming_reticle && cell.grid_position == reticle_position:
 			if reticle.visible:

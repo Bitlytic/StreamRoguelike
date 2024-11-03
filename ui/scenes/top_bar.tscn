@@ -17,6 +17,20 @@ theme = ExtResource("1_20utr")
 alignment = 1
 script = ExtResource("1_q8vh0")
 
+[node name="DeathStats" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_5vok3")
+
+[node name="DeathLabel" type="Label" parent="DeathStats"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 18
+text = "Weight: 2.0/20.0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="WeightStats" type="PanelContainer" parent="."]
 layout_mode = 2
 size_flags_vertical = 0
@@ -67,6 +81,25 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Spacer3" type="ReferenceRect" parent="."]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+border_width = 0.0
+
+[node name="KeyDisplay" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_5vok3")
+
+[node name="KeyLabel" type="Label" parent="KeyDisplay"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 18
+text = "Keys: 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Spacer4" type="ReferenceRect" parent="."]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 border_width = 0.0

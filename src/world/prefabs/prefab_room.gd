@@ -19,6 +19,7 @@ extends Node2D
 
 var wall_scene : PackedScene
 
+
 func generate_walls() -> void:
 	wall_scene = load("res://src/entity/wall.tscn")
 	

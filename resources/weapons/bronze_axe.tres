@@ -22,6 +22,6 @@ dice_roll = SubResource("Resource_fc0yh")
 effects = Array[ExtResource("1_81pbx")]([])
 on_hit_effects = Array[ExtResource("2_hg4la")]([])
 texture = SubResource("AtlasTexture_23xmw")
-texture_tint = Color(0.35, 0.231583, 0.147, 1)
+texture_tint = Color(0.51, 0.33745, 0.2142, 1)
 item_name = "Bronze Axe"
 weight = 2.0

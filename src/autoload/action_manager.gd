@@ -156,3 +156,7 @@ func hide_top_bar() -> void:
 
 func is_busy() -> bool:
 	return picking_action || picking_item || aiming
+
+
+func show_death():
+	top_bar.show_death()

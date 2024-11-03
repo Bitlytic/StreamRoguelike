@@ -10,8 +10,18 @@ region = Rect2(16, 0, 16, 16)
 [node name="AmbientTile" type="Node2D"]
 modulate = Color(1, 1, 1, 0.411765)
 script = ExtResource("1_pfi25")
-discovered_color = Color(0.172549, 0.172549, 0.172549, 1)
+discovered_color = Color(0.35, 0.35, 0.35, 1)
 vision_color = Color(0.713726, 0.713726, 0.713726, 1)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="BGRect" type="ColorRect" parent="."]
+z_index = -1
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+mouse_filter = 2
+color = Color(0.133333, 0.133333, 0.156863, 1)
+
+[node name="Grass" type="Sprite2D" parent="."]
+z_index = -1
 texture = SubResource("AtlasTexture_5wxfd")

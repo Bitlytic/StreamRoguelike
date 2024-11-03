@@ -103,7 +103,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	
 	if Input.is_action_just_pressed("debug_info"):
-		print(equipment.get_weight())
+		ActionLog.print_all_actions()
+	
 	
 	if event is InputEventMouseMotion:
 		_handle_mouse_movement()

@@ -17,4 +17,7 @@ func perform_action() -> void:
 		if owner is Player:
 			PlayerEventBus.weight_changed.emit(owner)
 		
+		if target.item is Key:
+			PlayerEventBus.keys_changed.emit(owner)
+		
 		GridWorld.remove_entity(target)

@@ -27,3 +27,6 @@ func perform_action():
 	
 	if owner is Player:
 		PlayerEventBus.weight_changed.emit(owner)
+	
+	if spawned_entity.item is Key:
+		PlayerEventBus.keys_changed.emit(owner)

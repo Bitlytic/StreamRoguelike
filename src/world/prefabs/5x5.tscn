@@ -1,80 +1,11 @@
-[gd_scene load_steps=29 format=3 uid="uid://bgd2hj48rci3f"]
+[gd_scene load_steps=6 format=3 uid="uid://bgd2hj48rci3f"]
 
 [ext_resource type="Script" path="res://src/world/prefabs/prefab_room.gd" id="1_pqc74"]
 [ext_resource type="PackedScene" uid="uid://bvbty718biabw" path="res://src/entity/enemy/enemy.tscn" id="2_md0mt"]
 [ext_resource type="PackedScene" uid="uid://dkhrcr6y2unah" path="res://src/entity/wall.tscn" id="2_nyqs4"]
 [ext_resource type="Script" path="res://src/data/equipment.gd" id="4_dtfqc"]
 
-[sub_resource type="Resource" id="Resource_6y6je"]
-script = ExtResource("4_dtfqc")
-
-[sub_resource type="Resource" id="Resource_6802m"]
-script = ExtResource("4_dtfqc")
-
-[sub_resource type="Resource" id="Resource_02dey"]
-script = ExtResource("4_dtfqc")
-
-[sub_resource type="Resource" id="Resource_3u7q3"]
-script = ExtResource("4_dtfqc")
-
-[sub_resource type="Resource" id="Resource_e7o6k"]
-script = ExtResource("4_dtfqc")
-
-[sub_resource type="Resource" id="Resource_fxn7u"]
-script = ExtResource("4_dtfqc")
-
-[sub_resource type="Resource" id="Resource_8y8ud"]
-script = ExtResource("4_dtfqc")
-
-[sub_resource type="Resource" id="Resource_it6ji"]
-script = ExtResource("4_dtfqc")
-
-[sub_resource type="Resource" id="Resource_5swpj"]
-script = ExtResource("4_dtfqc")
-
-[sub_resource type="Resource" id="Resource_il5g0"]
-script = ExtResource("4_dtfqc")
-
-[sub_resource type="Resource" id="Resource_k1yib"]
-script = ExtResource("4_dtfqc")
-
-[sub_resource type="Resource" id="Resource_r2pdp"]
-script = ExtResource("4_dtfqc")
-
-[sub_resource type="Resource" id="Resource_xockl"]
-script = ExtResource("4_dtfqc")
-
-[sub_resource type="Resource" id="Resource_p2mav"]
-script = ExtResource("4_dtfqc")
-
-[sub_resource type="Resource" id="Resource_idsdp"]
-script = ExtResource("4_dtfqc")
-
-[sub_resource type="Resource" id="Resource_2qw3s"]
-script = ExtResource("4_dtfqc")
-
-[sub_resource type="Resource" id="Resource_2icl6"]
-script = ExtResource("4_dtfqc")
-
-[sub_resource type="Resource" id="Resource_yhgc4"]
-script = ExtResource("4_dtfqc")
-
-[sub_resource type="Resource" id="Resource_vjbcy"]
-script = ExtResource("4_dtfqc")
-
-[sub_resource type="Resource" id="Resource_3e648"]
-script = ExtResource("4_dtfqc")
-
-[sub_resource type="Resource" id="Resource_tn3kh"]
-script = ExtResource("4_dtfqc")
-
-[sub_resource type="Resource" id="Resource_sydpu"]
-script = ExtResource("4_dtfqc")
-
-[sub_resource type="Resource" id="Resource_aaxmu"]
-script = ExtResource("4_dtfqc")
-
-[sub_resource type="Resource" id="Resource_152em"]
+[sub_resource type="Resource" id="Resource_2gi0x"]
 script = ExtResource("4_dtfqc")
 
 [node name="PrefabRoom" type="Node2D"]
@@ -86,99 +17,99 @@ blocks_spawn = true
 
 [node name="Wall" parent="Walls" instance=ExtResource("2_nyqs4")]
 position = Vector2(-8, -8)
-equipment = SubResource("Resource_6y6je")
+equipment = SubResource("Resource_2gi0x")
 
-[node name="@Node2D@101387" parent="Walls" instance=ExtResource("2_nyqs4")]
+[node name="@Node2D@66790" parent="Walls" instance=ExtResource("2_nyqs4")]
 position = Vector2(8, -8)
-equipment = SubResource("Resource_6802m")
+equipment = SubResource("Resource_2gi0x")
 
-[node name="@Node2D@101388" parent="Walls" instance=ExtResource("2_nyqs4")]
+[node name="@Node2D@66791" parent="Walls" instance=ExtResource("2_nyqs4")]
 position = Vector2(24, -8)
-equipment = SubResource("Resource_02dey")
+equipment = SubResource("Resource_2gi0x")
 
-[node name="@Node2D@101389" parent="Walls" instance=ExtResource("2_nyqs4")]
+[node name="@Node2D@66792" parent="Walls" instance=ExtResource("2_nyqs4")]
 position = Vector2(40, -8)
-equipment = SubResource("Resource_3u7q3")
+equipment = SubResource("Resource_2gi0x")
 
-[node name="@Node2D@101390" parent="Walls" instance=ExtResource("2_nyqs4")]
+[node name="@Node2D@66793" parent="Walls" instance=ExtResource("2_nyqs4")]
 position = Vector2(56, -8)
-equipment = SubResource("Resource_e7o6k")
+equipment = SubResource("Resource_2gi0x")
 
-[node name="@Node2D@101391" parent="Walls" instance=ExtResource("2_nyqs4")]
+[node name="@Node2D@66794" parent="Walls" instance=ExtResource("2_nyqs4")]
 position = Vector2(72, -8)
-equipment = SubResource("Resource_fxn7u")
+equipment = SubResource("Resource_2gi0x")
 
-[node name="@Node2D@101392" parent="Walls" instance=ExtResource("2_nyqs4")]
+[node name="@Node2D@66795" parent="Walls" instance=ExtResource("2_nyqs4")]
 position = Vector2(88, -8)
-equipment = SubResource("Resource_8y8ud")
+equipment = SubResource("Resource_2gi0x")
 
-[node name="@Node2D@101393" parent="Walls" instance=ExtResource("2_nyqs4")]
+[node name="@Node2D@66796" parent="Walls" instance=ExtResource("2_nyqs4")]
 position = Vector2(-8, 8)
-equipment = SubResource("Resource_it6ji")
+equipment = SubResource("Resource_2gi0x")
 
-[node name="@Node2D@101394" parent="Walls" instance=ExtResource("2_nyqs4")]
+[node name="@Node2D@66797" parent="Walls" instance=ExtResource("2_nyqs4")]
 position = Vector2(88, 8)
-equipment = SubResource("Resource_5swpj")
+equipment = SubResource("Resource_2gi0x")
 
-[node name="@Node2D@101395" parent="Walls" instance=ExtResource("2_nyqs4")]
+[node name="@Node2D@66798" parent="Walls" instance=ExtResource("2_nyqs4")]
 position = Vector2(-8, 24)
-equipment = SubResource("Resource_il5g0")
+equipment = SubResource("Resource_2gi0x")
 
-[node name="@Node2D@101396" parent="Walls" instance=ExtResource("2_nyqs4")]
+[node name="@Node2D@66799" parent="Walls" instance=ExtResource("2_nyqs4")]
 position = Vector2(88, 24)
-equipment = SubResource("Resource_k1yib")
+equipment = SubResource("Resource_2gi0x")
 
-[node name="@Node2D@101397" parent="Walls" instance=ExtResource("2_nyqs4")]
+[node name="@Node2D@66800" parent="Walls" instance=ExtResource("2_nyqs4")]
 position = Vector2(-8, 40)
-equipment = SubResource("Resource_r2pdp")
+equipment = SubResource("Resource_2gi0x")
 
-[node name="@Node2D@101398" parent="Walls" instance=ExtResource("2_nyqs4")]
+[node name="@Node2D@66801" parent="Walls" instance=ExtResource("2_nyqs4")]
 position = Vector2(88, 40)
-equipment = SubResource("Resource_xockl")
+equipment = SubResource("Resource_2gi0x")
 
-[node name="@Node2D@101399" parent="Walls" instance=ExtResource("2_nyqs4")]
+[node name="@Node2D@66802" parent="Walls" instance=ExtResource("2_nyqs4")]
 position = Vector2(-8, 56)
-equipment = SubResource("Resource_p2mav")
+equipment = SubResource("Resource_2gi0x")
 
-[node name="@Node2D@101400" parent="Walls" instance=ExtResource("2_nyqs4")]
+[node name="@Node2D@66803" parent="Walls" instance=ExtResource("2_nyqs4")]
 position = Vector2(88, 56)
-equipment = SubResource("Resource_idsdp")
+equipment = SubResource("Resource_2gi0x")
 
-[node name="@Node2D@101401" parent="Walls" instance=ExtResource("2_nyqs4")]
+[node name="@Node2D@66804" parent="Walls" instance=ExtResource("2_nyqs4")]
 position = Vector2(-8, 72)
-equipment = SubResource("Resource_2qw3s")
+equipment = SubResource("Resource_2gi0x")
 
-[node name="@Node2D@101402" parent="Walls" instance=ExtResource("2_nyqs4")]
+[node name="@Node2D@66805" parent="Walls" instance=ExtResource("2_nyqs4")]
 position = Vector2(88, 72)
-equipment = SubResource("Resource_2icl6")
+equipment = SubResource("Resource_2gi0x")
 
-[node name="@Node2D@101403" parent="Walls" instance=ExtResource("2_nyqs4")]
+[node name="@Node2D@66806" parent="Walls" instance=ExtResource("2_nyqs4")]
 position = Vector2(-8, 88)
-equipment = SubResource("Resource_yhgc4")
+equipment = SubResource("Resource_2gi0x")
 
-[node name="@Node2D@101404" parent="Walls" instance=ExtResource("2_nyqs4")]
+[node name="@Node2D@66807" parent="Walls" instance=ExtResource("2_nyqs4")]
 position = Vector2(8, 88)
-equipment = SubResource("Resource_vjbcy")
+equipment = SubResource("Resource_2gi0x")
 
-[node name="@Node2D@101405" parent="Walls" instance=ExtResource("2_nyqs4")]
+[node name="@Node2D@66808" parent="Walls" instance=ExtResource("2_nyqs4")]
 position = Vector2(24, 88)
-equipment = SubResource("Resource_3e648")
+equipment = SubResource("Resource_2gi0x")
 
-[node name="@Node2D@101406" parent="Walls" instance=ExtResource("2_nyqs4")]
+[node name="@Node2D@66809" parent="Walls" instance=ExtResource("2_nyqs4")]
 position = Vector2(40, 88)
-equipment = SubResource("Resource_tn3kh")
+equipment = SubResource("Resource_2gi0x")
 
-[node name="@Node2D@101407" parent="Walls" instance=ExtResource("2_nyqs4")]
+[node name="@Node2D@66810" parent="Walls" instance=ExtResource("2_nyqs4")]
 position = Vector2(56, 88)
-equipment = SubResource("Resource_sydpu")
+equipment = SubResource("Resource_2gi0x")
 
-[node name="@Node2D@101408" parent="Walls" instance=ExtResource("2_nyqs4")]
+[node name="@Node2D@66811" parent="Walls" instance=ExtResource("2_nyqs4")]
 position = Vector2(72, 88)
-equipment = SubResource("Resource_aaxmu")
+equipment = SubResource("Resource_2gi0x")
 
-[node name="@Node2D@101409" parent="Walls" instance=ExtResource("2_nyqs4")]
+[node name="@Node2D@66812" parent="Walls" instance=ExtResource("2_nyqs4")]
 position = Vector2(88, 88)
-equipment = SubResource("Resource_152em")
+equipment = SubResource("Resource_2gi0x")
 
 [node name="Enemy" parent="." instance=ExtResource("2_md0mt")]
 position = Vector2(24, 8)

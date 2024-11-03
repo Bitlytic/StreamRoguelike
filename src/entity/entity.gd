@@ -59,6 +59,8 @@ var stunned := false
 var vulnerable := false
 var weak := false
 
+var damage_to_player := 0
+
 func _ready():
 	if !Engine.is_editor_hint():
 		grid_position = global_position / GridWorld.cell_size.floor()
@@ -108,7 +110,6 @@ func _take_damage(damage: int) -> void:
 		health = 0
 		died.emit(self)
 		queue_free()
-		Vector2(0, 0) * Vector2(1, 1)
 	else:
 		health_changed.emit(health)
 

@@ -21,3 +21,4 @@ func perform_action() -> void:
 			owner.inventory.remove_item(slot.item, 1)
 			if owner is Player:
 				PlayerEventBus.weight_changed.emit(owner)
+				PlayerEventBus.keys_changed.emit(owner)

@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://bp60fd66wta23"]
+
+[node name="ActionLogLabel" type="Label"]
+text = "You took 15 damage."

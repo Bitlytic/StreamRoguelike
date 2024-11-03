@@ -85,7 +85,7 @@ func _draw() -> void:
 
 
 func get_entity_name() -> String:
-	return "Enemy >:("
+	return "Enemy"
 
 
 func play_attack_animation(action: AttackAction):

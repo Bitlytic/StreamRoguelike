@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://b1e8jih67gmol"]
+
+[ext_resource type="Theme" uid="uid://g27u5fdw6jtd" path="res://ui/theme/main_theme.tres" id="1_bk1kn"]
+[ext_resource type="Script" path="res://scenes/game_over.gd" id="2_ct7m4"]
+[ext_resource type="PackedScene" uid="uid://bp60fd66wta23" path="res://ui/scenes/action_log_label.tscn" id="3_vb5uf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cj5kg"]
+bg_color = Color(0.133333, 0.133333, 0.156863, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x426w"]
+bg_color = Color(0.0666667, 0.0666667, 0.0784314, 1)
+
+[node name="GameOver" type="Panel" node_paths=PackedStringArray("log_container")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_bk1kn")
+theme_override_styles/panel = SubResource("StyleBoxFlat_cj5kg")
+script = ExtResource("2_ct7m4")
+log_container = NodePath("MarginContainer/ScrollContainer/VBoxContainer")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_x426w")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer"]
+layout_mode = 2
+
+[node name="Label" parent="MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("3_vb5uf")]
+layout_mode = 2

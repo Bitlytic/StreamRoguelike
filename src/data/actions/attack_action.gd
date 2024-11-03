@@ -46,4 +46,7 @@ func perform_action() -> void:
 		if target.vulnerable:
 			attack.damage += randi_range(2, 4)
 		
+		if target is Player:
+			attack.attacker.damage_to_player += attack.damage
+		
 		target.process_attack(attack)

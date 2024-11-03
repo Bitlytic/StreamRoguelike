@@ -45,6 +45,7 @@ func set_display(b: bool) -> void:
 	displayed = b
 	_display_entity()
 
+
 func _display_entity() -> void:
 	var index_offset = 0
 	
